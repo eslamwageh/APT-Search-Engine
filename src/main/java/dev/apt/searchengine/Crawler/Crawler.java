@@ -46,7 +46,7 @@ public class Crawler implements Runnable {
 		// remove duplicates and create a list of new webpages to upload
 		List<WebPage> newWP = detectDuplicate(newSeeds);
 		// update the database
-		database.updateDB(newWP);
+		database.updateUrlsDB(newWP);
 	}
 	System.out.println("Crawling is done");
 
@@ -257,7 +257,7 @@ public class Crawler implements Runnable {
 				webPages.add(webPage);
 			}
 	
-			this.database.updateDB(webPages);
+			this.database.updateUrlsDB(webPages);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

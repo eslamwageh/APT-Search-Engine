@@ -16,7 +16,7 @@ import com.mongodb.client.MongoDatabase;
 import lombok.Data;
 import lombok.Getter;
 
-@Data
+@Data // This line is to make setters and getters of each data member
 public class CrawlerDB {
 	private Properties env;
 
@@ -24,7 +24,8 @@ public class CrawlerDB {
 	private MongoClient mongoClient;
 
 	private MongoDatabase database;
-	private MongoCollection<org.bson.Document> collection;
+	private MongoCollection<org.bson.Document> urlsCollection;
+	private MongoCollection<org.bson.Document> wordsCollection;
 
 	public CrawlerDB() {
 		env = new Properties();
@@ -50,10 +51,12 @@ public class CrawlerDB {
 				username, password);
 		mongoClient = MongoClients.create(uri);
 		database = mongoClient.getDatabase("SearchEngine");
-		collection = database.getCollection("WebPage");
+		urlsCollection = database.getCollection("WebPage");
+		wordsCollection = database.getCollection("Search Index");
 	}
 
-	public void updateDB(List<WebPage> newWPs) {
+	// changed the name to urls as there will be another db update
+	public void updateUrlsDB(List<WebPage> newWPs) {
 		if (newWPs != null) {
 			List<org.bson.Document> documents = new ArrayList<>();
 			for (WebPage wp : newWPs) {
@@ -64,7 +67,7 @@ public class CrawlerDB {
 						.append("Refreshed", wp.isRefreshed);
 				documents.add(document);
 			}
-			collection.insertMany(documents);
+			urlsCollection.insertMany(documents);
 		}
 	}
 
@@ -72,7 +75,7 @@ public class CrawlerDB {
 	public LinkedList<String> _fetchSeed() {
 		connectMongoDB();
 		LinkedList<String> s = new LinkedList<>();
-		for (org.bson.Document doc : collection.find()) {
+		for (org.bson.Document doc : urlsCollection.find()) {
 			s.add(doc.getString("URL"));
 		}
 		return s;
@@ -80,7 +83,6 @@ public class CrawlerDB {
 
 	public boolean detectDuplicatePages(String compactString) {
 		org.bson.Document query = new org.bson.Document("CompactString", compactString);
-		return collection.countDocuments(query) > 0;
+		return urlsCollection.countDocuments(query) > 0;
 	}
-
 }
