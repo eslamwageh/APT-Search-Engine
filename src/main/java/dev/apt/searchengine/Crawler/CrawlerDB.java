@@ -13,13 +13,16 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import lombok.Data;
+import lombok.Getter;
 
-
+@Data
 public class CrawlerDB {
 	private Properties env;
 
 	// MongoDB data members
 	private MongoClient mongoClient;
+
 	private MongoDatabase database;
 	private MongoCollection<org.bson.Document> collection;
 
@@ -79,4 +82,5 @@ public class CrawlerDB {
 		org.bson.Document query = new org.bson.Document("CompactString", compactString);
 		return collection.countDocuments(query) > 0;
 	}
+
 }
