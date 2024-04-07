@@ -3,20 +3,19 @@ package dev.apt.searchengine.Crawler;
 import java.io.FileInputStream;
 import java.io.IOException;
 //	Data structures
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 //	MongoDB dependencies
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import dev.apt.searchengine.Indexer.DocData;
 import lombok.Data;
 import lombok.Getter;
+import org.bson.Document;
 
-@Data
+@Data // This line is to make setters and getters of each data member
 public class CrawlerDB {
 	private Properties env;
 
@@ -24,7 +23,8 @@ public class CrawlerDB {
 	private MongoClient mongoClient;
 
 	private MongoDatabase database;
-	private MongoCollection<org.bson.Document> collection;
+	private MongoCollection<org.bson.Document> urlsCollection;
+	private MongoCollection<org.bson.Document> wordsCollection;
 
 	public CrawlerDB() {
 		env = new Properties();
@@ -50,10 +50,12 @@ public class CrawlerDB {
 				username, password);
 		mongoClient = MongoClients.create(uri);
 		database = mongoClient.getDatabase("SearchEngine");
-		collection = database.getCollection("WebPage");
+		urlsCollection = database.getCollection("WebPage");
+		wordsCollection = database.getCollection("Search Index");
 	}
 
-	public void updateDB(List<WebPage> newWPs) {
+	// changed the name to urls as there will be another db update
+	public void updateUrlsDB(List<WebPage> newWPs) {
 		if (newWPs != null) {
 			List<org.bson.Document> documents = new ArrayList<>();
 			for (WebPage wp : newWPs) {
@@ -64,7 +66,45 @@ public class CrawlerDB {
 						.append("Refreshed", wp.isRefreshed);
 				documents.add(document);
 			}
-			collection.insertMany(documents);
+			urlsCollection.insertMany(documents);
+		}
+	}
+
+	// to update the second collection
+	public void updateWordsDB(HashMap<String, HashMap<String, DocData>> invertedFile, HashMap<String, Double> DFsPerDocs) {
+		if (invertedFile != null && !invertedFile.isEmpty() && DFsPerDocs != null && !DFsPerDocs.isEmpty()) {
+			List<Document> documents = new ArrayList<>();
+
+			for (Map.Entry<String, HashMap<String, DocData>> entry : invertedFile.entrySet()) {
+				String word = entry.getKey();
+				HashMap<String, DocData> docHash = entry.getValue();
+
+				List<Document> wordDocuments = new ArrayList<>();
+
+				for (Map.Entry<String, DocData> docHashEntry : docHash.entrySet()) {
+					String docUrl = docHashEntry.getKey();
+					DocData docData = docHashEntry.getValue();
+
+					Document wordDocument = new Document()
+							.append("URL", docUrl) // Assuming docId is the HTML document URL
+							.append("TermFrequency", docData.getTermFrequency())
+							.append("Title", docData.getTitle())
+							.append("Priority", docData.getPriority());
+
+					wordDocuments.add(wordDocument);
+				}
+
+				Document wordEntry = new Document("Word", word)
+						.append("Documents", wordDocuments);
+
+				documents.add(wordEntry);
+			}
+
+			// Assuming you have a MongoClient configured
+			// and a reference to the appropriate MongoDB collection
+			// Replace "yourCollectionName" with the actual name of your collection
+			MongoCollection<Document> wordsCollection = mongoClient.getDatabase("yourDatabaseName").getCollection("yourCollectionName");
+			wordsCollection.insertMany(documents);
 		}
 	}
 
@@ -72,7 +112,7 @@ public class CrawlerDB {
 	public LinkedList<String> _fetchSeed() {
 		connectMongoDB();
 		LinkedList<String> s = new LinkedList<>();
-		for (org.bson.Document doc : collection.find()) {
+		for (org.bson.Document doc : urlsCollection.find()) {
 			s.add(doc.getString("URL"));
 		}
 		return s;
@@ -80,7 +120,6 @@ public class CrawlerDB {
 
 	public boolean detectDuplicatePages(String compactString) {
 		org.bson.Document query = new org.bson.Document("CompactString", compactString);
-		return collection.countDocuments(query) > 0;
+		return urlsCollection.countDocuments(query) > 0;
 	}
-
 }
