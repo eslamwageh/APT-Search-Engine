@@ -3,18 +3,17 @@ package dev.apt.searchengine.Crawler;
 import java.io.FileInputStream;
 import java.io.IOException;
 //	Data structures
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 //	MongoDB dependencies
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import dev.apt.searchengine.Indexer.DocData;
 import lombok.Data;
 import lombok.Getter;
+import org.bson.Document;
 
 @Data // This line is to make setters and getters of each data member
 public class CrawlerDB {
@@ -68,6 +67,44 @@ public class CrawlerDB {
 				documents.add(document);
 			}
 			urlsCollection.insertMany(documents);
+		}
+	}
+
+	// to update the second collection
+	public void updateWordsDB(HashMap<String, HashMap<String, DocData>> invertedFile, HashMap<String, Double> DFsPerDocs) {
+		if (invertedFile != null && !invertedFile.isEmpty() && DFsPerDocs != null && !DFsPerDocs.isEmpty()) {
+			List<Document> documents = new ArrayList<>();
+
+			for (Map.Entry<String, HashMap<String, DocData>> entry : invertedFile.entrySet()) {
+				String word = entry.getKey();
+				HashMap<String, DocData> docHash = entry.getValue();
+
+				List<Document> wordDocuments = new ArrayList<>();
+
+				for (Map.Entry<String, DocData> docHashEntry : docHash.entrySet()) {
+					String docUrl = docHashEntry.getKey();
+					DocData docData = docHashEntry.getValue();
+
+					Document wordDocument = new Document()
+							.append("URL", docUrl) // Assuming docId is the HTML document URL
+							.append("TermFrequency", docData.getTermFrequency())
+							.append("Title", docData.getTitle())
+							.append("Priority", docData.getPriority());
+
+					wordDocuments.add(wordDocument);
+				}
+
+				Document wordEntry = new Document("Word", word)
+						.append("Documents", wordDocuments);
+
+				documents.add(wordEntry);
+			}
+
+			// Assuming you have a MongoClient configured
+			// and a reference to the appropriate MongoDB collection
+			// Replace "yourCollectionName" with the actual name of your collection
+			MongoCollection<Document> wordsCollection = mongoClient.getDatabase("yourDatabaseName").getCollection("yourCollectionName");
+			wordsCollection.insertMany(documents);
 		}
 	}
 

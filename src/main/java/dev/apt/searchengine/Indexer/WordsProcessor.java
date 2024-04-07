@@ -38,13 +38,24 @@ public class WordsProcessor {
 
     public static String withoutStopWords(String s) {
         List<String> words = Arrays.asList(s.toLowerCase().split(" "));
-        words.removeIf(stopWords::contains);
+        //words.removeIf(stopWords::contains);
+        for (int i = 0; i < words.size(); i++) {
+            String word = words.get(i);
+
+            // Check if the stopWords list contains the current word
+            if (stopWords.contains(word)) {
+                // Remove the word if it's a stop word
+                words.set(i, "");
+                // Decrement the index to handle the shifted elements
+            }
+        }
         return words.toString();
     }
 
     public static String wordStemmer(String w) {
+        String cleanedText = w.replaceAll("[^a-zA-Z\\u0600-\\u06FF ]", "");
         englishStemmer stemmer = new englishStemmer();
-        stemmer.setCurrent(w);
+        stemmer.setCurrent(cleanedText);
         stemmer.stem();
         return stemmer.getCurrent();
     }
