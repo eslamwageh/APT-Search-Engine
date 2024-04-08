@@ -95,15 +95,11 @@ public class CrawlerDB {
 				}
 
 				Document wordEntry = new Document("Word", word)
-						.append("Documents", wordDocuments);
+						.append("Documents", wordDocuments).append("IDF", 1 / DFsPerDocs.get(word));
 
 				documents.add(wordEntry);
 			}
-
-			// Assuming you have a MongoClient configured
-			// and a reference to the appropriate MongoDB collection
-			// Replace "yourCollectionName" with the actual name of your collection
-			MongoCollection<Document> wordsCollection = mongoClient.getDatabase("yourDatabaseName").getCollection("yourCollectionName");
+			wordsCollection.deleteMany(new Document());
 			wordsCollection.insertMany(documents);
 		}
 	}
