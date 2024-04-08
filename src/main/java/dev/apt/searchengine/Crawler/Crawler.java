@@ -51,19 +51,31 @@ public class Crawler implements Runnable {
 		while (crawlerData.getCrawledPagesNum() < maxWPNum) {
 			// get a seed from the queue
 			String seed = crawlerData.getSeed();
+
+			database.updateCompactString(seed, createCompactString(seed));
+
 			System.out.println("\n" + Thread.currentThread().getName());
 			System.out.println("Seed: " + seed);
+
 			// crawl over that seed
 			List<String> newSeeds = crawl(seed);
 			if (newSeeds == null)
 				return;
+
 			// System.out.println("New Seeds: " + newSeeds.size());
+
 			// remove duplicates and create a list of new webpages to upload
 			List<WebPage> newWP = detectDuplicate(newSeeds);
+
 			// update the database
 			database.updateUrlsDB(newWP);
+			database.updateIsCrawled(seed, true);
+
+		
 			crawlerData.increaseCrawledPagesNum();
 		}
+		database.updateIsCrawled();
+		
 		System.out.println("Crawling is done");
 
 	}
@@ -89,6 +101,7 @@ public class Crawler implements Runnable {
 
 		// allow only a certain amount of URLs out of each crawled URL
 		List<String> sortedURLs = grippedURLs.stream()
+				.distinct()
 				.sorted(Comparator.comparingInt(String::length))
 				.limit(maxChildren)
 				.collect(Collectors.toList());
@@ -193,7 +206,7 @@ public class Crawler implements Runnable {
 			}
 			String compactString = createCompactString(url);
 			if (!database.detectDuplicatePages(compactString)) {
-				WebPage page = new WebPage(url, compactString, categorizePage(url), true);
+				WebPage page = new WebPage(url, compactString, categorizePage(url), false, false);
 				okPages.add(page);
 				crawlerData.addUniqueURL(url);
 				crawlerData.addSeed(url);
@@ -211,6 +224,7 @@ public class Crawler implements Runnable {
 		return okPages;
 
 	}
+
 
 	private String categorizePage(String url) {
 		try {
@@ -314,7 +328,7 @@ public class Crawler implements Runnable {
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
 				WebPage webPage = new WebPage(jsonObject.getString("URL"), jsonObject.getString("CompactString"),
-						jsonObject.getString("Category"), jsonObject.getBoolean("Refreshed"));
+						jsonObject.getString("Category"), jsonObject.getBoolean("IsCrawled"), jsonObject.getBoolean("IsIndexed"));
 				webPages.add(webPage);
 			}
 
