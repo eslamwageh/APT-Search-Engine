@@ -2,9 +2,9 @@ package dev.apt.searchengine.Crawler;
 
 import java.io.IOException;
 // data structures
-import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
+
 // jsoup related dependencies
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,6 +25,7 @@ import java.nio.file.Paths;
 
 public class Crawler implements Runnable {
 	private static int maxWPNum;
+	private static int maxChildren; // is the maximum number of children per URL
 	private CrawlerData crawlerData;
 	private CrawlerDB database;
 	// Categories
@@ -38,6 +39,10 @@ public class Crawler implements Runnable {
 
 	public static void setMaxWPNum(int maxi) {
 		maxWPNum = maxi;
+	}
+
+	public static void setMaxChildren(int maxi) {
+		maxChildren = maxi;
 	}
 
 	@Override
@@ -81,7 +86,13 @@ public class Crawler implements Runnable {
 			e.printStackTrace();
 			return null;
 		}
-		return grippedURLs;
+
+		List<String> sortedURLs = grippedURLs.stream()
+				.sorted(Comparator.comparingInt(String::length))
+				.limit(maxChildren)
+				.collect(Collectors.toList());
+
+		return sortedURLs;
 	}
 
 	// private void _deleteWP(String url) {
@@ -315,16 +326,20 @@ public class Crawler implements Runnable {
 	public static void main(String[] args) throws Exception {
 		CrawlerDB db = new CrawlerDB();
 		CrawlerData data = new CrawlerData(db);
-
+		// Ask for the number of threads
 		System.out.print("Enter number of threads: ");
 		Scanner scanner = new Scanner(System.in);
 		int threadsNum = scanner.nextInt();
-
-		System.out.print("\nEnter max number of crawled WebPages: ");
+		// Ask for the max number of crawled pages
+		System.out.print("Enter max number of crawled WebPages: ");
 		int maxi = scanner.nextInt();
+		// Ask for the depth of a single url
+		System.err.print("What is the max number of URLs out of a single URL? ");
+		int maxChildren = scanner.nextInt();
 		scanner.close();
 
 		Crawler.setMaxWPNum(maxi);
+		Crawler.setMaxChildren(maxChildren);
 
 		// Crawler cr = new Crawler(db, data);
 		// //
