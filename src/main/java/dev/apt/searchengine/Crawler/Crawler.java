@@ -87,6 +87,7 @@ public class Crawler implements Runnable {
 			return null;
 		}
 
+		// allow only a certain amount of URLs out of each crawled URL
 		List<String> sortedURLs = grippedURLs.stream()
 				.sorted(Comparator.comparingInt(String::length))
 				.limit(maxChildren)
