@@ -17,13 +17,13 @@ public class Ranker {
     public static ArrayList<RankedDoc> rankedDocs;
     public static HashMap<String, RankedDoc> docHashMap;
 
-    public static void main(String[] args) {
+    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw) {
         db = new CrawlerDB();
         words = db.getWordsCollection();
-        //queryWords = qw;
-        queryWords = new ArrayList<>(Arrays.asList("compar", "web", "tool"));
+        queryWords = qw;
         docHashMap = new HashMap<>();
         rank();
+        return rankedDocs;
     }
 
     public static void rank() {
@@ -62,8 +62,6 @@ public class Ranker {
 
         Collections.sort(rankedDocs, Comparator.comparingDouble(RankedDoc::getScore).reversed());
 
-        for (RankedDoc rd : rankedDocs) {
-            System.out.println(rd.getUrl() + " " + rd.getTitle());
-        }
+
     }
 };

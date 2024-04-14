@@ -95,7 +95,7 @@ public class CrawlerDB {
 				}
 
 				Document wordEntry = new Document("Word", word)
-						.append("Documents", wordDocuments).append("IDF", 1 / DFsPerDocs.get(word));
+						.append("Documents", wordDocuments).append("IDF", Math.log(1 / DFsPerDocs.get(word)));
 
 				documents.add(wordEntry);
 			}
