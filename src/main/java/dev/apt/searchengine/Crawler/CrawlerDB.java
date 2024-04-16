@@ -36,7 +36,7 @@ public class CrawlerDB {
 		}
 		connectMongoDB();
 		//delete all the documents in the collection
-		//! collection.deleteMany(new org.bson.Document());
+		//urlsCollection.deleteMany(new org.bson.Document());
 	}
 
 	public void connectMongoDB() {
@@ -63,11 +63,44 @@ public class CrawlerDB {
 						.append("URL", wp.URL)
 						.append("CompactString", wp.compactString)
 						.append("Category", wp.category)
-						.append("Refreshed", wp.isRefreshed);
+						.append("IsCrawled", wp.isCrawled)
+						.append("IsIndexed", wp.isIndexed);
 				documents.add(document);
 			}
 			urlsCollection.insertMany(documents);
 		}
+	}
+
+	public void updateCompactString(String URL, String compactString) {
+		org.bson.Document query = new org.bson.Document("URL", URL);
+		org.bson.Document update = new org.bson.Document("$set", new org.bson.Document("CompactString", compactString));
+		org.bson.Document result = urlsCollection.findOneAndUpdate(query, update);
+		if (result != null) {
+			String oldValue = result.getString("CompactString");
+			if(!compactString.equals(oldValue)){
+				updateIsIndexed(URL, false);
+			}
+		}
+
+	}
+
+	public void updateIsIndexed(String URL, boolean isIndexed) {
+		org.bson.Document query = new org.bson.Document("URL", URL);
+		org.bson.Document update = new org.bson.Document("$set", new org.bson.Document("IsIndexed", isIndexed));
+		urlsCollection.updateOne(query, update);
+	}
+
+	public void updateIsCrawled(String URL, boolean isCrawled) {
+		org.bson.Document query = new org.bson.Document("URL", URL);
+		org.bson.Document update = new org.bson.Document("$set", new org.bson.Document("IsCrawled", isCrawled));
+		urlsCollection.updateOne(query, update);
+	}
+
+	public void updateIsCrawled(){
+		// update all the documents to IsCrawled = false
+		org.bson.Document query = new org.bson.Document();
+		org.bson.Document update = new org.bson.Document("$set", new org.bson.Document("IsCrawled", false));
+		urlsCollection.updateMany(query, update);
 	}
 
 	// to update the second collection
@@ -108,7 +141,9 @@ public class CrawlerDB {
 	public LinkedList<String> _fetchSeed() {
 		connectMongoDB();
 		LinkedList<String> s = new LinkedList<>();
-		for (org.bson.Document doc : urlsCollection.find()) {
+		// download all the documents having IsCrawled = false
+		org.bson.Document query = new org.bson.Document("IsCrawled", false);
+		for (org.bson.Document doc : urlsCollection.find(query)) {
 			s.add(doc.getString("URL"));
 		}
 		return s;

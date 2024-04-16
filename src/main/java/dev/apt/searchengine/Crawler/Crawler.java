@@ -2,8 +2,9 @@ package dev.apt.searchengine.Crawler;
 
 import java.io.IOException;
 // data structures
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
+
 // jsoup related dependencies
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,6 +13,7 @@ import org.jsoup.select.Elements;
 // helping classes
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.HttpURLConnection;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,6 +24,8 @@ import java.nio.file.Paths;
 // import java.security.NoSuchAlgorithmException;
 
 public class Crawler implements Runnable {
+	private static int maxWPNum;
+	private static int maxChildren; // is the maximum number of children per URL
 	private CrawlerData crawlerData;
 	private CrawlerDB database;
 	// Categories
@@ -33,22 +37,45 @@ public class Crawler implements Runnable {
 		domains = new Domains();
 	}
 
+	public static void setMaxWPNum(int maxi) {
+		maxWPNum = maxi;
+	}
+
+	public static void setMaxChildren(int maxi) {
+		maxChildren = maxi;
+	}
+
 	@Override
 	public void run() {
 		// check if it reached the limit
-		while (crawlerData.getCrawledPagesNum() < 6000){
-		// get a seed from the queue
-		String seed = crawlerData.getSeed();
-		System.out.println("Seed: " + seed);
-		// crawl over that seed
-		List<String> newSeeds = crawl(seed);
-		System.out.println("New Seeds: " + newSeeds.size());
-		// remove duplicates and create a list of new webpages to upload
-		List<WebPage> newWP = detectDuplicate(newSeeds);
-		// update the database
-		database.updateUrlsDB(newWP);
-	}
-	System.out.println("Crawling is done");
+		while (crawlerData.getCrawledPagesNum() < maxWPNum) {
+			// get a seed from the queue
+			String seed = crawlerData.getSeed();
+
+			database.updateCompactString(seed, createCompactString(seed));
+
+			System.out.println("\n" + Thread.currentThread().getName());
+			System.out.println("Seed: " + seed);
+
+			// crawl over that seed
+			List<String> newSeeds = crawl(seed);
+			if (newSeeds == null)
+				return;
+
+			// System.out.println("New Seeds: " + newSeeds.size());
+
+			// remove duplicates and create a list of new webpages to upload
+			List<WebPage> newWP = detectDuplicate(newSeeds);
+
+			// update the database
+			database.updateUrlsDB(newWP);
+			database.updateIsCrawled(seed, true);
+
+		
+			crawlerData.increaseCrawledPagesNum();
+		}
+		
+		System.out.println("Crawling Sprint Finished");
 
 	}
 
@@ -68,8 +95,17 @@ public class Crawler implements Runnable {
 		} catch (IOException e) {
 			System.err.println("error in connecting to the url");
 			e.printStackTrace();
+			return null;
 		}
-		return grippedURLs;
+
+		// allow only a certain amount of URLs out of each crawled URL
+		List<String> sortedURLs = grippedURLs.stream()
+				.distinct()
+				.sorted(Comparator.comparingInt(String::length))
+				.limit(maxChildren)
+				.collect(Collectors.toList());
+
+		return sortedURLs;
 	}
 
 	// private void _deleteWP(String url) {
@@ -82,6 +118,24 @@ public class Crawler implements Runnable {
 			System.err.println("Invalid URL: " + url);
 			return false;
 		}
+		// check authorized connection
+		try {
+			HttpURLConnection connection = (HttpURLConnection) ((new URI(url)).toURL().openConnection());
+			connection.setRequestMethod("HEAD");
+			int responseCode = connection.getResponseCode();
+			if (responseCode != HttpURLConnection.HTTP_OK) {
+				System.err.println("Received 1 response code " + responseCode + " for URL: " + url);
+				return false;
+			}
+		} catch (IOException e) {
+			System.err.println("Error 1 checking URL: " + url);
+			// e.printStackTrace();
+			return false;
+		} catch (URISyntaxException e) {
+			System.err.println("Error 2 checking URL: " + url);
+			// e.printStackTrace();
+			return false;
+		}
 		// get the base url
 		String baseUrl = "";
 		try {
@@ -90,15 +144,32 @@ public class Crawler implements Runnable {
 			baseUrl = urlHandler.getScheme() + "://" + urlHandler.getHost();
 		} catch (URISyntaxException e) {
 			System.err.println("error at uriHandler");
-			e.printStackTrace();
+			// e.printStackTrace();
+			return false;
 		}
 		// fetch the robots.txt
 		Document doc = new Document("");
 		try {
-			doc = Jsoup.connect(baseUrl + "/robots.txt").get();
+			String robotsPath = baseUrl + "/robots.txt";
+
+			// check that it exist first
+			HttpURLConnection connection = (HttpURLConnection) ((new URI(robotsPath)).toURL().openConnection());
+			connection.setRequestMethod("HEAD");
+			int responseCode = connection.getResponseCode();
+			if (responseCode != HttpURLConnection.HTTP_OK) {
+				System.err.println("Received response code " + responseCode + " for URL: " + url);
+				return true;
+			}
+
+			doc = Jsoup.connect(robotsPath).get();
 		} catch (IOException e) {
 			System.err.println("failed to get the base URL");
-			e.printStackTrace();
+			// e.printStackTrace();
+			return false;
+		} catch (URISyntaxException e) {
+			System.err.println("error at uriHandler");
+			// e.printStackTrace();
+			return false;
 		}
 		String robotsTxt = doc.wholeText();
 		String[] lines = robotsTxt.split("\n");
@@ -134,7 +205,7 @@ public class Crawler implements Runnable {
 			}
 			String compactString = createCompactString(url);
 			if (!database.detectDuplicatePages(compactString)) {
-				WebPage page = new WebPage(url, compactString, categorizePage(url), true);
+				WebPage page = new WebPage(url, compactString, categorizePage(url), false, false);
 				okPages.add(page);
 				crawlerData.addUniqueURL(url);
 				crawlerData.addSeed(url);
@@ -145,13 +216,14 @@ public class Crawler implements Runnable {
 			// System.out.println("URL: " + URL + " with category: " + categorizePage(URL));
 			// //! testing purposes
 		}
-		if(okPages.size() == 0){
+		if (okPages.size() == 0) {
 			System.out.println("No new pages to add from this seed");
 			return null;
 		}
 		return okPages;
 
 	}
+
 
 	private String categorizePage(String url) {
 		try {
@@ -214,7 +286,7 @@ public class Crawler implements Runnable {
 		}
 	}
 
-	private String generateHash(String input) { //? this is my hand-made hash function aka the inefficient one :D
+	private String generateHash(String input) { // ? this is my hand-made hash function aka the inefficient one :D
 		long sum = 0;
 		int groupSize = 100;
 		int groupIndex = 0;
@@ -229,34 +301,36 @@ public class Crawler implements Runnable {
 		String hexString = Long.toHexString(sum);
 		return hexString;
 	}
-	/* the old hash function
-	private String generateHash(String input, String algorithm) throws NoSuchAlgorithmException {
-		MessageDigest digest = MessageDigest.getInstance(algorithm);
-		byte[] hash = digest.digest(input.getBytes());
-		StringBuffer hexString = new StringBuffer();
-		for (int i = 0; i < hash.length; i++) {
-			String hex = Integer.toHexString(0xff & hash[i]);
-			if (hex.length() == 1)
-				hexString.append('0');
-			hexString.append(hex);
-		}
-		return hexString.toString();
-	}
+	/*
+	 * the old hash function
+	 * private String generateHash(String input, String algorithm) throws
+	 * NoSuchAlgorithmException {
+	 * MessageDigest digest = MessageDigest.getInstance(algorithm);
+	 * byte[] hash = digest.digest(input.getBytes());
+	 * StringBuffer hexString = new StringBuffer();
+	 * for (int i = 0; i < hash.length; i++) {
+	 * String hex = Integer.toHexString(0xff & hash[i]);
+	 * if (hex.length() == 1)
+	 * hexString.append('0');
+	 * hexString.append(hex);
+	 * }
+	 * return hexString.toString();
+	 * }
 	 */
 
-	private void initializeSeed(){
+	private void initializeSeed() {
 		try {
 			String content = new String(Files.readAllBytes(Paths.get("./seed.json")));
 			JSONArray jsonArray = new JSONArray(content);
 			List<WebPage> webPages = new ArrayList<>();
-	
+
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
 				WebPage webPage = new WebPage(jsonObject.getString("URL"), jsonObject.getString("CompactString"),
-						jsonObject.getString("Category"), jsonObject.getBoolean("Refreshed"));
+						jsonObject.getString("Category"), jsonObject.getBoolean("IsCrawled"), jsonObject.getBoolean("IsIndexed"));
 				webPages.add(webPage);
 			}
-	
+
 			this.database.updateUrlsDB(webPages);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -264,13 +338,32 @@ public class Crawler implements Runnable {
 	}
 
 	public static void main(String[] args) throws Exception {
-		int threadsNum  = Integer.parseInt(args[0]);
-		// for now, make it only one
-		threadsNum = 1;
 		CrawlerDB db = new CrawlerDB();
 		CrawlerData data = new CrawlerData(db);
+		// Ask for the number of threads
+		System.out.print("Enter number of threads: ");
+		Scanner scanner = new Scanner(System.in);
+		int threadsNum = scanner.nextInt();
+		// Ask for the max number of crawled pages
+		System.out.print("Enter max number of crawled WebPages: ");
+		int maxi = scanner.nextInt();
+		// Ask for the depth of a single url
+		System.err.print("What is the max number of URLs out of a single URL? ");
+		int maxChildren = scanner.nextInt();
+		scanner.close();
+
+		Crawler.setMaxWPNum(maxi);
+		Crawler.setMaxChildren(maxChildren);
+
+		// Crawler cr = new Crawler(db, data);
+		// //
+		// System.out.println(cr._isAllowedPath("https://www.amazon.com/gp/help/customer/display.html/ref=footer_cou?ie=UTF8&nodeId=508088"));
+		// cr.initializeSeed();
+
 		for (int i = 0; i < threadsNum; i++) {
-			(new Thread( new Crawler(db, data))).start();
+			Thread thread = new Thread(new Crawler(db, data));
+			thread.setName("Thread " + (i + 1));
+			thread.start();
 		}
 	}
 }
