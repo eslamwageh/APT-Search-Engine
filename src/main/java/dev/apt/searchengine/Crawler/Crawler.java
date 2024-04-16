@@ -74,9 +74,8 @@ public class Crawler implements Runnable {
 		
 			crawlerData.increaseCrawledPagesNum();
 		}
-		database.updateIsCrawled();
 		
-		System.out.println("Crawling is done");
+		System.out.println("Crawling Sprint Finished");
 
 	}
 
