@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class QueryProcessor {
     public static void main(String[] args) {
-        String query = "Iphone 15";
+        String query = "Sayed is playing in the football league";
         query = WordsProcessor.withoutStopWords(query);
         ArrayList<String> queryWords = new ArrayList<>(Arrays.asList(query.split(" ")));
         ArrayList<String> stemmedQueryWords = new ArrayList<>();
