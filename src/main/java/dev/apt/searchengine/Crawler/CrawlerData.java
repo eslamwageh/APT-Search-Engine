@@ -18,14 +18,15 @@ public class CrawlerData {
 	public CrawlerData(CrawlerDB db) {
 		this.db = db;
 		LinkedList<String> seeds = db._fetchSeed();
+		LinkedList<String> urls = db._fetchAllURLs();
 		// initialize the Locks
 		crawledPagesNumLock = new Object();
 		// initialize the containers
 		seedURLs = seeds;
 		uniqueURLs = new HashSet<>();
-		for (String s : seeds) uniqueURLs.add(s);
+		for (String s : urls) uniqueURLs.add(s);
 		// initialize variables
-		crawledPagesNum = seeds.size();
+		crawledPagesNum = 0; //? should it be 0?
 	}
 
 	// public void setCrawledPagesNum(int num) {

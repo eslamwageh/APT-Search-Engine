@@ -77,6 +77,8 @@ public class CrawlerDB {
 		org.bson.Document result = urlsCollection.findOneAndUpdate(query, update);
 		if (result != null) {
 			String oldValue = result.getString("CompactString");
+			if(compactString == null)
+				return;
 			if(!compactString.equals(oldValue)){
 				updateIsIndexed(URL, false);
 			}
@@ -143,6 +145,15 @@ public class CrawlerDB {
 		LinkedList<String> s = new LinkedList<>();
 		// download all the documents having IsCrawled = false
 		org.bson.Document query = new org.bson.Document("IsCrawled", false);
+		for (org.bson.Document doc : urlsCollection.find(query)) {
+			s.add(doc.getString("URL"));
+		}
+		return s;
+	}
+
+	public LinkedList<String> _fetchAllURLs() {
+		LinkedList<String> s = new LinkedList<>();
+		org.bson.Document query = new org.bson.Document();
 		for (org.bson.Document doc : urlsCollection.find(query)) {
 			s.add(doc.getString("URL"));
 		}
