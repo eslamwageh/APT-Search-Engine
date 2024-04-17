@@ -14,6 +14,7 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.FormatFlagsConversionMismatchException;
 import java.util.HashMap;
 import java.util.Objects;
@@ -53,8 +54,9 @@ public class Indexer {
                 if (jsoupDoc == null) continue;
 
                 String title = jsoupDoc.title();
+                String docText = jsoupDoc.text();
 
-                processElements(jsoupDoc.getAllElements(), title, url);
+                processElements(jsoupDoc.getAllElements(), title, url, docText);
 //                Elements allElements = jsoupDoc.getAllElements();
 
                 // Loop over all elements
@@ -67,7 +69,7 @@ public class Indexer {
     }
 
 
-    private static void processElements(Elements allElements, String title, String url){
+    private static void processElements(Elements allElements, String title, String url, String docText){
         int totWordsInDoc = 0;
         for (Element e : allElements) {
             String tag = e.tagName();
@@ -89,6 +91,15 @@ public class Indexer {
                         priority = 2;
                     }
 
+                    int index = text.indexOf(word);
+                    int count = 0;
+                    ArrayList<Integer> occurrences = new ArrayList<>();
+                    while (index >= 0) {
+                        count++;
+                        occurrences.add(index);
+                        index = text.indexOf(word, index + 1);
+                    }
+
                     word = WordsProcessor.wordStemmer(word);
                     totWordsInDoc++;
                     if (word.isEmpty()) continue;
@@ -99,12 +110,14 @@ public class Indexer {
                         if (invertedFile.get(word).containsKey(url)) {
                             DocData info = invertedFile.get(word).get(url);
                             info.setTermFrequency(info.getTermFrequency() + 1);
+                            info.setOccurrences(occurrences);
                             info.setPriority(Math.max(info.getPriority(), priority));
                             invertedFile.get(word).put(url, info);
                         } else {
                             DFsPerDocs.put(word, DFsPerDocs.get(word) + 1 / allDocsCount);
                             DocData info = new DocData();
                             info.setTermFrequency(1);
+                            info.setOccurrences(occurrences);
                             info.setTitle(title);
                             info.setPriority(priority);
                             invertedFile.get(word).put(url, info);
@@ -114,6 +127,7 @@ public class Indexer {
                         HashMap<String, DocData> docHash = new HashMap<>();
                         DocData info = new DocData();
                         info.setTitle(title);
+                        info.setOccurrences(occurrences);
                         info.setPriority(priority);
                         info.setTermFrequency(1);
 
@@ -122,7 +136,7 @@ public class Indexer {
                     }
                     System.out.println(word + ": " + invertedFile.get(word).get(url).getTermFrequency());
                 }
-                processElements(e.children(), title, url);
+                processElements(e.children(), title, url, docText);
             }
 
         }
