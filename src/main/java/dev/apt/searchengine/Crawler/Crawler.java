@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 // jsoup related dependencies
+import dev.apt.searchengine.Ranker.Ranker;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 
 // import java.security.MessageDigest;
 // import java.security.NoSuchAlgorithmException;
@@ -59,6 +61,7 @@ public class Crawler implements Runnable {
 
 			// crawl over that seed
 			List<String> newSeeds = crawl(seed);
+			System.out.println("tamam");
 			if (newSeeds == null)
 				return;
 
@@ -71,7 +74,9 @@ public class Crawler implements Runnable {
 			database.updateUrlsDB(newWP);
 			database.updateIsCrawled(seed, true);
 
-		
+			Ranker.updatePopularity(seed, newSeeds);
+			
+			
 			crawlerData.increaseCrawledPagesNum();
 		}
 		
@@ -122,7 +127,7 @@ public class Crawler implements Runnable {
 		try {
 			HttpURLConnection connection = (HttpURLConnection) ((new URI(url)).toURL().openConnection());
 			connection.setRequestMethod("HEAD");
-			int responseCode = connection.getResponseCode();
+			int responseCode = connection.getResponseCode(); //? set timeout here
 			if (responseCode != HttpURLConnection.HTTP_OK) {
 				System.err.println("Received 1 response code " + responseCode + " for URL: " + url);
 				return false;
@@ -281,7 +286,7 @@ public class Crawler implements Runnable {
 			compactString = generateHash(doc.body().text());
 			return compactString;
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Error: m4 lagyeen el url deh yabo 3ammo");
 			return null;
 		}
 	}
@@ -365,6 +370,7 @@ public class Crawler implements Runnable {
 			thread.setName("Thread " + (i + 1));
 			thread.start();
 		}
+		Ranker.calculatePopularity();
 	}
 }
 

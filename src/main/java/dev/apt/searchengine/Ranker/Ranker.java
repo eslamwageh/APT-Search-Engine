@@ -17,6 +17,11 @@ public class Ranker {
     public static ArrayList<RankedDoc> rankedDocs;
     public static HashMap<String, RankedDoc> docHashMap;
 
+    public static HashMap<String, ArrayList<String>> urlsGraph = new HashMap<>();
+
+    public static HashMap<String, Double> pageRanks = new HashMap<>();
+
+
     public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw) {
         db = new CrawlerDB();
         words = db.getWordsCollection();
@@ -24,6 +29,74 @@ public class Ranker {
         docHashMap = new HashMap<>();
         rank();
         return rankedDocs;
+    }
+    
+    public static void updatePopularity(String parent, List<String> children) {
+       synchronized (urlsGraph)
+       {
+           for(String url: children)
+           {
+                if(urlsGraph.containsKey(url))
+                {
+                    urlsGraph.get(url).add(parent);
+                }
+                else
+                {
+                    ArrayList<String> temp = new ArrayList<>();
+                    temp.add(parent);
+                    urlsGraph.put(url, temp);
+                }
+           }
+       }
+    }
+
+    public static void calculatePopularity()
+    {
+        for (String node : urlsGraph.keySet()) {
+            pageRanks.put(node, 1/(double)urlsGraph.size()); // Initialize all PageRank values to 1.0
+        }
+
+        // Perform PageRank iterations
+        int iterations = 10;
+        double dampingFactor = 0.85; // Typical damping factor used in PageRank
+        for (int i = 0; i < iterations; i++) {
+            HashMap<String, Double> newPageRanks = new HashMap<>();
+            double sumOfRanks = 0.0;
+
+            // Calculate new PageRank values for each node
+            for (String node : urlsGraph.keySet()) {
+                double newPageRank = (1 - dampingFactor); // Initial value (damping factor)
+
+                // Contribution from incoming edges
+                for (String incomingNode : urlsGraph.keySet()) {
+                    if (urlsGraph.get(incomingNode) != null && urlsGraph.get(incomingNode).size() > 0) {
+                        for (String outgoingNode : urlsGraph.get(incomingNode)) {
+                            if (outgoingNode.equals(node)) {
+                                newPageRank += dampingFactor * (pageRanks.get(incomingNode) / urlsGraph.get(incomingNode).size());
+                            }
+                        }
+                    }
+                }
+
+                newPageRanks.put(node, newPageRank);
+                sumOfRanks += newPageRank;
+            }
+
+            // Normalize PageRank values
+            for (String node : newPageRanks.keySet()) {
+                newPageRanks.put(node, newPageRanks.get(node) / sumOfRanks);
+            }
+
+            // Update PageRank values for the next iteration
+
+            pageRanks = newPageRanks;
+        }
+
+        // Print the final PageRank values
+        System.out.println("Final PageRank values:");
+        for (String node : pageRanks.keySet()) {
+            System.out.println(node + ": " + pageRanks.get(node));
+        }
     }
 
     public static void rank() {
@@ -47,7 +120,8 @@ public class Ranker {
                     String title = embeddedDoc.getString("Title");
                     int priority = embeddedDoc.getInteger("Priority");
 
-                    score = termFrequency * IDF * priority;
+                    score = termFrequency * IDF * priority * (pageRanks.get(url) != null ? pageRanks.get(url) : 1 );
+
                     if (docHashMap.containsKey(url)) {
                         docHashMap.get(url).setScore(docHashMap.get(url).getScore() + score);
                     } else {
@@ -64,4 +138,5 @@ public class Ranker {
 
 
     }
+
 };
