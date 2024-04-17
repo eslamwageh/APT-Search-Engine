@@ -148,6 +148,7 @@ public class CrawlerDB {
             s.add(doc.getString("URL"));
         }
         return s;
+
     }
 
     public boolean detectDuplicatePages(String compactString) {
