@@ -88,6 +88,7 @@ public class Ranker {
             }
 
             // Update PageRank values for the next iteration
+
             pageRanks = newPageRanks;
         }
 
