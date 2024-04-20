@@ -22,7 +22,7 @@ public class Ranker {
 
     public static HashMap<String, Double> pageRanks = new HashMap<>();
 
-
+    private static HashMap<String, HashMap<String, ArrayList<Integer>>> docWordOccurrences= new HashMap<>();
     public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, boolean isPhrase) {
         db = new CrawlerDB();
         words = db.getWordsCollection();
@@ -141,7 +141,7 @@ public class Ranker {
     public static void phraseRank() {
         rankedDocs = new ArrayList<>();
         ArrayList<Document> wordsIntersection = new ArrayList<>();
-        ArrayList<ArrayList<ArrayList<Integer>>> occurrences = new ArrayList<>(); //for each document, for each word, for each occurrence
+        //ArrayList<ArrayList<ArrayList<Integer>>> occurrences = new ArrayList<>(); //for each document, for each word, for each occurrence
         // initialize the intersection with the first word's documents
         Document initDocsQuery = new Document("Word", queryWords.get(0));
         FindIterable<Document> initDocuments = words.find(initDocsQuery);
@@ -149,10 +149,12 @@ public class Ranker {
         if (initDoc != null) {
             wordsIntersection = (ArrayList<Document>) initDoc.get("Documents");
         }
+
         for (String word : queryWords) {
             Document findQuery = new Document("Word", word);
             FindIterable<Document> documents = words.find(findQuery);
             Document doc = documents.first();
+
 
             if (doc != null) {
                 // get the documents of the current word
@@ -160,6 +162,12 @@ public class Ranker {
                 // get the intersection between the current word's documents and the wordsIntersection
                 ArrayList<Document> newIntersection = new ArrayList<>();
                 for (Document currentWordDoc : currentWordDocs) {
+                    ArrayList<Integer> occ = (ArrayList<Integer>) currentWordDoc.get("Occurrences");
+                    String url = currentWordDoc.getString("URL");
+                    if (!docWordOccurrences.containsKey(url))
+                        docWordOccurrences.put(url, new HashMap<>());
+                    docWordOccurrences.get(url).put(word, occ);
+
                     for (Document intersectionDoc : wordsIntersection) {
                         if (currentWordDoc.getString("URL").equals(intersectionDoc.getString("URL"))) {
                             newIntersection.add(currentWordDoc);
@@ -172,67 +180,38 @@ public class Ranker {
         }
         // wordsIntersection now contains the documents that contain all the words in the query
 
-        // fill the occurrences array
-        for (String word : queryWords) {
-            Document findQuery = new Document("Word", word);
-            FindIterable<Document> documents = words.find(findQuery);
-            Document doc = documents.first();
-
-            if (doc != null) {
-                ArrayList<Document> currentWordDocs = (ArrayList<Document>) doc.get("Documents");
-                for (Document currentWordDoc : currentWordDocs) {
-                    for (Document intersectionDoc : wordsIntersection) {
-                        if (currentWordDoc.getString("URL").equals(intersectionDoc.getString("URL"))) {
-                            if (occurrences.size() < wordsIntersection.size()) {
-                                occurrences.add(new ArrayList<>());
-                            }
-                            ArrayList<Integer> currentWordOccurrences = (ArrayList<Integer>) currentWordDoc.get("occurrences");
-                            occurrences.get(wordsIntersection.indexOf(intersectionDoc)).add(currentWordOccurrences);
-                        }
-                    }
-                }
-            }
-        }
-        // occurrences now contains the occurrences of each word in the query in the documents in wordsIntersection
-
-        // now we have the documents that contain all the words in the query and the occurrences of each word in each document
-        // we can check the order of the words in the occurrences
 
         for (int i = 0; i < wordsIntersection.size(); i++) {
             Document doc = wordsIntersection.get(i);
             String url = doc.getString("URL");
             String title = doc.getString("Title");
             Double IDF = (Double)doc.get("IDF");
-            ArrayList<ArrayList<Integer>> currentDocOccurrences = occurrences.get(i);
+
+            int lastOcc = -1;
             boolean isPhrase = true;
-            int nextStartIndex = 0;
-            for (int j = 0; j < currentDocOccurrences.size() - 1; j++) {
-                ArrayList<Integer> currentWordOccurrences = currentDocOccurrences.get(j);
-                ArrayList<Integer> nextWordOccurrences = currentDocOccurrences.get(j + 1);
-                boolean found = false;
-                for (int k = nextStartIndex; k < currentWordOccurrences.size(); k++) {
-                    for (int l = 0; l < nextWordOccurrences.size(); l++) {
-                        if (currentWordOccurrences.get(k) < nextWordOccurrences.get(l)) {
-                            found = true;
-                            nextStartIndex = l;
-                            break;
-                        }
-                    }
-                    if (found) {
+            for(String word: queryWords)
+            {
+                boolean goodDoc = false;
+                for(Integer j :docWordOccurrences.get(url).get(word))
+                {
+                    if(j>lastOcc) {
+                        lastOcc = j;
+                        goodDoc = true;
                         break;
                     }
                 }
-                if (!found) {
+                if(!goodDoc) {
                     isPhrase = false;
                     break;
                 }
             }
-            if (isPhrase) {
-               
+            if (isPhrase)
+            {
                 RankedDoc info = new RankedDoc(url, calculateScore(doc, IDF, url), title, "");
-                rankedDocs.add(info);
             }
+
         }
+
 
         Collections.sort(rankedDocs, Comparator.comparingDouble(RankedDoc::getScore).reversed());
         
