@@ -98,8 +98,6 @@ public class Crawler implements Runnable {
 					grippedURLs.add(href);
 			}
 		} catch (IOException e) {
-			System.err.println("error in connecting to the url");
-			e.printStackTrace();
 			return null;
 		}
 
@@ -120,7 +118,7 @@ public class Crawler implements Runnable {
 	// Check if the given URL is allowed in terms of robots.txt
 	private boolean _isAllowedPath(String url) {
 		if (!url.startsWith("http://") && !url.startsWith("https://")) {
-			System.err.println("Invalid URL: " + url);
+			//System.err.println("Invalid URL: " + url);
 			return false;
 		}
 		// check authorized connection
@@ -129,15 +127,14 @@ public class Crawler implements Runnable {
 			connection.setRequestMethod("HEAD");
 			int responseCode = connection.getResponseCode(); //? set timeout here
 			if (responseCode != HttpURLConnection.HTTP_OK) {
-				System.err.println("Received 1 response code " + responseCode + " for URL: " + url);
 				return false;
 			}
 		} catch (IOException e) {
-			System.err.println("Error 1 checking URL: " + url);
+			// System.err.println("Error 1 checking URL: " + url);
 			// e.printStackTrace();
 			return false;
 		} catch (URISyntaxException e) {
-			System.err.println("Error 2 checking URL: " + url);
+			// System.err.println("Error 2 checking URL: " + url);
 			// e.printStackTrace();
 			return false;
 		}
@@ -148,7 +145,7 @@ public class Crawler implements Runnable {
 			urlHandler = new URI(url);
 			baseUrl = urlHandler.getScheme() + "://" + urlHandler.getHost();
 		} catch (URISyntaxException e) {
-			System.err.println("error at uriHandler");
+			// System.err.println("error at uriHandler");
 			// e.printStackTrace();
 			return false;
 		}
@@ -162,17 +159,17 @@ public class Crawler implements Runnable {
 			connection.setRequestMethod("HEAD");
 			int responseCode = connection.getResponseCode();
 			if (responseCode != HttpURLConnection.HTTP_OK) {
-				System.err.println("Received response code " + responseCode + " for URL: " + url);
+				//System.err.println("Received response code " + responseCode + " for URL: " + url);
 				return true;
 			}
 
 			doc = Jsoup.connect(robotsPath).get();
 		} catch (IOException e) {
-			System.err.println("failed to get the base URL");
+			// System.err.println("failed to get the base URL");
 			// e.printStackTrace();
 			return false;
 		} catch (URISyntaxException e) {
-			System.err.println("error at uriHandler");
+			// System.err.println("error at uriHandler");
 			// e.printStackTrace();
 			return false;
 		}
@@ -353,7 +350,7 @@ public class Crawler implements Runnable {
 		System.out.print("Enter max number of crawled WebPages: ");
 		int maxi = scanner.nextInt();
 		// Ask for the depth of a single url
-		System.err.print("What is the max number of URLs out of a single URL? ");
+		System.out.print("What is the max number of URLs out of a single URL? ");
 		int maxChildren = scanner.nextInt();
 		scanner.close();
 

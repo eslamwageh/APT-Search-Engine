@@ -77,6 +77,8 @@ public class CrawlerDB {
         org.bson.Document result = urlsCollection.findOneAndUpdate(query, update);
         if (result != null) {
             String oldValue = result.getString("CompactString");
+            if(compactString == null)
+                return;
             if (!compactString.equals(oldValue)) {
                 updateIsIndexed(URL, false);
             }
@@ -151,6 +153,14 @@ public class CrawlerDB {
 
     }
 
+    public LinkedList<String> _fetchAllURLs() {
+        LinkedList<String> s = new LinkedList<>();
+        org.bson.Document query = new org.bson.Document();
+        for (org.bson.Document doc : urlsCollection.find(query)) {
+            s.add(doc.getString("URL"));
+        }
+        return s;
+    }
     public boolean detectDuplicatePages(String compactString) {
         org.bson.Document query = new org.bson.Document("CompactString", compactString);
         return urlsCollection.countDocuments(query) > 0;
