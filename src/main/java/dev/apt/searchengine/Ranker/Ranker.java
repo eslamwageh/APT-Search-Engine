@@ -50,6 +50,15 @@ public class Ranker {
             pageRanks.put(node, 1 / (double) urlsGraph.size()); // Initialize all PageRank values to 1.0
         }
 
+        //that is a function that calculates the converge
+        /*private double diff(Map<String, Double> nextIter, Map<String, Double> prevIter) {
+        double sum = 0;
+        for(String s : nodeCounter) {
+            sum += Math.abs(nextIter.get(s) - prevIter.get(s));
+        }
+        return(Math.sqrt(sum));
+        }*/
+
         // Perform PageRank iterations
         int iterations = 10;
         double dampingFactor = 0.85; // Typical damping factor used in PageRank
