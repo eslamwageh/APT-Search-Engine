@@ -39,6 +39,14 @@ public class CrawlerDB {
         //urlsCollection.deleteMany(new org.bson.Document());
     }
 
+    public void clearDB() {
+        System.out.print("Are you sure you want to delete the data base? (yes, no): ");
+        Scanner scanner = new Scanner(System.in);
+        String response = scanner.nextLine();
+        if (response.equals("yes")) urlsCollection.deleteMany(new org.bson.Document());;
+        scanner.close();
+    }
+
     public void connectMongoDB() {
         String password = env.getProperty("MONGOPASS");
         String username = env.getProperty("MONGOUSER");

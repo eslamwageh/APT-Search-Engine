@@ -275,7 +275,7 @@ public class Crawler implements Runnable {
 		}
 	}
 
-	private String createCompactString(String URL) {
+	public String createCompactString(String URL) {
 		org.jsoup.nodes.Document doc;
 		try {
 			doc = Jsoup.connect(URL).get();
@@ -320,14 +320,15 @@ public class Crawler implements Runnable {
 	 * }
 	 */
 
-	private void initializeSeed() {
+	public void initializeSeed(String json_name) {
 		try {
-			String content = new String(Files.readAllBytes(Paths.get("./seed.json")));
+			String content = new String(Files.readAllBytes(Paths.get(json_name)));
 			JSONArray jsonArray = new JSONArray(content);
 			List<WebPage> webPages = new ArrayList<>();
 
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				System.out.println(i);
 				WebPage webPage = new WebPage(jsonObject.getString("URL"), jsonObject.getString("CompactString"),
 						jsonObject.getString("Category"), jsonObject.getBoolean("IsCrawled"), jsonObject.getBoolean("IsIndexed"));
 				webPages.add(webPage);
