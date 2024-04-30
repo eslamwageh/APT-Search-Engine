@@ -1,0 +1,2375 @@
+[
+  {
+    "URL": "https://www.w3schools.com/js/js_intro.asp",
+    "CompactString": "854a0a1",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.vim.org/",
+    "CompactString": "925c5c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.simplilearn.com/tutorials/data-structure-tutorial/what-is-an-algorithm#:~:text\u003dAlgorithms%20are%20step%2Dby%2Dstep,web%20searches%20to%20artificial%20intelligence.",
+    "CompactString": "181c4e49",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/ruby-programming-language/",
+    "CompactString": "9d7ddb6",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://docs.arduino.cc/software/ide/",
+    "CompactString": "1a5030",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/r/programming/new/",
+    "CompactString": "9699d2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/rails/rails",
+    "CompactString": "18e8986",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.coursera.org/learn/algorithms-part1",
+    "CompactString": "129e8d0a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.coursera.org/courses?query\u003dweb%20development",
+    "CompactString": "91b7741",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Ruby_(programming_language)",
+    "CompactString": "5b67e0e1",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/r/programming/",
+    "CompactString": "9a2eac9",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://go.dev/",
+    "CompactString": "1d739fe",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mongodb.com/basics/mongodb-atlas-tutorial",
+    "CompactString": "5b17ed5",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.javatpoint.com/data-structure-tutorial",
+    "CompactString": "1ef3ae7b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.postgresql.org/download/",
+    "CompactString": "18826f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.pluralsight.com/resources/blog/cloud/what-is-the-ruby-programming-language",
+    "CompactString": "4507029",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/django/",
+    "CompactString": "7cc13ea",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.coursera.org/articles/ruby-vs-python",
+    "CompactString": "41650c1",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://nodejs.org/en",
+    "CompactString": "829bc",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.techtarget.com/searchapparchitecture/definition/object-oriented-programming-OOP#:~:text\u003dObject%2Doriented%20programming%20(OOP)%20is%20a%20computer%20programming%20model,has%20unique%20attributes%20and%20behavior.",
+    "CompactString": "3d489b8",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/REACT/DEFAULT.ASP",
+    "CompactString": "7a1e020",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://kinsta.com/blog/javascript-libraries/",
+    "CompactString": "4409bb7d",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/r/Rlanguage/",
+    "CompactString": "484b96",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.jetbrains.com/pycharm/download/",
+    "CompactString": "90c6",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.jetbrains.com/idea/download/",
+    "CompactString": "9efb",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/web-development/",
+    "CompactString": "a767a2b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.ibm.com/topics/nosql-databases#:~:text\u003dNoSQL%2C%20also%20referred%20to%20as,structures%20found%20in%20relational%20databases.",
+    "CompactString": "a02feb1",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://stackoverflow.com/",
+    "CompactString": "2211c4f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.jetbrains.com/pycharm/",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://vscode.dev/",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.udacity.com/course/data-structures-and-algorithms-nanodegree--nd256",
+    "CompactString": "130b625",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.theodinproject.com/",
+    "CompactString": "2a5222",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://techdevguide.withgoogle.com/paths/data-structures-and-algorithms/",
+    "CompactString": "5c18a5",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.coursera.org/",
+    "CompactString": "b81276",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://git-scm.com/",
+    "CompactString": "93ad9",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/r/CodingHelp/",
+    "CompactString": "360937a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.jetbrains.com/",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://julialang.org/",
+    "CompactString": "1d9b805",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/php/",
+    "CompactString": "1399479e",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/JuliaLang/julia",
+    "CompactString": "1bfd39a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://stackoverflow.blog/",
+    "CompactString": "44bac4b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/apache/groovy",
+    "CompactString": "268ac0a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/r/Julia/",
+    "CompactString": "5bf17a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Laravel",
+    "CompactString": "22cebd22",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Oracle_Database",
+    "CompactString": "bb2d31c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.edx.org/learn/databases",
+    "CompactString": "644be46",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.microverse.org/blog/angularjs-the-complete-guide-for-beginners",
+    "CompactString": "1134b2cd",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/cs/cs_intro.php",
+    "CompactString": "6983e2a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/bootstrap/bootstrap_get_started.asp",
+    "CompactString": "baf1b0f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/mysql/mysql_intro.asp",
+    "CompactString": "74ba4e1",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://blog.hubspot.com/website/website-development",
+    "CompactString": "43d3d395",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.solarwinds.com/resources/it-glossary/oracle-database",
+    "CompactString": "11ab091f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.kaggle.com/",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://vercel.com/frameworks/nextjs",
+    "CompactString": "129ff90",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/dart-lang",
+    "CompactString": "d192ca",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://laracasts.com/",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Ruby_on_Rails",
+    "CompactString": "1fa2045f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.sublimetext.com/",
+    "CompactString": "646171",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/microsoft/vscode",
+    "CompactString": "1a42dc2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/r/rprogramming/",
+    "CompactString": "1079434",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Object-oriented_programming",
+    "CompactString": "65a0978c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Assembly_language",
+    "CompactString": "8448b577",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Django_(web_framework)",
+    "CompactString": "f5dbad2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.pluralsight.com/resources/blog/guides/getting-started-with-angularjs",
+    "CompactString": "308a29c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/java/",
+    "CompactString": "8a5e22a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.investopedia.com/terms/a/assembly-language.asp",
+    "CompactString": "8dfa8eb",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Express.js",
+    "CompactString": "14d2702",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://groovy-lang.org/",
+    "CompactString": "3e7d5d",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://legacy.reactjs.org/",
+    "CompactString": "35d8f7",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.javascripting.com/",
+    "CompactString": "3c837d",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.educative.io/blog/object-oriented-programming",
+    "CompactString": "1b4f79f6",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.rust-lang.org/learn",
+    "CompactString": "cc4560",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mongodb.com/atlas",
+    "CompactString": "350a89f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://code.visualstudio.com/download",
+    "CompactString": "5f262",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/r/ProgrammingLanguages/",
+    "CompactString": "de4eea",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.kaggle.com/datasets?fileType\u003dcsv",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/IntelliJ_IDEA",
+    "CompactString": "5e297a2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.oracle.com/eg/java/technologies/downloads/",
+    "CompactString": "c22a85d",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.udemy.com/course/nextjs-react-the-complete-guide/",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.scratchjr.org/",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://docker-curriculum.com/",
+    "CompactString": "c0f6e2b3",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.postgresqltutorial.com/",
+    "CompactString": "8e40db7",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://stackoverflow.blog/2020/01/20/what-is-rust-and-why-is-it-so-popular/",
+    "CompactString": "5fc1c20",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.coursera.org/learn/introduction-to-databases",
+    "CompactString": "103e2e46",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/introduction-to-data-structures/",
+    "CompactString": "e83e7db",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/SQL",
+    "CompactString": "2c8e8595",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.djangoproject.com/",
+    "CompactString": "766be1",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.php.net/manual/en/book.pgsql.php",
+    "CompactString": "45beb69",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.microsoft.com/en-us/sql-server/sql-server-downloads",
+    "CompactString": "a1d867",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://support.arduino.cc/hc/en-us/articles/360019833020-Download-and-install-Arduino-IDE",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://gorails.com/",
+    "CompactString": "18db51e",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction",
+    "CompactString": "3553af54",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.khanacademy.org/computing/computer-programming/sql",
+    "CompactString": "24c1dcc",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Algorithm",
+    "CompactString": "65aee87a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.freecodecamp.org/",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://thehackernews.com/",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://developer.apple.com/swift/",
+    "CompactString": "4af7f29",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.npmjs.com/package/mongodb",
+    "CompactString": "30a2a34",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://dartpad.dev/",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.tutorialspoint.com/assembly_programming/assembly_introduction.htm",
+    "CompactString": "40b790c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.codecademy.com/catalog/language/python",
+    "CompactString": "1561a3bc",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/fundamentals-of-algorithms/",
+    "CompactString": "e7b30d8",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/r/",
+    "CompactString": "67edcad",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/c-programming-language/",
+    "CompactString": "19706ebb",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/R_(programming_language)",
+    "CompactString": "33d5d4e7",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.javatpoint.com/c-sharp-tutorial",
+    "CompactString": "32c2c6f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_programming",
+    "CompactString": "f10d054",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/List_of_JavaScript_libraries",
+    "CompactString": "f7d41e",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/django/django",
+    "CompactString": "efa6a0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.eclipse.org/",
+    "CompactString": "822f7b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/",
+    "CompactString": "70ad3a0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/GitHub",
+    "CompactString": "61c8af25",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.programiz.com/c-programming",
+    "CompactString": "bb7d5a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/js/",
+    "CompactString": "9941f8f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.udemy.com/courses/free/",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/java/java_oop.asp",
+    "CompactString": "87c4e39",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/r/coding/",
+    "CompactString": "14e92bc",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/c/c_intro.php",
+    "CompactString": "6c40ba0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.tutorialspoint.com/swift/index.htm",
+    "CompactString": "562f136",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/mysql/mysql-server",
+    "CompactString": "8a9fe4",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://realpython.com/pycharm-guide/",
+    "CompactString": "2f50ba20",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://jupyter.org/",
+    "CompactString": "4e7db3",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/JavaScript",
+    "CompactString": "9c3c2ebf",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.edx.org/",
+    "CompactString": "18e4169",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://aws.amazon.com/ar/what-is/django/",
+    "CompactString": "5800a868",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/MySQL/default.asp",
+    "CompactString": "769f6e0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/PostgreSQL",
+    "CompactString": "834ff948",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.spiceworks.com/tech/tech-general/articles/what-is-assembly-language/",
+    "CompactString": "e2ba7bf",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.techtarget.com/searchitoperations/definition/Go-programming-language",
+    "CompactString": "61ec183",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mongodb.com/atlas/database",
+    "CompactString": "33102b2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/golang/go",
+    "CompactString": "856dd6",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/r/pycharm/",
+    "CompactString": "14c9bbe",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://eg.linkedin.com/company/thehackernews?trk\u003dppro_cprof",
+    "CompactString": "101364a7",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://legacy.reactjs.org/docs/getting-started.html",
+    "CompactString": "23e5ac2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Stack_Overflow",
+    "CompactString": "bd59862",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.kaggle.com/datasets",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.r-project.org/about.html#:~:text\u003dR%20is%20a%20language%20and,by%20John%20Chambers%20and%20colleagues.",
+    "CompactString": "63be79",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://dotnet.microsoft.com/en-us/languages/csharp",
+    "CompactString": "32792af",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.theodinproject.com/paths",
+    "CompactString": "147b1c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mathworks.com/products/matlab.html",
+    "CompactString": "398eee3",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.javascript.com/",
+    "CompactString": "25fcf2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://cloud.google.com/learn/what-are-containers",
+    "CompactString": "4503008a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.udemy.com/course/nodejs-the-complete-guide/",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.ruby-lang.org/",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/MongoDB",
+    "CompactString": "1524889c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Kaggle",
+    "CompactString": "dfb29e3",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.classcentral.com/provider/coursera",
+    "CompactString": "472dd34",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.oracle.com/mysql/what-is-mysql/",
+    "CompactString": "38e1d2e",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.eclipse.org/downloads/packages/release/kepler/sr1/eclipse-ide-java-developers",
+    "CompactString": "518ee8b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/which-libraries-and-frameworks-available-in-javascript/",
+    "CompactString": "dcf8d6c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.r-project.org/",
+    "CompactString": "eb3be",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.oracle.com/eg/database/",
+    "CompactString": "97279ea",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/",
+    "CompactString": "46f0c95",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.pgadmin.org/",
+    "CompactString": "153f82f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/r/r_intro.asp",
+    "CompactString": "631c0fb",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/twbs/bootstrap",
+    "CompactString": "7efe56f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://atom-editor.cc/",
+    "CompactString": "38321f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/whatis/",
+    "CompactString": "70f8046",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.coursera.org/learn/data-structures",
+    "CompactString": "111b34d1",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/nodejs",
+    "CompactString": "370c6c0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.sololearn.com/",
+    "CompactString": "aed259",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.freecodecamp.org/learn/2022/responsive-web-design",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.codecademy.com/?g_network\u003dg\u0026g_productchannel\u003d\u0026g_adid\u003d528849219280\u0026g_locinterest\u003d\u0026g_keyword\u003dcodecademy\u0026g_acctid\u003d243-039-7011\u0026g_adtype\u003d\u0026g_keywordid\u003dkwd-41065460761\u0026g_ifcreative\u003d\u0026g_campaign\u003daccount\u0026g_locphysical\u003d9112370\u0026g_adgroupid\u003d70492864474\u0026g_productid\u003d\u0026g_source\u003d{sourceid}\u0026g_merchantid\u003d\u0026g_placement\u003d\u0026g_partition\u003d\u0026g_campaignid\u003d1726903838\u0026g_ifproduct\u003d\u0026utm_id\u003dt_kwd-41065460761:ag_70492864474:cp_1726903838:n_g:d_c\u0026utm_source\u003dgoogle\u0026utm_medium\u003dpaid-search\u0026utm_term\u003dcodecademy\u0026utm_campaign\u003dINTL_Brand_Exact\u0026utm_content\u003d528849219280\u0026g_adtype\u003dsearch\u0026g_acctid\u003d243-039-7011\u0026gad_source\u003d1\u0026gclid\u003dCj0KCQjwir2xBhC_ARIsAMTXk84lvEGXCaWZj1E76unwMjmp-B2tP0Yv68LrIsWMSBdibgprpAZtLFEaAvjxEALw_wcB",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/expressjs/express",
+    "CompactString": "119d535",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://gitforwindows.org/",
+    "CompactString": "22aab2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.udemy.com/",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/vercel/next.js",
+    "CompactString": "11a4579",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.rust-lang.org/",
+    "CompactString": "117095e",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/t/programming/",
+    "CompactString": "10aedb19",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mathworks.com/discovery/what-is-matlab.html",
+    "CompactString": "1964a09",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://code.visualstudio.com/docs/nodejs/nodejs-tutorial",
+    "CompactString": "74cc5e8",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/r-programming-language-introduction/",
+    "CompactString": "1147d135",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://eclipseide.org/",
+    "CompactString": "71c616",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://news.ycombinator.com/",
+    "CompactString": "5d7a36",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Java_(programming_language)",
+    "CompactString": "4db83766",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/cpp/cpp_oop.asp",
+    "CompactString": "73df150",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/python/",
+    "CompactString": "9170464",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/atom",
+    "CompactString": "f7259b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/C_Sharp_(programming_language)#:~:text\u003dC%23%20(%2F%CB%8Csi%CB%90%20%CB%88,C%23",
+    "CompactString": "7db07415",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/go/",
+    "CompactString": "62c418d",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.coursera.org/articles/programming-in-swift",
+    "CompactString": "4d45b9e",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/javascript-libraries-and-frameworks/",
+    "CompactString": "184f35bf",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.php.net/",
+    "CompactString": "83458d9",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.codecademy.com/catalog?g_network\u003dg\u0026g_productchannel\u003d\u0026g_adid\u003d528849219280\u0026g_locinterest\u003d\u0026g_keyword\u003dcodecademy\u0026g_acctid\u003d243-039-7011\u0026g_adtype\u003d\u0026g_keywordid\u003dkwd-41065460761\u0026g_ifcreative\u003d\u0026g_campaign\u003daccount\u0026g_locphysical\u003d9112370\u0026g_adgroupid\u003d70492864474\u0026g_productid\u003d\u0026g_source\u003d{sourceid}\u0026g_merchantid\u003d\u0026g_placement\u003d\u0026g_partition\u003d\u0026g_campaignid\u003d1726903838\u0026g_ifproduct\u003d\u0026utm_id\u003dt_kwd-41065460761:ag_70492864474:cp_1726903838:n_g:d_c\u0026utm_source\u003dgoogle\u0026utm_medium\u003dpaid-search\u0026utm_term\u003dcodecademy\u0026utm_campaign\u003dINTL_Brand_Exact\u0026utm_content\u003d528849219280\u0026g_adtype\u003dsearch\u0026g_acctid\u003d243-039-7011\u0026gad_source\u003d1\u0026gclid\u003dCj0KCQjwir2xBhC_ARIsAMTXk84Vefvq-B3IU_rEdw3oyf4SDXFYjo-lJQVENS0x3VRDOGN3N4LC17UaAvzqEALw_wcB",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/AngularJS",
+    "CompactString": "d0b52a0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.oracle.com/eg/manageability/database-management/",
+    "CompactString": "1f99e03",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Visual_Studio_Code",
+    "CompactString": "1a9a4a81",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.programiz.com/swift-programming",
+    "CompactString": "929421",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mysql.com/",
+    "CompactString": "456d4b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.oracle.com/eg/database/what-is-database/#:~:text\u003dA%20database%20is%20an%20organized,database%20management%20system%20(DBMS).",
+    "CompactString": "652809f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.khanacademy.org/computing/computer-science/algorithms",
+    "CompactString": "3f01d7b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://developer.android.com/",
+    "CompactString": "5921e2e",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.tutorialspoint.com/ruby/ruby_overview.htm",
+    "CompactString": "1caf1cb",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Dart_(programming_language)",
+    "CompactString": "2a519fb2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.simplilearn.com/tutorials/data-structure-tutorial/what-is-data-structure",
+    "CompactString": "31baec5f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.khanacademy.org/computing/computer-programming/html-css-js/using-js-libraries-in-your-webpage/a/whats-a-js-library",
+    "CompactString": "5f2e04a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/c-language-introduction/",
+    "CompactString": "14de43a3",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/introduction-to-algorithms/",
+    "CompactString": "296291ee",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://react.dev/",
+    "CompactString": "21e16f3",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://scratch.mit.edu/",
+    "CompactString": "7c2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/",
+    "CompactString": "12e89a5",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Node.js",
+    "CompactString": "192dbd08",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://cloud.mongodb.com/v2",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Android_Studio",
+    "CompactString": "187c5eb0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.techtarget.com/whatis/definition/algorithm",
+    "CompactString": "5c164f9",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.learnpython.org/",
+    "CompactString": "4976c2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/mongodb/",
+    "CompactString": "650b46b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.codecademy.com/catalog/language/javascript",
+    "CompactString": "d343f9a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.freecodecamp.org/news/tag/online-courses/",
+    "CompactString": "988306",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.enterprisedb.com/downloads/postgres-postgresql-downloads",
+    "CompactString": "1df2f14",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.techtarget.com/searchdatamanagement/definition/MongoDB",
+    "CompactString": "8182484",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.indeed.com/career-advice/career-development/what-is-assembly-language#:~:text\u003dAn%20assembly%20language%20is%20a,the%20computer%20stores%20and%20reads.",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/introduction-to-nosql/",
+    "CompactString": "18f82d27",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://books.google.com.eg/books?id\u003d0njqEAAAQBAJ\u0026pg\u003dPR12\u0026lpg\u003dPR12\u0026dq\u003dkaggle\u0026source\u003dbl\u0026ots\u003d-wV7dM3zJQ\u0026sig\u003dACfU3U1LSgQ70Z7vBBC0qv_GTwSUG5L4yg\u0026hl\u003den\u0026sa\u003dX\u0026ved\u003d2ahUKEwjOnpGG6OeFAxWsVPEDHYQZBdUQ6AF6BAgoEAM",
+    "CompactString": "9cc0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.freecodecamp.org/news/a-practical-guide-to-containers-dfa66d37ac30/",
+    "CompactString": "7a95119",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/sql/sql_intro.asp#:~:text\u003dWhat%20is%20SQL%3F,for%20Standardization%20(ISO)%20in%201987",
+    "CompactString": "a53d162",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/express-js/",
+    "CompactString": "d47c920",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mathworks.com/products/matlab/student.html",
+    "CompactString": "19559d4",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/dsa/dsa_intro.php",
+    "CompactString": "cc4a387",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/java/java_intro.asp",
+    "CompactString": "81cfabf",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/introduction-to-rust-programming-language/",
+    "CompactString": "1124f524",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://juliadatascience.io/",
+    "CompactString": "8e9ae2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://rubyonrails.org/",
+    "CompactString": "800db7",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Data_structure",
+    "CompactString": "b3d82cb",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/what-is-assembly-language/",
+    "CompactString": "cdab675",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.codecademy.com/catalog/language/php",
+    "CompactString": "db82f5",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/nodejs/",
+    "CompactString": "6b5db1f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://dartcode.org/",
+    "CompactString": "3685d9",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.jetbrains.com/ides/",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/sql/",
+    "CompactString": "95dc685",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://expressjs.com/",
+    "CompactString": "1c8a6f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://developer.android.com/studio",
+    "CompactString": "3d37dbe46",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://swift.org/",
+    "CompactString": "771738",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/r/learnprogramming/",
+    "CompactString": "2dfbe82",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Next.js",
+    "CompactString": "506e1f8",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/vim/vim",
+    "CompactString": "1f55318",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/Kaggle/kaggle-api",
+    "CompactString": "bea17d",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://neovim.io/",
+    "CompactString": "3bc09a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/cpp/",
+    "CompactString": "7459864",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.coursera.org/courses",
+    "CompactString": "3725991",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://gobyexample.com/",
+    "CompactString": "e83f4",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mongodb.com/",
+    "CompactString": "36029a0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://dart.dev/",
+    "CompactString": "d93902",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://tatum.io/blog/best-javascript-libraries",
+    "CompactString": "3e6bbe1",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mathworks.com/help/matlab/",
+    "CompactString": "1e7b59f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.programiz.com/dsa/data-structure-types",
+    "CompactString": "2338eb0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.php-fig.org/",
+    "CompactString": "163d83",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://getbootstrap.com/",
+    "CompactString": "2d49ea6",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/angularjs/",
+    "CompactString": "eba3921",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Rust_(programming_language)",
+    "CompactString": "9ebb1c68",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.atlassian.com/git/tutorials/what-is-git",
+    "CompactString": "74feef8",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Eclipse",
+    "CompactString": "31d08bbe",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/c/",
+    "CompactString": "6dfabf5",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.docker.com/resources/what-container/",
+    "CompactString": "1481ab4",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/C%2B%2B",
+    "CompactString": "90f18f5f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/nextjs/",
+    "CompactString": "eb955ec",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://nextjs.org/",
+    "CompactString": "19af2b5",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.arduino.cc/en/software",
+    "CompactString": "645f92",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.rust-lang.org/tools/install",
+    "CompactString": "148160a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.freecodecamp.org/news/learn-julia-programming-language/",
+    "CompactString": "147ac863",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.techtarget.com/searchdatamanagement/definition/data-structure",
+    "CompactString": "80a64b5",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.blog/2023-08-30-why-rust-is-the-most-admired-language-among-developers/",
+    "CompactString": "a23b786",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.spiceworks.com/tech/devops/articles/object-oriented-programming/",
+    "CompactString": "d7128e9",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://code.org/",
+    "CompactString": "48a185a",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.edx.org/school/edx",
+    "CompactString": "d3060e",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.datacamp.com/tutorial/tutorial-jupyter-notebook",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/neovim/neovim",
+    "CompactString": "24cb8b9",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://developer.apple.com/forums/",
+    "CompactString": "1d8bc87b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://code.visualstudio.com/docs",
+    "CompactString": "25045b3",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.sencha.com/blog/javascript-libraries/",
+    "CompactString": "750823b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.tutorialspoint.com/expressjs/index.htm",
+    "CompactString": "1189b25",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/angular/angular_intro.asp",
+    "CompactString": "8866d73",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/data-structures/",
+    "CompactString": "23b2a411",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/laravel/laravel",
+    "CompactString": "e5b1f5",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mongodb.com/docs/atlas/getting-started/",
+    "CompactString": "723bac",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.toptal.com/ruby-on-rails/after-two-decades-of-programming-i-use-rails",
+    "CompactString": "a966f20",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://twitter.com/github?ref_src\u003dtwsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor",
+    "CompactString": "1fa05",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/postgresql/index.php",
+    "CompactString": "6b1f003",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/cs/index.php",
+    "CompactString": "6edcdf0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/django/django_intro.php",
+    "CompactString": "8ce935c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://stackoverflow.com/questions/",
+    "CompactString": "31d2617",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/flutter/flutter",
+    "CompactString": "140e3be",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://flutter.dev/",
+    "CompactString": "129c362",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/C_(programming_language)",
+    "CompactString": "c101dd8c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.coursera.org/courses?query\u003ddatabase",
+    "CompactString": "8930392",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Julia_(programming_language)",
+    "CompactString": "81a22605",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/MATLAB",
+    "CompactString": "3c34d38c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://maharatech.gov.eg/course/view.php?id\u003d740",
+    "CompactString": "566eaf4",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/r/programminghorror/",
+    "CompactString": "8ae9bc",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://about.gitlab.com/",
+    "CompactString": "1021ac7",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://nodejs.org/en/learn/getting-started/introduction-to-nodejs",
+    "CompactString": "b7b856",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://twitter.com/pycharm?ref_src\u003dtwsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor",
+    "CompactString": "1fa05",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/",
+    "CompactString": "b2b9a8",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://laravel.com/",
+    "CompactString": "aecdfab",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://cplusplus.com/",
+    "CompactString": "6eab0c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://angular.io/",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Swift_(programming_language)",
+    "CompactString": "64846fdd",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/c-plus-plus/",
+    "CompactString": "213417bf",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Web_development",
+    "CompactString": "292bde4d",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Docker_(software)",
+    "CompactString": "f503930",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://angularjs.org/",
+    "CompactString": "94b22d",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/php/php_intro.asp",
+    "CompactString": "13faeee5",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://github.com/apple/swift",
+    "CompactString": "1f0037f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mongodb.com/cloud/atlas/register",
+    "CompactString": "3cf56",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.codecademy.com/learn/learn-c-plus-plus",
+    "CompactString": "1ad89b0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.atlassian.com/git",
+    "CompactString": "3203814",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/cpp/cpp_intro.asp#:~:text\u003dC%2B%2B%20is%20an%20object%2Doriented,be%20adapted%20to%20multiple%20platforms.",
+    "CompactString": "7179fae",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.postgresql.org/",
+    "CompactString": "ab56dc",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/git/",
+    "CompactString": "6a36394",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.codecademy.com/learn/learn-java",
+    "CompactString": "212fb5c",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/nodejs/nodejs_intro.asp",
+    "CompactString": "6d26bc2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.docker.com/",
+    "CompactString": "130fb13",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://code.visualstudio.com/docs/sourcecontrol/intro-to-git",
+    "CompactString": "8fc8c66",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    "CompactString": "8157f94",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mathworks.com/",
+    "CompactString": "2401725",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/r/C_Programming/",
+    "CompactString": "15efeda",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.spiceworks.com/tech/devops/articles/what-is-angular-js/",
+    "CompactString": "874ccf6",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.datacamp.com/blog/what-is-julia-used-for",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/go-programming-language-introduction/",
+    "CompactString": "1915e687",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.java.com/",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.pluralsight.com/resources/blog/cloud/what-is-go-an-intro-to-googles-go-programming-language-aka-golang",
+    "CompactString": "49739b4",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.jetbrains.com/idea/",
+    "CompactString": "0",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/csharp-programming-language/",
+    "CompactString": "1438e0ea",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.jetbrains.com/edu-products/download/",
+    "CompactString": "576b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/introduction-of-object-oriented-programming/",
+    "CompactString": "ebd17b2",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.ibm.com/topics/containers",
+    "CompactString": "3c98135",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Database",
+    "CompactString": "ac2cbb7f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://pub.dev/",
+    "CompactString": "727318",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.britannica.com/technology/database",
+    "CompactString": "38b2f3b",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/python/python_intro.asp",
+    "CompactString": "979e2e6",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.python.org/",
+    "CompactString": "194f901",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mongodb.com/nosql-explained",
+    "CompactString": "ef285e7",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.udemy.com/course/dart-learning-guide/",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://developers.google.com/learn/topics/go",
+    "CompactString": "1e179aa",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.udacity.com/course/sql-for-data-analysis--ud198",
+    "CompactString": "d496a5",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.linux.org/pages/download/",
+    "CompactString": "noCompactString",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.online-python.com/",
+    "CompactString": "c7c8a8",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://en.wikipedia.org/wiki/Scratch_(programming_language)",
+    "CompactString": "2fe7dc5f",
+    "Category": "Programming",
+    "IsCrawled": false,
+    "IsIndexed": false
+  }
+]
