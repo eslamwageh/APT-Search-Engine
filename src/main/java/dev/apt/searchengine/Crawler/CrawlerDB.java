@@ -43,7 +43,7 @@ public class CrawlerDB {
         System.out.print("Are you sure you want to delete the data base? (yes, no): ");
         Scanner scanner = new Scanner(System.in);
         String response = scanner.nextLine();
-        if (response.equals("yes")) urlsCollection.deleteMany(new org.bson.Document());;
+        if (response.equals("yes")) urlsCollection.deleteMany(new org.bson.Document());
         scanner.close();
     }
 

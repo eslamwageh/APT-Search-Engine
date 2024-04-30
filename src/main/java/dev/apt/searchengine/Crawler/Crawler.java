@@ -76,8 +76,6 @@ public class Crawler implements Runnable {
 
 			Ranker.updatePopularity(seed, newSeeds);
 			
-			
-			crawlerData.increaseCrawledPagesNum();
 		}
 		
 		System.out.println("Crawling Sprint Finished");
@@ -107,6 +105,8 @@ public class Crawler implements Runnable {
 				.sorted(Comparator.comparingInt(String::length))
 				.limit(maxChildren)
 				.collect(Collectors.toList());
+
+		crawlerData.increaseCrawledPagesNum(sortedURLs.size());
 
 		return sortedURLs;
 	}
