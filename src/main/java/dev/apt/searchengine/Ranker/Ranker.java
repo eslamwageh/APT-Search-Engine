@@ -34,8 +34,17 @@ public class Ranker {
     }
 
 
+    private static double diff(HashMap<String, Double> nextIter, Map<String, Double> prevIter) {
+        double sum = 0;
+        for(String s : nextIter.keySet()) {
+            sum += Math.abs(nextIter.get(s) - prevIter.get(s));
+        }
+        return(Math.sqrt(sum));
+    }
 
     public static HashMap<String, Double> calculatePopularity(HashMap<String, ArrayList<String>> urlsGraph) {
+        double prevDiff = 1000;
+        double convergenceThreshold = 0.001;
         HashMap<String, Double> pageRanks = new HashMap<>();
 
         for (String node : urlsGraph.keySet()) {
@@ -43,16 +52,10 @@ public class Ranker {
         }
 
         //that is a function that calculates the converge
-        /*private double diff(Map<String, Double> nextIter, Map<String, Double> prevIter) {
-        double sum = 0;
-        for(String s : nodeCounter) {
-            sum += Math.abs(nextIter.get(s) - prevIter.get(s));
-        }
-        return(Math.sqrt(sum));
-        }*/
+
 
         // Perform PageRank iterations
-        int iterations = 15;
+        int iterations = 100;
         double dampingFactor = 0.85; // Typical damping factor used in PageRank
         for (int i = 0; i < iterations; i++) {
             HashMap<String, Double> newPageRanks = new HashMap<>();
@@ -80,7 +83,17 @@ public class Ranker {
 
             // Update PageRank values for the next iteration
 
+            double currentDiff = diff(newPageRanks, pageRanks);
+
+            // Check for convergence
+            if (Math.abs(currentDiff - prevDiff) < convergenceThreshold) {
+                // Convergence achieved, exit loop
+                System.out.println("Convergence achieved at iteration: " + (i + 1));
+                break;
+            }
+
             pageRanks = newPageRanks;
+            prevDiff = currentDiff;
         }
 
         // Print the final PageRank values
