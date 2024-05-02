@@ -17,7 +17,7 @@ public class Ranker {
     public static ArrayList<String> queryWords;
     public static ArrayList<RankedDoc> rankedDocs;
     public static HashMap<String, RankedDoc> docHashMap;
-
+    private static HashMap<String, HashMap<String, ArrayList<Integer>>> docWordOccurrences= new HashMap<>();
 
 
 
@@ -27,7 +27,7 @@ public class Ranker {
         queryWords = qw;
         docHashMap = new HashMap<>();
         if(isPhrase)
-            phraseRank();
+            phraseRank(popularityHashMap);
         else
             rank(popularityHashMap);
         return rankedDocs;
@@ -131,7 +131,7 @@ public class Ranker {
 
     }
 
-    public static void phraseRank() {
+    public static void phraseRank(HashMap<String, Double> popularityHashMap) {
         rankedDocs = new ArrayList<>();
         ArrayList<Document> wordsIntersection = new ArrayList<>();
         //ArrayList<ArrayList<ArrayList<Integer>>> occurrences = new ArrayList<>(); //for each document, for each word, for each occurrence
@@ -179,6 +179,12 @@ public class Ranker {
             String url = doc.getString("URL");
             String title = doc.getString("Title");
             Double IDF = (Double)doc.get("IDF");
+            Double score;
+            // Access fields of each embedded document
+            int termFrequency = doc.getInteger("TermFrequency");
+            int priority = doc.getInteger("Priority");
+
+            score = termFrequency * IDF * priority * (popularityHashMap.get(url) != null ? popularityHashMap.get(url) : 1);
 
             int lastOcc = -1;
             boolean isPhrase = true;
@@ -200,7 +206,7 @@ public class Ranker {
             }
             if (isPhrase)
             {
-                RankedDoc info = new RankedDoc(url, calculateScore(doc, IDF, url), title, "");
+                RankedDoc info = new RankedDoc(url, score, title, "");
             }
 
         }
@@ -208,16 +214,6 @@ public class Ranker {
 
         Collections.sort(rankedDocs, Comparator.comparingDouble(RankedDoc::getScore).reversed());
 
-    }
-
-    private static Double calculateScore(Document doc, Double IDF, String url) {
-        Double score;
-        int termFrequency = doc.getInteger("TermFrequency");
-        int priority = doc.getInteger("Priority");
-
-        score = termFrequency * IDF * priority * (pageRanks.get(url) != null ? pageRanks.get(url) : 1 );
-
-        return score;
     }
 
 };
