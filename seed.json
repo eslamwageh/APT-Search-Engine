@@ -1,466 +1,459 @@
 [
-    {
-        "URL":"https://www.bbc.com/",
-        "CompactString":"d1efe7c", 
-        "Category":"News",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.cnn.com/",
-        "CompactString":"f34def", 
-        "Category":"News",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL": "https://apnews.com/",
-        "CompactString": "21ab66", 
-        "Category": "News",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
-    {
-        "URL": "https://www.theguardian.com/",
-        "CompactString": "11cc45f", 
-        "Category": "News",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
-    {
-        "URL": "https://www.telegraph.co.uk",
-        "CompactString": "a8812f", 
-        "Category": "News",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
-    {
-        "URL": "https://www.independent.co.uk",
-        "CompactString": "77b3c1", 
-        "Category": "News",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
-    {
-        "URL": "https://timesofindia.indiatimes.com/",
-        "CompactString": "1bb3ef", 
-        "Category": "News",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
+  {
+    "URL": "https://www.bbc.com/",
+    "CompactString": "d1efe7c",
+    "Category": "News",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.cnn.com/",
+    "CompactString": "f34def",
+    "Category": "News",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://apnews.com/",
+    "CompactString": "21ab66",
+    "Category": "News",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.theguardian.com/",
+    "CompactString": "11cc45f",
+    "Category": "News",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.telegraph.co.uk",
+    "CompactString": "a8812f",
+    "Category": "News",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.independent.co.uk",
+    "CompactString": "77b3c1",
+    "Category": "News",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://timesofindia.indiatimes.com/",
+    "CompactString": "1bb3ef",
+    "Category": "News",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
 
+  {
+    "URL": "https://www.facebook.com/",
+    "CompactString": "278dc2",
+    "Category": "Social Media",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.twitter.com/",
+    "CompactString": "b32a19",
+    "Category": "Social Media",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.linkedin.com/",
+    "CompactString": "a33b80",
+    "Category": "Social Media",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.reddit.com/",
+    "CompactString": "11ff2b",
+    "Category": "Social Media",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.youtube.com/",
+    "CompactString": "bc80",
+    "Category": "Entertainment",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.quora.com/",
+    "CompactString": "44b30f",
+    "Category": "Social Media",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://medium.com/",
+    "CompactString": "21acbb",
+    "Category": "Social Media",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.github.com/",
+    "CompactString": "1228f52",
+    "Category": "Development",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
 
-
-    {
-        "URL": "https://www.facebook.com/",
-        "CompactString": "278dc2", 
-        "Category": "Social Media",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
-    {
-        "URL": "https://www.twitter.com/",
-        "CompactString": "b32a19", 
-        "Category": "Social Media",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
-    {
-        "URL": "https://www.linkedin.com/",
-        "CompactString": "a33b80", 
-        "Category": "Social Media",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
-    {
-        "URL": "https://www.reddit.com/",
-        "CompactString": "11ff2b", 
-        "Category": "Social Media",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    }, 
-    {
-        "URL":"https://www.youtube.com/",
-        "CompactString":"bc80",
-        "Category":"Entertainment", 
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL": "https://www.quora.com/",
-        "CompactString": "44b30f", 
-        "Category": "Social Media",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
-    {
-        "URL": "https://medium.com/",
-        "CompactString": "21acbb", 
-        "Category": "Social Media",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
-    {
-        "URL":"https://www.github.com/",
-        "CompactString":"1228f52", 
-        "Category":"Development", 
-        "IsCrawled":false,
-        "IsIndexed":false 
-    },
-
-
-
-    {
-        "URL":"https://www.amazon.com/",
-        "CompactString":"7e47", 
-        "Category":"Shopping",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.alibaba.com/",
-        "CompactString":"c301af", 
-        "Category":"Shopping",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.aliexpress.com/",
-        "CompactString":"9bb321", 
-        "Category":"Shopping",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-
-
-
-    {
-        "URL":"https://www.espn.com/",
-        "CompactString":"1940c19",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.nba.com/",
-        "CompactString":"883e1f",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },     
-    {
-        "URL":"https://www.nfl.com/",
-        "CompactString": "a11b3c",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.fifa.com/",
-        "CompactString": "21ab44",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://olympics.com/",
-        "CompactString": "ab112a",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.nascar.com/",
-        "CompactString": "81bbaa",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.pga.com/",
-        "CompactString": "b321cd",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.atptour.com/",
-        "CompactString": "8ab898",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.wtatennis.com/",
-        "CompactString": "1bbca1",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.formula1.com/",
-        "CompactString": "9cc123",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.motogp.com/",
-        "CompactString": "33ab21",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.ufc.com/",
-        "CompactString": "421bb4",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.wwe.com/",
-        "CompactString": "cc1b33",
-        "Category":"Sports",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.khanacademy.org/",
-        "CompactString":"a1b2c3", 
-        "Category":"Education",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.coursera.org/",
-        "CompactString":"d4e5f6", 
-        "Category":"Education",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.udemy.com/",
-        "CompactString":"g7h8i9", 
-        "Category":"Education",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.edx.org/",
-        "CompactString":"j0k1l2", 
-        "Category":"Education",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://projecteuler.net/",
-        "CompactString":"v2w3x4", 
-        "Category":"Education",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.nature.com/",
-        "CompactString":"4f2a1b", 
-        "Category":"Science",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.science.org/",
-        "CompactString":"9a5c31", 
-        "Category":"Science",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.scientificamerican.com/",
-        "CompactString":"b30cd2", 
-        "Category":"Science",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.newscientist.com/",
-        "CompactString":"6f3d1a", 
-        "Category":"Science",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.livescience.com/",
-        "CompactString":"bb02aa", 
-        "Category":"Science",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://physicsworld.com/",
-        "CompactString":"cc112b", 
-        "Category":"Science",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.chemistryworld.com/",
-        "CompactString":"1a2bcd", 
-        "Category":"Science",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.springer.com/",
-        "CompactString":"d332ff", 
-        "Category":"Science",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.elsevier.com/",
-        "CompactString":"2bc1d4", 
-        "Category":"Science",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.wiley.com/",
-        "CompactString":"9a10bb", 
-        "Category":"Science",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.codecademy.com/",
-        "CompactString": "m3n4o5", 
-        "Category": "Development",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.geeksforgeeks.org/",
-        "CompactString": "p6q7r8", 
-        "Category": "Development",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://leetcode.com/",
-        "CompactString": "s9t0u1", 
-        "Category": "Development",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL": "https://stackoverflow.com/",
-        "CompactString": "d883ab",
-        "Category": "Development",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
-    {
-        "URL": "https://www.w3schools.com/",
-        "CompactString": "a91ccd",
-        "Category": "Development",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
-    {
-        "URL": "https://developer.mozilla.org/",
-        "CompactString": "212ab3",
-        "Category": "Development",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    },
-    {
-        "URL":"https://www.healthline.com/",
-        "CompactString":"73368e",
-        "Category":"Health",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.webmd.com/",
-        "CompactString":"a8bc81",
-        "Category":"Health",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://www.mayoclinic.org/",
-        "CompactString":"bb018f",
-        "Category":"Health",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL":"https://medlineplus.gov/",
-        "CompactString":"8822cc",
-        "Category":"Health",
-        "IsCrawled":false,
-        "IsIndexed":false
-    }, 
-    {
-        "URL":"https://www.cdc.gov/",
-        "CompactString":"10aacc",
-        "Category":"Health",
-        "IsCrawled":false,
-        "IsIndexed":false
-    },
-    {
-        "URL": "https://www.hulu.com/",
-        "CompactString": "a11bc2",
-        "Category": "Entertainment",
-        "IsCrawled": false,
-        "IsIndexed": false
-    },
-    {
-        "URL": "https://www.apple.com/apple-tv-plus/",
-        "CompactString": "b22cd3",
-        "Category": "Entertainment",
-        "IsCrawled": false,
-        "IsIndexed": false
-    },
-    {
-        "URL": "https://www.peacocktv.com/",
-        "CompactString": "c33de4",
-        "Category": "Entertainment",
-        "IsCrawled": false,
-        "IsIndexed": false
-    },
-    {
-        "URL": "https://www.paramountplus.com/",
-        "CompactString": "3dd5ff",
-        "Category": "Entertainment",
-        "IsCrawled": false,
-        "IsIndexed": false
-    },
-    {
-        "URL": "https://www.twitch.tv/",
-        "CompactString": "a234b5",
-        "Category": "Entertainment", 
-        "IsCrawled": false,
-        "IsIndexed": false
-    },
-    {
-        "URL": "https://music.apple.com/",
-        "CompactString": "d123e4",
-        "Category": "Entertainment",
-        "IsCrawled": false,
-        "IsIndexed": false
-    },
-    {
-        "URL": "https://www.pandora.com/",
-        "CompactString": "e567f8",
-        "Category": "Entertainment",
-        "IsCrawled": false,
-        "IsIndexed": false
-    },
-    {
-        "URL": "https://soundcloud.com/",
-        "CompactString": "11cc45",
-        "Category": "Entertainment",
-        "IsCrawled": false,
-        "IsIndexed": false 
-    }
+  {
+    "URL": "https://www.amazon.com/",
+    "CompactString": "7e47",
+    "Category": "Shopping",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.alibaba.com/",
+    "CompactString": "c301af",
+    "Category": "Shopping",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.aliexpress.com/",
+    "CompactString": "9bb321",
+    "Category": "Shopping",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.espn.com/",
+    "CompactString": "1940c19",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.nba.com/",
+    "CompactString": "883e1f",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.nfl.com/",
+    "CompactString": "a11b3c",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.fifa.com/",
+    "CompactString": "21ab44",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://olympics.com/",
+    "CompactString": "ab112a",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.nascar.com/",
+    "CompactString": "81bbaa",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.pga.com/",
+    "CompactString": "b321cd",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.atptour.com/",
+    "CompactString": "8ab898",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.wtatennis.com/",
+    "CompactString": "1bbca1",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.formula1.com/",
+    "CompactString": "9cc123",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.motogp.com/",
+    "CompactString": "33ab21",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.ufc.com/",
+    "CompactString": "421bb4",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.wwe.com/",
+    "CompactString": "cc1b33",
+    "Category": "Sports",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.khanacademy.org/",
+    "CompactString": "a1b2c3",
+    "Category": "Education",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.coursera.org/",
+    "CompactString": "d4e5f6",
+    "Category": "Education",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.udemy.com/",
+    "CompactString": "g7h8i9",
+    "Category": "Education",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.edx.org/",
+    "CompactString": "j0k1l2",
+    "Category": "Education",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://projecteuler.net/",
+    "CompactString": "v2w3x4",
+    "Category": "Education",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.nature.com/",
+    "CompactString": "4f2a1b",
+    "Category": "Science",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.science.org/",
+    "CompactString": "9a5c31",
+    "Category": "Science",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.scientificamerican.com/",
+    "CompactString": "b30cd2",
+    "Category": "Science",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.newscientist.com/",
+    "CompactString": "6f3d1a",
+    "Category": "Science",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.livescience.com/",
+    "CompactString": "bb02aa",
+    "Category": "Science",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://physicsworld.com/",
+    "CompactString": "cc112b",
+    "Category": "Science",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.chemistryworld.com/",
+    "CompactString": "1a2bcd",
+    "Category": "Science",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.springer.com/",
+    "CompactString": "d332ff",
+    "Category": "Science",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.elsevier.com/",
+    "CompactString": "2bc1d4",
+    "Category": "Science",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.wiley.com/",
+    "CompactString": "9a10bb",
+    "Category": "Science",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.codecademy.com/",
+    "CompactString": "m3n4o5",
+    "Category": "Development",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.geeksforgeeks.org/",
+    "CompactString": "p6q7r8",
+    "Category": "Development",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://leetcode.com/",
+    "CompactString": "s9t0u1",
+    "Category": "Development",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://stackoverflow.com/",
+    "CompactString": "d883ab",
+    "Category": "Development",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.w3schools.com/",
+    "CompactString": "a91ccd",
+    "Category": "Development",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://developer.mozilla.org/",
+    "CompactString": "212ab3",
+    "Category": "Development",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.healthline.com/",
+    "CompactString": "73368e",
+    "Category": "Health",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.webmd.com/",
+    "CompactString": "a8bc81",
+    "Category": "Health",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.mayoclinic.org/",
+    "CompactString": "bb018f",
+    "Category": "Health",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://medlineplus.gov/",
+    "CompactString": "8822cc",
+    "Category": "Health",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.cdc.gov/",
+    "CompactString": "10aacc",
+    "Category": "Health",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.hulu.com/",
+    "CompactString": "a11bc2",
+    "Category": "Entertainment",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.apple.com/apple-tv-plus/",
+    "CompactString": "b22cd3",
+    "Category": "Entertainment",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.peacocktv.com/",
+    "CompactString": "c33de4",
+    "Category": "Entertainment",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.paramountplus.com/",
+    "CompactString": "3dd5ff",
+    "Category": "Entertainment",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.twitch.tv/",
+    "CompactString": "a234b5",
+    "Category": "Entertainment",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://music.apple.com/",
+    "CompactString": "d123e4",
+    "Category": "Entertainment",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://www.pandora.com/",
+    "CompactString": "e567f8",
+    "Category": "Entertainment",
+    "IsCrawled": false,
+    "IsIndexed": false
+  },
+  {
+    "URL": "https://soundcloud.com/",
+    "CompactString": "11cc45",
+    "Category": "Entertainment",
+    "IsCrawled": false,
+    "IsIndexed": false
+  }
 ]

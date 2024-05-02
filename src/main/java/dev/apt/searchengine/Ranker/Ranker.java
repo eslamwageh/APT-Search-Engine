@@ -8,6 +8,7 @@ import dev.apt.searchengine.Crawler.CrawlerDB;
 import dev.apt.searchengine.Indexer.DocData;
 import org.bson.Document;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Ranker {
@@ -19,12 +20,16 @@ public class Ranker {
 
 
 
-    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, HashMap<String, Double> popularityHashMap) {
+
+    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, HashMap<String, Double> popularityHashMap, boolean isPhrase) {
         db = new CrawlerDB();
         words = db.getWordsCollection();
         queryWords = qw;
         docHashMap = new HashMap<>();
-        rank(popularityHashMap);
+        if(isPhrase)
+            phraseRank();
+        else
+            rank(popularityHashMap);
         return rankedDocs;
     }
 
@@ -124,6 +129,95 @@ public class Ranker {
         Collections.sort(rankedDocs, Comparator.comparingDouble(RankedDoc::getScore).reversed());
 
 
+    }
+
+    public static void phraseRank() {
+        rankedDocs = new ArrayList<>();
+        ArrayList<Document> wordsIntersection = new ArrayList<>();
+        //ArrayList<ArrayList<ArrayList<Integer>>> occurrences = new ArrayList<>(); //for each document, for each word, for each occurrence
+        // initialize the intersection with the first word's documents
+        Document initDocsQuery = new Document("Word", queryWords.get(0));
+        FindIterable<Document> initDocuments = words.find(initDocsQuery);
+        Document initDoc = initDocuments.first();
+        if (initDoc != null) {
+            wordsIntersection = (ArrayList<Document>) initDoc.get("Documents");
+        }
+
+        for (String word : queryWords) {
+            Document findQuery = new Document("Word", word);
+            FindIterable<Document> documents = words.find(findQuery);
+            Document doc = documents.first();
+
+
+            if (doc != null) {
+                // get the documents of the current word
+                ArrayList<Document> currentWordDocs = (ArrayList<Document>) doc.get("Documents");
+                // get the intersection between the current word's documents and the wordsIntersection
+                ArrayList<Document> newIntersection = new ArrayList<>();
+                for (Document currentWordDoc : currentWordDocs) {
+                    ArrayList<Integer> occ = (ArrayList<Integer>) currentWordDoc.get("Occurrences");
+                    String url = currentWordDoc.getString("URL");
+                    if (!docWordOccurrences.containsKey(url))
+                        docWordOccurrences.put(url, new HashMap<>());
+                    docWordOccurrences.get(url).put(word, occ);
+
+                    for (Document intersectionDoc : wordsIntersection) {
+                        if (currentWordDoc.getString("URL").equals(intersectionDoc.getString("URL"))) {
+                            newIntersection.add(currentWordDoc);
+                            break;
+                        }
+                    }
+                }
+                wordsIntersection = newIntersection;
+            }
+        }
+        // wordsIntersection now contains the documents that contain all the words in the query
+
+
+        for (int i = 0; i < wordsIntersection.size(); i++) {
+            Document doc = wordsIntersection.get(i);
+            String url = doc.getString("URL");
+            String title = doc.getString("Title");
+            Double IDF = (Double)doc.get("IDF");
+
+            int lastOcc = -1;
+            boolean isPhrase = true;
+            for(String word: queryWords)
+            {
+                boolean goodDoc = false;
+                for(Integer j :docWordOccurrences.get(url).get(word))
+                {
+                    if(j>lastOcc) {
+                        lastOcc = j;
+                        goodDoc = true;
+                        break;
+                    }
+                }
+                if(!goodDoc) {
+                    isPhrase = false;
+                    break;
+                }
+            }
+            if (isPhrase)
+            {
+                RankedDoc info = new RankedDoc(url, calculateScore(doc, IDF, url), title, "");
+            }
+
+        }
+
+
+        Collections.sort(rankedDocs, Comparator.comparingDouble(RankedDoc::getScore).reversed());
+
+    }
+
+    private static Double calculateScore(Document doc, Double IDF, String url) {
+        Double score;
+        int termFrequency = doc.getInteger("TermFrequency");
+        int priority = doc.getInteger("Priority");
+
+        score = termFrequency * IDF * priority * (pageRanks.get(url) != null ? pageRanks.get(url) : 1 );
+
+        return score;
     }
 
 };

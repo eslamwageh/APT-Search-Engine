@@ -29,7 +29,7 @@ public class QueryProcessor {
             if (!w.isEmpty()) stemmedQueryWords.add(w);
         }
         LinkedList<String> urls = new LinkedList<>();
-        ArrayList<RankedDoc> rankedDocs = Ranker.mainRanker(stemmedQueryWords, database.fetchPopularity());
+        ArrayList<RankedDoc> rankedDocs = Ranker.mainRanker(stemmedQueryWords, database.fetchPopularity(), true);
         for (RankedDoc rd : rankedDocs) {
             urls.add(rd.getUrl());
         }

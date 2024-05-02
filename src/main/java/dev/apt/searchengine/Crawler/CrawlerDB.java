@@ -39,6 +39,14 @@ public class CrawlerDB {
         //urlsCollection.deleteMany(new org.bson.Document());
     }
 
+    public void clearDB() {
+        System.out.print("Are you sure you want to delete the data base? (yes, no): ");
+        Scanner scanner = new Scanner(System.in);
+        String response = scanner.nextLine();
+        if (response.equals("yes")) urlsCollection.deleteMany(new org.bson.Document());
+        scanner.close();
+    }
+
     public void connectMongoDB() {
         String password = env.getProperty("MONGOPASS");
         String username = env.getProperty("MONGOUSER");
@@ -79,6 +87,8 @@ public class CrawlerDB {
         org.bson.Document result = urlsCollection.findOneAndUpdate(query, update);
         if (result != null) {
             String oldValue = result.getString("CompactString");
+            if(compactString == null)
+                return;
             if (!compactString.equals(oldValue)) {
                 updateIsIndexed(URL, false);
             }
@@ -153,6 +163,14 @@ public class CrawlerDB {
 
     }
 
+    public LinkedList<String> _fetchAllURLs() {
+        LinkedList<String> s = new LinkedList<>();
+        org.bson.Document query = new org.bson.Document();
+        for (org.bson.Document doc : urlsCollection.find(query)) {
+            s.add(doc.getString("URL"));
+        }
+        return s;
+    }
     public boolean detectDuplicatePages(String compactString) {
         org.bson.Document query = new org.bson.Document("CompactString", compactString);
         return urlsCollection.countDocuments(query) > 0;
