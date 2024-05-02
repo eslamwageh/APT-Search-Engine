@@ -16,21 +16,23 @@ public class Ranker {
     public static ArrayList<String> queryWords;
     public static ArrayList<RankedDoc> rankedDocs;
     public static HashMap<String, RankedDoc> docHashMap;
-    public static HashMap<String, Double> pageRanks = new HashMap<>();
 
 
-    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw) {
+
+    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, HashMap<String, Double> popularityHashMap) {
         db = new CrawlerDB();
         words = db.getWordsCollection();
         queryWords = qw;
         docHashMap = new HashMap<>();
-        rank();
+        rank(popularityHashMap);
         return rankedDocs;
     }
 
 
 
-    public static void calculatePopularity(HashMap<String, ArrayList<String>> urlsGraph) {
+    public static HashMap<String, Double> calculatePopularity(HashMap<String, ArrayList<String>> urlsGraph) {
+        HashMap<String, Double> pageRanks = new HashMap<>();
+
         for (String node : urlsGraph.keySet()) {
             pageRanks.put(node, 1 / (double) urlsGraph.size()); // Initialize all PageRank values to 1.0
         }
@@ -81,9 +83,10 @@ public class Ranker {
         for (String node : pageRanks.keySet()) {
             System.out.println(node + ": " + pageRanks.get(node));
         }
+        return pageRanks;
     }
 
-    public static void rank() {
+    public static void rank(HashMap<String, Double> popularityHashMap) {
         rankedDocs = new ArrayList<>();
 
         for (String word : queryWords) {
@@ -104,7 +107,7 @@ public class Ranker {
                     String title = embeddedDoc.getString("Title");
                     int priority = embeddedDoc.getInteger("Priority");
 
-                    score = termFrequency * IDF * priority * (pageRanks.get(url) != null ? pageRanks.get(url) : 1);
+                    score = termFrequency * IDF * priority * (popularityHashMap.get(url) != null ? popularityHashMap.get(url) : 1);
 
                     if (docHashMap.containsKey(url)) {
                         docHashMap.get(url).setScore(docHashMap.get(url).getScore() + score);

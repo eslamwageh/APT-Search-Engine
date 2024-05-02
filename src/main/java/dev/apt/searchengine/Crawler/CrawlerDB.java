@@ -24,6 +24,7 @@ public class CrawlerDB {
     private MongoCollection<org.bson.Document> urlsCollection;
     private MongoCollection<org.bson.Document> wordsCollection;
     private MongoCollection<org.bson.Document> urlsGraphCollection;
+    private MongoCollection<org.bson.Document> popularityCollection;
 
     public CrawlerDB() {
         env = new Properties();
@@ -52,6 +53,7 @@ public class CrawlerDB {
         urlsCollection = database.getCollection("WebPage");
         wordsCollection = database.getCollection("Search Index");
         urlsGraphCollection = database.getCollection("URLs Graph");
+        popularityCollection = database.getCollection("Popularity");
     }
 
     // changed the name to urls as there will be another db update
@@ -182,5 +184,30 @@ public class CrawlerDB {
             urlsGraph.put(url, new ArrayList<>(parents));
         }
         return urlsGraph;
+    }
+
+    public void uploadPopularity(HashMap<String, Double> popularityHashMap) {
+        for (Map.Entry<String, Double> entry : popularityHashMap.entrySet()) {
+            String url = entry.getKey();
+            Double popularity = entry.getValue();
+
+            Document query = new Document("url", url);
+            Document update = new Document("$set", new Document("popularity", popularity));
+
+            // Upsert the document: if the document doesn't exist, insert it; otherwise, update it.
+            popularityCollection.updateOne(query, update, new UpdateOptions().upsert(true));
+        }
+    }
+
+    public HashMap<String, Double> fetchPopularity() {
+        HashMap<String, Double> popularityHashMap = new HashMap<>();
+
+            FindIterable<Document> documents = popularityCollection.find();
+            for (Document document : documents) {
+                String url = document.getString("url");
+                Double popularity = document.getDouble("popularity");
+                popularityHashMap.put(url, popularity);
+            }
+        return popularityHashMap;
     }
 }
