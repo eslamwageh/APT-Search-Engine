@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.util.*;
 
 //	MongoDB dependencies
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
+import com.mongodb.client.model.UpdateOptions;
 import dev.apt.searchengine.Indexer.DocData;
 import lombok.Data;
 import lombok.Getter;
@@ -25,6 +23,7 @@ public class CrawlerDB {
     private MongoDatabase database;
     private MongoCollection<org.bson.Document> urlsCollection;
     private MongoCollection<org.bson.Document> wordsCollection;
+    private MongoCollection<org.bson.Document> urlsGraphCollection;
 
     public CrawlerDB() {
         env = new Properties();
@@ -52,6 +51,7 @@ public class CrawlerDB {
         database = mongoClient.getDatabase("SearchEngine");
         urlsCollection = database.getCollection("WebPage");
         wordsCollection = database.getCollection("Search Index");
+        urlsGraphCollection = database.getCollection("URLs Graph");
     }
 
     // changed the name to urls as there will be another db update
@@ -154,5 +154,33 @@ public class CrawlerDB {
     public boolean detectDuplicatePages(String compactString) {
         org.bson.Document query = new org.bson.Document("CompactString", compactString);
         return urlsCollection.countDocuments(query) > 0;
+    }
+
+
+    public void updateUrlsGraphDB(String parent, List<String> children) {
+        for (String url : children) {
+            Document query = new Document("url", url);
+            Document update = new Document("$push", new Document("parents", parent));
+
+            UpdateOptions options = new UpdateOptions().upsert(true);
+            urlsGraphCollection.updateOne(query, update, options);
+        }
+    }
+
+    public HashMap<String, ArrayList<String>> fetchUrlsGraphFromDB() {
+        HashMap<String, ArrayList<String>> urlsGraph = new HashMap<>();
+
+        // Query all documents from the collection
+        FindIterable<Document> documents = urlsGraphCollection.find();
+
+        // Iterate over the documents and populate urlsGraph
+        for (Document document : documents) {
+            String url = document.getString("url");
+            List<String> parents = (List<String>) document.get("parents");
+
+            // Add the URL and its parents to the urlsGraph
+            urlsGraph.put(url, new ArrayList<>(parents));
+        }
+        return urlsGraph;
     }
 }

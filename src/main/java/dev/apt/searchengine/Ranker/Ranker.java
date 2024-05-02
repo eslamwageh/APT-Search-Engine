@@ -16,9 +16,6 @@ public class Ranker {
     public static ArrayList<String> queryWords;
     public static ArrayList<RankedDoc> rankedDocs;
     public static HashMap<String, RankedDoc> docHashMap;
-
-    public static HashMap<String, ArrayList<String>> urlsGraph = new HashMap<>();
-
     public static HashMap<String, Double> pageRanks = new HashMap<>();
 
 
@@ -31,21 +28,9 @@ public class Ranker {
         return rankedDocs;
     }
 
-    public static void updatePopularity(String parent, List<String> children) {
-        synchronized (urlsGraph) {
-            for (String url : children) {
-                if (urlsGraph.containsKey(url)) {
-                    urlsGraph.get(url).add(parent);
-                } else {
-                    ArrayList<String> temp = new ArrayList<>();
-                    temp.add(parent);
-                    urlsGraph.put(url, temp);
-                }
-            }
-        }
-    }
 
-    public static void calculatePopularity() {
+
+    public static void calculatePopularity(HashMap<String, ArrayList<String>> urlsGraph) {
         for (String node : urlsGraph.keySet()) {
             pageRanks.put(node, 1 / (double) urlsGraph.size()); // Initialize all PageRank values to 1.0
         }
@@ -60,7 +45,7 @@ public class Ranker {
         }*/
 
         // Perform PageRank iterations
-        int iterations = 10;
+        int iterations = 15;
         double dampingFactor = 0.85; // Typical damping factor used in PageRank
         for (int i = 0; i < iterations; i++) {
             HashMap<String, Double> newPageRanks = new HashMap<>();

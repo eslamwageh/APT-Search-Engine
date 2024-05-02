@@ -74,7 +74,7 @@ public class Crawler implements Runnable {
 			database.updateUrlsDB(newWP);
 			database.updateIsCrawled(seed, true);
 
-			Ranker.updatePopularity(seed, newSeeds);
+			database.updateUrlsGraphDB(seed, newSeeds);
 			
 			
 			crawlerData.increaseCrawledPagesNum();
@@ -370,7 +370,8 @@ public class Crawler implements Runnable {
 			thread.setName("Thread " + (i + 1));
 			thread.start();
 		}
-		Ranker.calculatePopularity();
+
+		Ranker.calculatePopularity(db.fetchUrlsGraphFromDB());
 	}
 }
 
