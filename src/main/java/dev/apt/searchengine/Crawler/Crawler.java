@@ -74,7 +74,7 @@ public class Crawler implements Runnable {
 			database.updateUrlsDB(newWP);
 			database.updateIsCrawled(seed, true);
 
-			Ranker.updatePopularity(seed, newSeeds);
+			database.updateUrlsGraphDB(seed, newSeeds);
 			
 		}
 		
@@ -368,7 +368,11 @@ public class Crawler implements Runnable {
 			thread.setName("Thread " + (i + 1));
 			thread.start();
 		}
-		Ranker.calculatePopularity();
+
+		// we get the hashmap from the urls graph db at the end of crawling
+		// then we pass it to calculate popularity and it returns popularity hash map
+		// we recieve it and pass it to upload on the database so that the searching can access it
+		db.uploadPopularity(Ranker.calculatePopularity(db.fetchUrlsGraphFromDB()));
 	}
 }
 
