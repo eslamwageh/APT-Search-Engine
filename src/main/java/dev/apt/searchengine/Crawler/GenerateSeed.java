@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.google.gson.Gson;
+import org.jsoup.Jsoup;
 
+import com.google.gson.Gson;
 
 public class GenerateSeed {
     public static void main(String[] args) throws InterruptedException {
- 
+
         System.out.print("0: generate seeds\n1: upload seeds\n2: delete data base\nChoice: ");
         Scanner scanner = new Scanner(System.in);
-
 
         String choice = scanner.nextLine();
         if (choice.equals("0")) {
@@ -28,7 +28,7 @@ public class GenerateSeed {
             Crawler crawler = new Crawler(null, null);
             List<Seed> seeds = readUrlsFromFile(file_name, crawler);
             writeToJsonFile(seeds, json_name);
-        } else if (choice.equals("1")){
+        } else if (choice.equals("1")) {
             System.out.print("json name: ");
             String json_name = scanner.nextLine();
             CrawlerDB db = new CrawlerDB();
@@ -51,15 +51,19 @@ public class GenerateSeed {
             while ((line = reader.readLine()) != null) {
                 Seed seed = new Seed();
                 seed.setURL(line);
-                if ((com = crawler.createCompactString(line)) != null)
+                if ((com = crawler.createCompactString(line)) != null) {
                     seed.setCompactString(com);
-                else seed.setCompactString("noCompactString");
+                } else
+                    seed.setCompactString("noCompactString");
+                seed.setHTMLContent(line);
                 seed.setCategory("Programming");
                 seed.setIsCrawled(false);
                 seed.setIsIndexed(false);
                 seeds.add(seed);
                 System.out.println("URL num: " + count);
                 count++;
+                if (count == 2)
+                    break;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,11 +85,12 @@ public class GenerateSeed {
         private String URL;
         private String CompactString;
         private String Category;
+        private String HTMLContent;
         private boolean IsCrawled;
         private boolean IsIndexed;
 
         // public String getURL() {
-        //     return URL;
+        // return URL;
         // }
 
         public void setURL(String URL) {
@@ -93,7 +98,7 @@ public class GenerateSeed {
         }
 
         // public String getCompactString() {
-        //     return CompactString;
+        // return CompactString;
         // }
 
         public void setCompactString(String compactString) {
@@ -101,15 +106,26 @@ public class GenerateSeed {
         }
 
         // public String getCategory() {
-        //     return Category;
+        // return Category;
         // }
 
         public void setCategory(String category) {
             Category = category;
         }
 
+        public void setHTMLContent(String URL) {
+            try {
+                org.jsoup.nodes.Document doc = Jsoup.connect(URL).get();
+                HTMLContent = doc.body().toString();
+                HTMLContent = HTMLContent.replace("<body>", "").replace("</body>", "");
+            } catch (IOException e) {
+                HTMLContent = "Couldn't Connect";
+                e.printStackTrace();
+            }
+        }
+
         // public boolean isCrawled() {
-        //     return IsCrawled;
+        // return IsCrawled;
         // }
 
         public void setIsCrawled(boolean isCrawled) {
@@ -117,7 +133,7 @@ public class GenerateSeed {
         }
 
         // public boolean isIndexed() {
-        //     return IsIndexed;
+        // return IsIndexed;
         // }
 
         public void setIsIndexed(boolean isIndexed) {
