@@ -207,8 +207,24 @@ public class Crawler implements Runnable {
                 continue;
             }
             String compactString = createCompactString(url);
+            String HTMLContent="";
             if (!database.detectDuplicatePages(compactString)) {
-                WebPage page = new WebPage(url, compactString, categorizePage(url), false, false);
+                try {
+                    org.jsoup.nodes.Document doc = Jsoup.connect(url).get();
+
+                    // Remove script elements within the body
+                    Elements scripts = doc.select("body script");
+                    scripts.remove();
+
+                    // Remove style elements within the body
+                    Elements styles = doc.select("body style");
+                    styles.remove();
+
+                    HTMLContent = doc.body().outerHtml();
+                } catch (Exception e) {}
+
+
+                WebPage page = new WebPage(url, compactString, categorizePage(url), false, false, HTMLContent);
                 okPages.add(page);
                 crawlerData.addUniqueURL(url);
                 crawlerData.addSeed(url);
@@ -331,7 +347,8 @@ public class Crawler implements Runnable {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 System.out.println(i);
                 WebPage webPage = new WebPage(jsonObject.getString("URL"), jsonObject.getString("CompactString"),
-                        jsonObject.getString("Category"), jsonObject.getBoolean("IsCrawled"), jsonObject.getBoolean("IsIndexed"));
+                        jsonObject.getString("Category"), jsonObject.getBoolean("IsCrawled"), jsonObject.getBoolean("IsIndexed"),
+                        jsonObject.getString("HTMLContent"));
                 webPages.add(webPage);
             }
 

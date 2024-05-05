@@ -13,18 +13,24 @@ import java.util.*;
 
 public class Ranker {
     public static CrawlerDB db;
+    public static SnippetGenerator snippeter;
     public static MongoCollection<Document> words;
+    public static HashMap<String, String> urlHtmlHashMap;
     public static ArrayList<String> queryWords;
+    public static String[] originalQueryWords;
     public static ArrayList<RankedDoc> rankedDocs;
     public static HashMap<String, RankedDoc> docHashMap;
     private static HashMap<String, HashMap<String, ArrayList<Integer>>> docWordOccurrences= new HashMap<>();
 
 
 
-    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, HashMap<String, Double> popularityHashMap, boolean isPhrase) {
+    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, String[] oqw,  HashMap<String, Double> popularityHashMap, boolean isPhrase) {
         db = new CrawlerDB();
+        snippeter = new SnippetGenerator();
         words = db.getWordsCollection();
+        urlHtmlHashMap = db.getUrlsAndHtmlContentMap();
         queryWords = qw;
+        originalQueryWords = oqw;
         docHashMap = new HashMap<>();
         if(isPhrase)
             phraseRank(popularityHashMap);
@@ -130,7 +136,8 @@ public class Ranker {
                     if (docHashMap.containsKey(url)) {
                         docHashMap.get(url).setScore(docHashMap.get(url).getScore() + score);
                     } else {
-                        RankedDoc info = new RankedDoc(url, score, title, "");
+                        String snippet = snippeter.generateSnippet(urlHtmlHashMap.get(url), Arrays.asList(originalQueryWords));
+                        RankedDoc info = new RankedDoc(url, score, title, snippet);
                         rankedDocs.add(info);
                         docHashMap.put(url, info);
                     }

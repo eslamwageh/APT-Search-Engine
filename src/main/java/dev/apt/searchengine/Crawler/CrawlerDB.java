@@ -74,7 +74,8 @@ public class CrawlerDB {
                         .append("CompactString", wp.compactString)
                         .append("Category", wp.category)
                         .append("IsCrawled", wp.isCrawled)
-                        .append("IsIndexed", wp.isIndexed);
+                        .append("IsIndexed", wp.isIndexed)
+                        .append("HtmlContent", wp.HtmlContent);
                 documents.add(document);
             }
             urlsCollection.insertMany(documents);
@@ -227,5 +228,23 @@ public class CrawlerDB {
                 popularityHashMap.put(url, popularity);
             }
         return popularityHashMap;
+    }
+
+    public HashMap<String, String> getUrlsAndHtmlContentMap() {
+        HashMap<String, String> urlHtmlMap = new HashMap<>();
+
+        MongoCursor<Document> cursor = urlsCollection.find().iterator();
+        try {
+            while (cursor.hasNext()) {
+                Document doc = cursor.next();
+                String url = doc.getString("URL");
+                String htmlContent = doc.getString("HtmlContent");
+                urlHtmlMap.put(url, htmlContent);
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return urlHtmlMap;
     }
 }

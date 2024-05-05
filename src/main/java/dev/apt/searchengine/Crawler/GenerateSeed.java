@@ -11,6 +11,7 @@ import java.util.Scanner;
 import org.jsoup.Jsoup;
 
 import com.google.gson.Gson;
+import org.jsoup.select.Elements;
 
 public class GenerateSeed {
     public static void main(String[] args) throws InterruptedException {
@@ -62,8 +63,6 @@ public class GenerateSeed {
                 seeds.add(seed);
                 System.out.println("URL num: " + count);
                 count++;
-                if (count == 2)
-                    break;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -116,8 +115,17 @@ public class GenerateSeed {
         public void setHTMLContent(String URL) {
             try {
                 org.jsoup.nodes.Document doc = Jsoup.connect(URL).get();
-                HTMLContent = doc.body().toString();
-                HTMLContent = HTMLContent.replace("<body>", "").replace("</body>", "");
+
+                // Remove script elements within the body
+                Elements scripts = doc.select("body script");
+                scripts.remove();
+
+                // Remove style elements within the body
+                Elements styles = doc.select("body style");
+                styles.remove();
+
+                HTMLContent = doc.body().outerHtml();
+                System.out.println(HTMLContent);
             } catch (IOException e) {
                 HTMLContent = "Couldn't Connect";
                 e.printStackTrace();
