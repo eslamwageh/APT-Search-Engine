@@ -13,18 +13,24 @@ import java.util.*;
 
 public class Ranker {
     public static CrawlerDB db;
+    public static SnippetGenerator snippeter;
     public static MongoCollection<Document> words;
+    public static HashMap<String, String> urlHtmlHashMap;
     public static ArrayList<String> queryWords;
+    public static String[] originalQueryWords;
     public static ArrayList<RankedDoc> rankedDocs;
     public static HashMap<String, RankedDoc> docHashMap;
     private static HashMap<String, HashMap<String, ArrayList<Integer>>> docWordOccurrences= new HashMap<>();
 
 
 
-    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, HashMap<String, Double> popularityHashMap, boolean isPhrase) {
+    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, String[] oqw,  HashMap<String, Double> popularityHashMap, boolean isPhrase) {
         db = new CrawlerDB();
+        snippeter = new SnippetGenerator();
         words = db.getWordsCollection();
+        urlHtmlHashMap = db.getUrlsAndHtmlContentMap();
         queryWords = qw;
+        originalQueryWords = oqw;
         docHashMap = new HashMap<>();
         if(isPhrase)
             phraseRank(popularityHashMap);
@@ -34,8 +40,17 @@ public class Ranker {
     }
 
 
+    private static double diff(HashMap<String, Double> nextIter, Map<String, Double> prevIter) {
+        double sum = 0;
+        for(String s : nextIter.keySet()) {
+            sum += Math.abs(nextIter.get(s) - prevIter.get(s));
+        }
+        return(Math.sqrt(sum));
+    }
 
     public static HashMap<String, Double> calculatePopularity(HashMap<String, ArrayList<String>> urlsGraph) {
+        double prevDiff = 1000;
+        double convergenceThreshold = 0.001;
         HashMap<String, Double> pageRanks = new HashMap<>();
 
         for (String node : urlsGraph.keySet()) {
@@ -43,16 +58,10 @@ public class Ranker {
         }
 
         //that is a function that calculates the converge
-        /*private double diff(Map<String, Double> nextIter, Map<String, Double> prevIter) {
-        double sum = 0;
-        for(String s : nodeCounter) {
-            sum += Math.abs(nextIter.get(s) - prevIter.get(s));
-        }
-        return(Math.sqrt(sum));
-        }*/
+
 
         // Perform PageRank iterations
-        int iterations = 15;
+        int iterations = 100;
         double dampingFactor = 0.85; // Typical damping factor used in PageRank
         for (int i = 0; i < iterations; i++) {
             HashMap<String, Double> newPageRanks = new HashMap<>();
@@ -80,7 +89,17 @@ public class Ranker {
 
             // Update PageRank values for the next iteration
 
+            double currentDiff = diff(newPageRanks, pageRanks);
+
+            // Check for convergence
+            if (Math.abs(currentDiff - prevDiff) < convergenceThreshold) {
+                // Convergence achieved, exit loop
+                System.out.println("Convergence achieved at iteration: " + (i + 1));
+                break;
+            }
+
             pageRanks = newPageRanks;
+            prevDiff = currentDiff;
         }
 
         // Print the final PageRank values
@@ -117,7 +136,8 @@ public class Ranker {
                     if (docHashMap.containsKey(url)) {
                         docHashMap.get(url).setScore(docHashMap.get(url).getScore() + score);
                     } else {
-                        RankedDoc info = new RankedDoc(url, score, title, "");
+                        String snippet = snippeter.generateSnippet(urlHtmlHashMap.get(url), Arrays.asList(originalQueryWords));
+                        RankedDoc info = new RankedDoc(url, score, title, snippet);
                         rankedDocs.add(info);
                         docHashMap.put(url, info);
                     }
