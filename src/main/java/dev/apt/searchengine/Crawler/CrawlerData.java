@@ -35,9 +35,9 @@ public class CrawlerData {
 	// 	}
 	// }
 
-	public void increaseCrawledPagesNum() {
+	public void increaseCrawledPagesNum(int value) {
 		synchronized (crawledPagesNumLock) {
-			crawledPagesNum += 1;
+			crawledPagesNum += value;
 		}
 	}
 

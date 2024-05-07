@@ -4,6 +4,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import dev.apt.searchengine.Crawler.CrawlerDB;
 import org.bson.Document;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.FormatFlagsConversionMismatchException;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.logging.Filter;
 
 public class Indexer {
     private static MongoCollection<Document> urlsCollection;
@@ -31,7 +33,7 @@ public class Indexer {
         MongoDatabase db = crawlerDB.getDatabase();
         urlsCollection = crawlerDB.getUrlsCollection();
         //MongoCollection<Document> wordsCollection = crawlerDB.getWordsCollection();
-        startIndexing();
+        startIndexing(crawlerDB);
         for (String key1 : invertedFile.keySet()) {
             System.out.println("word: " + key1);
         }
@@ -39,8 +41,8 @@ public class Indexer {
         crawlerDB.updateWordsDB(invertedFile, DFsPerDocs);
     }
 
-    private static void startIndexing() {
-        FindIterable<Document> urls = urlsCollection.find().projection(Projections.include("URL"));
+    private static void startIndexing(CrawlerDB crawlerDB) {
+        FindIterable<Document> urls = urlsCollection.find(Filters.eq("IsIndexed", false)).projection(Projections.include("URL"));
         Long l = urlsCollection.countDocuments();
         allDocsCount = l.doubleValue();
         MongoCursor<Document> urlsIterator = urls.iterator();
@@ -49,6 +51,7 @@ public class Indexer {
             while (urlsIterator.hasNext() && counter++ < 500) {
                 Document dbDocument = urlsIterator.next();
                 String url = dbDocument.getString("URL");
+                crawlerDB.updateIsIndexed(url, true);
                 org.jsoup.nodes.Document jsoupDoc = getDocFromUrl(url);
                 // Get all html elements
                 if (jsoupDoc == null) continue;

@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.util.*;
 
 //	MongoDB dependencies
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
+import com.mongodb.client.model.UpdateOptions;
 import dev.apt.searchengine.Indexer.DocData;
 import lombok.Data;
 import lombok.Getter;
@@ -25,6 +23,8 @@ public class CrawlerDB {
     private MongoDatabase database;
     private MongoCollection<org.bson.Document> urlsCollection;
     private MongoCollection<org.bson.Document> wordsCollection;
+    private MongoCollection<org.bson.Document> urlsGraphCollection;
+    private MongoCollection<org.bson.Document> popularityCollection;
 
     public CrawlerDB() {
         env = new Properties();
@@ -37,6 +37,14 @@ public class CrawlerDB {
         connectMongoDB();
         //delete all the documents in the collection
         //urlsCollection.deleteMany(new org.bson.Document());
+    }
+
+    public void clearDB() {
+        System.out.print("Are you sure you want to delete the data base? (yes, no): ");
+        Scanner scanner = new Scanner(System.in);
+        String response = scanner.nextLine();
+        if (response.equals("yes")) urlsCollection.deleteMany(new org.bson.Document());
+        scanner.close();
     }
 
     public void connectMongoDB() {
@@ -52,6 +60,8 @@ public class CrawlerDB {
         database = mongoClient.getDatabase("SearchEngine");
         urlsCollection = database.getCollection("WebPage");
         wordsCollection = database.getCollection("Search Index");
+        urlsGraphCollection = database.getCollection("URLs Graph");
+        popularityCollection = database.getCollection("Popularity");
     }
 
     // changed the name to urls as there will be another db update
@@ -64,7 +74,9 @@ public class CrawlerDB {
                         .append("CompactString", wp.compactString)
                         .append("Category", wp.category)
                         .append("IsCrawled", wp.isCrawled)
-                        .append("IsIndexed", wp.isIndexed);
+                        .append("IsIndexed", wp.isIndexed)
+                        .append("HtmlContent", wp.HtmlContent);
+                System.out.println("to upload: "  + wp.URL);
                 documents.add(document);
             }
             urlsCollection.insertMany(documents);
@@ -164,5 +176,76 @@ public class CrawlerDB {
     public boolean detectDuplicatePages(String compactString) {
         org.bson.Document query = new org.bson.Document("CompactString", compactString);
         return urlsCollection.countDocuments(query) > 0;
+    }
+
+
+    public void updateUrlsGraphDB(String parent, List<String> children) {
+        for (String url : children) {
+            Document query = new Document("url", url);
+            Document update = new Document("$push", new Document("parents", parent));
+
+            UpdateOptions options = new UpdateOptions().upsert(true);
+            urlsGraphCollection.updateOne(query, update, options);
+        }
+    }
+
+    public HashMap<String, ArrayList<String>> fetchUrlsGraphFromDB() {
+        HashMap<String, ArrayList<String>> urlsGraph = new HashMap<>();
+
+        // Query all documents from the collection
+        FindIterable<Document> documents = urlsGraphCollection.find();
+
+        // Iterate over the documents and populate urlsGraph
+        for (Document document : documents) {
+            String url = document.getString("url");
+            List<String> parents = (List<String>) document.get("parents");
+
+            // Add the URL and its parents to the urlsGraph
+            urlsGraph.put(url, new ArrayList<>(parents));
+        }
+        return urlsGraph;
+    }
+
+    public void uploadPopularity(HashMap<String, Double> popularityHashMap) {
+        for (Map.Entry<String, Double> entry : popularityHashMap.entrySet()) {
+            String url = entry.getKey();
+            Double popularity = entry.getValue();
+
+            Document query = new Document("url", url);
+            Document update = new Document("$set", new Document("popularity", popularity));
+
+            // Upsert the document: if the document doesn't exist, insert it; otherwise, update it.
+            popularityCollection.updateOne(query, update, new UpdateOptions().upsert(true));
+        }
+    }
+
+    public HashMap<String, Double> fetchPopularity() {
+        HashMap<String, Double> popularityHashMap = new HashMap<>();
+
+            FindIterable<Document> documents = popularityCollection.find();
+            for (Document document : documents) {
+                String url = document.getString("url");
+                Double popularity = document.getDouble("popularity");
+                popularityHashMap.put(url, popularity);
+            }
+        return popularityHashMap;
+    }
+
+    public HashMap<String, String> getUrlsAndHtmlContentMap() {
+        HashMap<String, String> urlHtmlMap = new HashMap<>();
+
+        MongoCursor<Document> cursor = urlsCollection.find().iterator();
+        try {
+            while (cursor.hasNext()) {
+                Document doc = cursor.next();
+                String url = doc.getString("URL");
+                String htmlContent = doc.getString("HtmlContent");
+                urlHtmlMap.put(url, htmlContent);
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return urlHtmlMap;
     }
 }

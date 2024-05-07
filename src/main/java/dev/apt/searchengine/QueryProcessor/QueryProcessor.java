@@ -18,6 +18,7 @@ import dev.apt.searchengine.Ranker.Ranker;
 @RestController
 @RequestMapping("/api/v1/query")
 public class QueryProcessor {
+    CrawlerDB database = new CrawlerDB();
     @PostMapping
     public LinkedList<String> processQuery(@RequestBody String query) {
         query = WordsProcessor.withoutStopWords(query);
@@ -28,7 +29,7 @@ public class QueryProcessor {
             if (!w.isEmpty()) stemmedQueryWords.add(w);
         }
         LinkedList<String> urls = new LinkedList<>();
-        ArrayList<RankedDoc> rankedDocs = Ranker.mainRanker(stemmedQueryWords, true);
+        ArrayList<RankedDoc> rankedDocs = Ranker.mainRanker(stemmedQueryWords, words, database.fetchPopularity(), true);
         for (RankedDoc rd : rankedDocs) {
             urls.add(rd.getUrl());
         }
