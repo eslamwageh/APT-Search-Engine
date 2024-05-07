@@ -15,13 +15,15 @@ import org.jsoup.select.Elements;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 // import java.security.MessageDigest;
 // import java.security.NoSuchAlgorithmException;
@@ -62,9 +64,9 @@ public class Crawler implements Runnable {
 
             // crawl over that seed
             List<String> newSeeds = crawl(seed);
-            System.out.println("tamam");
+            // System.out.println("tamam");
             if (newSeeds == null)
-                return;
+                continue;
 
             // System.out.println("New Seeds: " + newSeeds.size());
 
@@ -87,14 +89,19 @@ public class Crawler implements Runnable {
         List<String> grippedURLs = new ArrayList<>();
         try {
             // connect to the webpage
+            System.out.println("zero");
             Document doc = Jsoup.connect(url).get();
+            System.out.println("first");
             // get all the link elements in document
             Elements links = doc.select("a[href]");
+            System.out.println("second");
             // extract the urls into the grippedURLs array
             for (Element link : links) {
                 String href = link.attr("abs:href");
-                if (_isAllowedPath(href))
+                if (_isAllowedPath(href)) {
                     grippedURLs.add(href);
+                    System.out.println("this is allowed link" + href);
+                }
             }
         } catch (IOException e) {
             return null;
@@ -119,15 +126,23 @@ public class Crawler implements Runnable {
     // Check if the given URL is allowed in terms of robots.txt
     private boolean _isAllowedPath(String url) {
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            //System.err.println("Invalid URL: " + url);
+            // System.err.println("Invalid URL: " + url);
             return false;
         }
         // check authorized connection
         try {
             HttpURLConnection connection = (HttpURLConnection) ((new URI(url)).toURL().openConnection());
             connection.setRequestMethod("HEAD");
-            int responseCode = connection.getResponseCode(); //? set timeout here
-            if (responseCode != HttpURLConnection.HTTP_OK) {
+            connection.setConnectTimeout(500); // timeout in milliseconds
+            connection.setReadTimeout(500); // timeout in milliseconds
+            try {
+                int responseCode = connection.getResponseCode();
+                if (responseCode != HttpURLConnection.HTTP_OK) {
+                    return false;
+                }
+            } catch (SocketTimeoutException e) {
+                // handle timeout here
+                System.out.println("Connection timed out");
                 return false;
             }
         } catch (IOException e) {
@@ -160,7 +175,8 @@ public class Crawler implements Runnable {
             connection.setRequestMethod("HEAD");
             int responseCode = connection.getResponseCode();
             if (responseCode != HttpURLConnection.HTTP_OK) {
-                //System.err.println("Received response code " + responseCode + " for URL: " + url);
+                // System.err.println("Received response code " + responseCode + " for URL: " +
+                // url);
                 return true;
             }
 
@@ -192,9 +208,14 @@ public class Crawler implements Runnable {
             }
         }
         // now, check the url against every path
-        for (String disallowed : disallowedPaths)
-            if (url.matches(disallowed))
+        for (String disallowed : disallowedPaths) {
+            try {
+                if (url.matches(disallowed))
+                    return false;
+            } catch (java.util.regex.PatternSyntaxException e) {
                 return false;
+            }
+        }
         // the url is ok
         return true;
     }
@@ -202,12 +223,12 @@ public class Crawler implements Runnable {
     private List<WebPage> detectDuplicate(List<String> urls) {
         List<WebPage> okPages = new ArrayList<WebPage>();
         for (String url : urls) {
-            System.out.println("URL: " + url);
+            // System.out.println("URL: " + url);
             if (!crawlerData.isUniqueURL(url)) {
                 continue;
             }
             String compactString = createCompactString(url);
-            String HTMLContent="";
+            String HTMLContent = "";
             if (!database.detectDuplicatePages(compactString)) {
                 try {
                     org.jsoup.nodes.Document doc = Jsoup.connect(url).get();
@@ -220,9 +241,19 @@ public class Crawler implements Runnable {
                     Elements styles = doc.select("body style");
                     styles.remove();
 
-                    HTMLContent = doc.body().outerHtml();
-                } catch (Exception e) {}
+                    LocalDateTime now = LocalDateTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    String formatDateTime = now.format(formatter);
 
+                    System.out.println("Start getting HTML content of " + url + " at " + formatDateTime);
+                    HTMLContent = doc.body().outerHtml();
+
+                    LocalDateTime now2 = LocalDateTime.now();
+                    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    String formatDateTime2 = now2.format(formatter2);
+                    System.out.println("Finished getting HTML content of " + url + " at " + formatDateTime2);
+                } catch (Exception e) {
+                }
 
                 WebPage page = new WebPage(url, compactString, categorizePage(url), false, false, HTMLContent);
                 okPages.add(page);
@@ -236,13 +267,12 @@ public class Crawler implements Runnable {
             // //! testing purposes
         }
         if (okPages.size() == 0) {
-            System.out.println("No new pages to add from this seed");
+            // System.out.println("No new pages to add from this seed");
             return null;
         }
         return okPages;
 
     }
-
 
     private String categorizePage(String url) {
         try {
@@ -300,7 +330,7 @@ public class Crawler implements Runnable {
             compactString = generateHash(doc.body().text());
             return compactString;
         } catch (IOException e) {
-            System.out.println("Error: m4 lagyeen el url deh yabo 3ammo");
+            // System.out.println("Error: m4 lagyeen el url deh yabo 3ammo");
             return null;
         }
     }
@@ -345,9 +375,10 @@ public class Crawler implements Runnable {
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                System.out.println(i);
+                // System.out.println(i);
                 WebPage webPage = new WebPage(jsonObject.getString("URL"), jsonObject.getString("CompactString"),
-                        jsonObject.getString("Category"), jsonObject.getBoolean("IsCrawled"), jsonObject.getBoolean("IsIndexed"),
+                        jsonObject.getString("Category"), jsonObject.getBoolean("IsCrawled"),
+                        jsonObject.getBoolean("IsIndexed"),
                         jsonObject.getString("HTMLContent"));
                 webPages.add(webPage);
             }
@@ -377,7 +408,6 @@ public class Crawler implements Runnable {
         Crawler.setMaxChildren(maxChildren);
 
         // Crawler cr = new Crawler(db, data);
-        // //
         // System.out.println(cr._isAllowedPath("https://www.amazon.com/gp/help/customer/display.html/ref=footer_cou?ie=UTF8&nodeId=508088"));
         // cr.initializeSeed();
 
@@ -403,7 +433,8 @@ public class Crawler implements Runnable {
 
         // we get the hashmap from the urls graph db at the end of crawling
         // then we pass it to calculate popularity and it returns popularity hash map
-        // we recieve it and pass it to upload on the database so that the searching can access it
+        // we recieve it and pass it to upload on the database so that the searching can
+        // access it
 
         db.uploadPopularity(Ranker.calculatePopularity(db.fetchUrlsGraphFromDB()));
     }

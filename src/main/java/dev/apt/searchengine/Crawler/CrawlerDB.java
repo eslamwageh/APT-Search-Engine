@@ -76,6 +76,7 @@ public class CrawlerDB {
                         .append("IsCrawled", wp.isCrawled)
                         .append("IsIndexed", wp.isIndexed)
                         .append("HtmlContent", wp.HtmlContent);
+                System.out.println("to upload: "  + wp.URL);
                 documents.add(document);
             }
             urlsCollection.insertMany(documents);
