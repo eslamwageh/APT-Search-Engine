@@ -24,12 +24,12 @@ public class Ranker {
 
 
 
-    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, String[] oqw,  HashMap<String, Double> popularityHashMap, boolean isPhrase, CrawlerDB database) {
+    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, String[] oqw,  HashMap<String, Double> popularityHashMap, boolean isPhrase, CrawlerDB database, MongoCollection<Document> wordsCol) {
         System.out.println("before databases");
         db = database;
         System.out.println("db");
         snippeter = new SnippetGenerator();
-        words = db.getWordsCollection();
+        words = wordsCol;
         System.out.println("snippet and words");
         urlHtmlHashMap = db.getUrlsAndHtmlContentMap();
         System.out.println("html hashmap");
