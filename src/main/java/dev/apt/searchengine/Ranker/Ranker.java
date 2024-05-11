@@ -24,8 +24,8 @@ public class Ranker {
 
 
 
-    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, String[] oqw,  HashMap<String, Double> popularityHashMap, boolean isPhrase) {
-        db = new CrawlerDB();
+    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, String[] oqw,  HashMap<String, Double> popularityHashMap, boolean isPhrase, CrawlerDB database) {
+        db = database;
         snippeter = new SnippetGenerator();
         words = db.getWordsCollection();
         urlHtmlHashMap = db.getUrlsAndHtmlContentMap();

@@ -49,6 +49,7 @@ public class WordsProcessor {
                 // Decrement the index to handle the shifted elements
             }
         }
+        System.out.println(words.toString());
         return words.toString();
     }
 
