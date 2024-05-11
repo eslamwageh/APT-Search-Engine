@@ -25,13 +25,19 @@ public class Ranker {
 
 
     public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, String[] oqw,  HashMap<String, Double> popularityHashMap, boolean isPhrase, CrawlerDB database) {
+        System.out.println("before databases");
         db = database;
+        System.out.println("db");
         snippeter = new SnippetGenerator();
         words = db.getWordsCollection();
+        System.out.println("snippet and words");
         urlHtmlHashMap = db.getUrlsAndHtmlContentMap();
+        System.out.println("html hashmap");
         queryWords = qw;
         originalQueryWords = oqw;
         docHashMap = new HashMap<>();
+
+        System.out.println("finished initializing from database");
         if(isPhrase)
             phraseRank(popularityHashMap);
         else
@@ -127,6 +133,7 @@ public class Ranker {
                     Double score;
                     // Access fields of each embedded document
                     String url = embeddedDoc.getString("URL");
+                    System.out.println("doc url:" + url);
                     int termFrequency = embeddedDoc.getInteger("TermFrequency");
                     String title = embeddedDoc.getString("Title");
                     int priority = embeddedDoc.getInteger("Priority");
@@ -145,10 +152,11 @@ public class Ranker {
 
             }
         }
+        System.out.println("finished getting ranked docs");
 
         Collections.sort(rankedDocs, Comparator.comparingDouble(RankedDoc::getScore).reversed());
 
-
+        System.out.println("finished sorting");
     }
 
     public static void phraseRank(HashMap<String, Double> popularityHashMap) {

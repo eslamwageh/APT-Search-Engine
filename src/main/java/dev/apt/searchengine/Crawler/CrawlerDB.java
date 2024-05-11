@@ -233,14 +233,15 @@ public class CrawlerDB {
 
     public HashMap<String, String> getUrlsAndHtmlContentMap() {
         HashMap<String, String> urlHtmlMap = new HashMap<>();
-
+        int counter = 0;
         MongoCursor<Document> cursor = urlsCollection.find().iterator();
         try {
-            while (cursor.hasNext()) {
+            while (cursor.hasNext() && counter++ < 2) {
                 Document doc = cursor.next();
                 String url = doc.getString("URL");
                 String htmlContent = doc.getString("HtmlContent");
                 urlHtmlMap.put(url, htmlContent);
+                System.out.println(url);
             }
         } finally {
             cursor.close();

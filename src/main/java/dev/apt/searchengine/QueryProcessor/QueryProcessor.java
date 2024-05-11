@@ -20,7 +20,7 @@ import dev.apt.searchengine.Ranker.Ranker;
 public class QueryProcessor {
     CrawlerDB database = new CrawlerDB();
     @PostMapping
-    public LinkedList<String> processQuery(@RequestBody String query) {
+    public ArrayList<RankedDoc> processQuery(@RequestBody String query) {
         query = WordsProcessor.withoutStopWords(query);
         String[] words = query.split(" ");
         ArrayList<String> stemmedQueryWords = new ArrayList<>();
@@ -34,8 +34,9 @@ public class QueryProcessor {
         System.out.println("after ranks");
         for (RankedDoc rd : rankedDocs) {
             urls.add(rd.getUrl());
+            System.out.println(rd.getSnippet());
             System.out.println(rd.getUrl());
         }
-        return urls;
+        return rankedDocs;
     }
 }

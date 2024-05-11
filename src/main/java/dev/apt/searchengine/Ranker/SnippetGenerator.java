@@ -4,12 +4,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class SnippetGenerator {
-    private static final int SNIPPET_LENGTH = 100; // Maximum length of snippet
+    private static final int SNIPPET_LENGTH = 1000; // Maximum length of snippet
     private static final String HIGHLIGHT_START = "<b>"; // HTML tag to highlight query terms
     private static final String HIGHLIGHT_END = "</b>"; // Closing tag for highlighting
 
@@ -19,6 +20,10 @@ public class SnippetGenerator {
         String bestSnippet = "";
         double bestScore = Double.NEGATIVE_INFINITY;
 
+        if (document == null || document.isEmpty()) {
+            System.out.println("doc was null");
+            return bestSnippet;
+        }
         // Parse HTML content using Jsoup
         Document doc = Jsoup.parse(document);
 
@@ -35,6 +40,7 @@ public class SnippetGenerator {
 
             // Update best snippet if the current paragraph has a higher score
             if (score > bestScore && paragraphText.length() <= SNIPPET_LENGTH) {
+                System.out.println(score);
                 bestSnippet = paragraphText;
                 bestScore = score;
             }
@@ -44,7 +50,6 @@ public class SnippetGenerator {
         for (String term : queryTerms) {
             bestSnippet = highlightQueryTerm(bestSnippet, term);
         }
-
         return bestSnippet;
     }
 
