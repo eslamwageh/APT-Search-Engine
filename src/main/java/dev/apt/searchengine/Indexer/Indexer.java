@@ -57,7 +57,7 @@ public class Indexer {
                 if (jsoupDoc == null) continue;
 
                 String title = jsoupDoc.title();
-                String docText = jsoupDoc.text();
+                String docText = jsoupDoc.body().text();
 
                 processElements(jsoupDoc.getAllElements(), title, url, docText);
 //                Elements allElements = jsoupDoc.getAllElements();
@@ -94,13 +94,13 @@ public class Indexer {
                         priority = 2;
                     }
 
-                    int index = text.indexOf(word);
+                    int index = docText.indexOf(word);
                     int count = 0;
                     ArrayList<Integer> occurrences = new ArrayList<>();
                     while (index >= 0) {
                         count++;
                         occurrences.add(index);
-                        index = text.indexOf(word, index + 1);
+                        index = docText.indexOf(word, index + 1);
                     }
 
                     word = WordsProcessor.wordStemmer(word);

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import dev.apt.searchengine.Indexer.DocData;
 import dev.apt.searchengine.Indexer.WordsProcessor;
@@ -21,6 +22,7 @@ import dev.apt.searchengine.Ranker.Ranker;
 
 @RestController
 @RequestMapping("/api/v1/query")
+@CrossOrigin(origins = "*")
 public class QueryProcessor {
     CrawlerDB database = new CrawlerDB();
     MongoCollection<Document> wordsCol = database.getWordsCollection();
@@ -39,7 +41,7 @@ public class QueryProcessor {
         }
         LinkedList<String> urls = new LinkedList<>();
         System.out.println("before ranks");
-        ArrayList<RankedDoc> rankedDocs = Ranker.mainRanker(stemmedQueryWords, words, database.fetchPopularity(), false, database, wordsCol, urlhtml);
+        ArrayList<RankedDoc> rankedDocs = Ranker.mainRanker(stemmedQueryWords, words, database.fetchPopularity(), true, database, wordsCol, urlhtml);
         System.out.println("after ranks");
         for (RankedDoc rd : rankedDocs) {
             urls.add(rd.getUrl());

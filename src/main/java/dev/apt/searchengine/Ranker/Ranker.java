@@ -23,8 +23,7 @@ public class Ranker {
     private static HashMap<String, HashMap<String, ArrayList<Integer>>> docWordOccurrences= new HashMap<>();
 
 
-
-    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, String[] oqw,  HashMap<String, Double> popularityHashMap, boolean isPhrase, CrawlerDB database, MongoCollection<Document> wordsCol, HashMap<String, String> urlhtml) {
+    public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, String[] oqw, HashMap<String, Double> popularityHashMap, boolean isPhrase, CrawlerDB database, MongoCollection<Document> wordsCol, HashMap<String, String> urlhtml) {
         System.out.println("before databases");
         db = database;
         System.out.println("db");
@@ -38,7 +37,7 @@ public class Ranker {
         docHashMap = new HashMap<>();
 
         System.out.println("finished initializing from database");
-        if(isPhrase)
+        if (isPhrase)
             phraseRank(popularityHashMap);
         else
             rank(popularityHashMap);
@@ -48,10 +47,10 @@ public class Ranker {
 
     private static double diff(HashMap<String, Double> nextIter, Map<String, Double> prevIter) {
         double sum = 0;
-        for(String s : nextIter.keySet()) {
+        for (String s : nextIter.keySet()) {
             sum += Math.abs(nextIter.get(s) - prevIter.get(s));
         }
-        return(Math.sqrt(sum));
+        return (Math.sqrt(sum));
     }
 
     public static HashMap<String, Double> calculatePopularity(HashMap<String, ArrayList<String>> urlsGraph) {
@@ -172,6 +171,7 @@ public class Ranker {
         }
 
         for (String word : queryWords) {
+
             Document findQuery = new Document("Word", word);
             FindIterable<Document> documents = words.find(findQuery);
             Document doc = documents.first();
@@ -197,6 +197,9 @@ public class Ranker {
                     }
                 }
                 wordsIntersection = newIntersection;
+                System.out.println("Current Intersected Docs till word "+ word);
+                for(Document testDoc: wordsIntersection)
+                    System.out.println(testDoc.getString("URL"));
             }
         }
         // wordsIntersection now contains the documents that contain all the words in the query
@@ -206,35 +209,33 @@ public class Ranker {
             Document doc = wordsIntersection.get(i);
             String url = doc.getString("URL");
             String title = doc.getString("Title");
-            Double IDF = (Double)doc.get("IDF");
             Double score;
             // Access fields of each embedded document
             int termFrequency = doc.getInteger("TermFrequency");
             int priority = doc.getInteger("Priority");
 
-            score = termFrequency * IDF * priority * (popularityHashMap.get(url) != null ? popularityHashMap.get(url) : 1);
+            score = termFrequency * priority * (popularityHashMap.get(url) != null ? popularityHashMap.get(url) : 1);
 
             int lastOcc = -1;
             boolean isPhrase = true;
-            for(String word: queryWords)
-            {
+            for (String word : queryWords) {
                 boolean goodDoc = false;
-                for(Integer j :docWordOccurrences.get(url).get(word))
-                {
-                    if(j>lastOcc) {
+                for (Integer j : docWordOccurrences.get(url).get(word)) {
+                    if (j > lastOcc) {
                         lastOcc = j;
                         goodDoc = true;
                         break;
                     }
                 }
-                if(!goodDoc) {
+                if (!goodDoc) {
                     isPhrase = false;
                     break;
                 }
             }
-            if (isPhrase)
-            {
-                RankedDoc info = new RankedDoc(url, score, title, "");
+            if (isPhrase) {
+                String snippet = snippeter.generateSnippet(urlHtmlHashMap.get(url), Arrays.asList(originalQueryWords));
+                RankedDoc info = new RankedDoc(url, score, title, snippet);
+                rankedDocs.add(info);
             }
 
         }
