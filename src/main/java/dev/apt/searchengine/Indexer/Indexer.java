@@ -43,29 +43,50 @@ public class Indexer {
         FindIterable<Document> urls = urlsCollection.find(Filters.eq("IsIndexed", false)).projection(Projections.include("URL"));
         Long l = urlsCollection.countDocuments();
         allDocsCount = l.doubleValue();
+
+        Thread[] threads = new Thread[50];
         MongoCursor<Document> urlsIterator = urls.iterator();
-        try {
-            int counter = 0;
-            while (urlsIterator.hasNext()) {
-                Document dbDocument = urlsIterator.next();
-                String url = dbDocument.getString("URL");
-                crawlerDB.updateIsIndexed(url, true);
-                org.jsoup.nodes.Document jsoupDoc = getDocFromUrl(url);
-                // Get all html elements
-                if (jsoupDoc == null) continue;
+        for (int i = 0; i < 50; i++) {
+            threads[i] = new Thread(() -> {
+                try {
+                    while (true) {
+                        Document dbDocument;
+                        synchronized (urlsIterator){
+                            if(urlsIterator.hasNext())
+                                dbDocument = urlsIterator.next();
+                            else
+                                break;
+                        }
+                        String url = dbDocument.getString("URL");
+                        crawlerDB.updateIsIndexed(url, true);
+                        org.jsoup.nodes.Document jsoupDoc = getDocFromUrl(url);
+                        // Get all html elements
+                        if (jsoupDoc == null) continue;
 
-                String title = jsoupDoc.title();
-                String docText = jsoupDoc.body().text();
+                        String title = jsoupDoc.title();
+                        String docText = jsoupDoc.body().text();
 
-                processElements(jsoupDoc.getAllElements(), title, url, docText);
+                        processElements(jsoupDoc.getAllElements(), title, url, docText);
 //                Elements allElements = jsoupDoc.getAllElements();
 
-                // Loop over all elements
+                        // Loop over all elements
 
-            }
-        } finally {
-            urlsIterator.close();
+                    }
+                } finally {
+                    urlsIterator.close();
+                }
+            });
+            threads[i].start();
+
         }
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
 
     }
 
