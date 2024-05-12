@@ -24,11 +24,13 @@ import dev.apt.searchengine.Ranker.Ranker;
 @RequestMapping("/api/v1/query")
 @CrossOrigin(origins = "*")
 public class QueryProcessor {
+    boolean isPhrase = false;
     CrawlerDB database = new CrawlerDB();
     MongoCollection<Document> wordsCol = database.getWordsCollection();
     HashMap<String, String> urlhtml = database.getUrlsAndHtmlContentMap();
     @PostMapping
     public ArrayList<RankedDoc> processQuery(@RequestBody String query) {
+        if (query.startsWith("\"") && query.endsWith("\"")) isPhrase = true;
         query = WordsProcessor.withoutStopWords(query).toString();
         String[] words = query.split(" ");
         for (int i = 0; i < words.length; i++) {
@@ -41,7 +43,7 @@ public class QueryProcessor {
         }
         LinkedList<String> urls = new LinkedList<>();
         System.out.println("before ranks");
-        ArrayList<RankedDoc> rankedDocs = Ranker.mainRanker(stemmedQueryWords, words, database.fetchPopularity(), true, database, wordsCol, urlhtml);
+        ArrayList<RankedDoc> rankedDocs = Ranker.mainRanker(stemmedQueryWords, words, database.fetchPopularity(), isPhrase, database, wordsCol, urlhtml);
         System.out.println("after ranks");
         for (RankedDoc rd : rankedDocs) {
             urls.add(rd.getUrl());
