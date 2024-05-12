@@ -185,6 +185,28 @@ public class CrawlerDB {
         }
     }
 
+    public HashMap<String, Double> retrieveDFsPerDocs() {
+        HashMap<String, Double> DFsPerDocs = new HashMap<>();
+
+        // Retrieve all documents from the collection
+        FindIterable<Document> iterable = wordsCollection.find();
+
+        try (MongoCursor<Document> cursor = iterable.iterator()) {
+            while (cursor.hasNext()) {
+                Document wordEntry = cursor.next();
+
+                // Extract word and documents information
+                String word = wordEntry.getString("Word");
+                Double idf = wordEntry.getDouble("IDF");
+
+                // Put DocData object into docHash
+                DFsPerDocs.put(word, Math.pow(10, -idf));
+            }
+        }
+        return DFsPerDocs;
+    }
+
+
     public HashMap<String, HashMap<String, DocData>> retrieveWordsDB() {
         HashMap<String, HashMap<String, DocData>> invertedFile = new HashMap<>();
 

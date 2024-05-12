@@ -30,6 +30,7 @@ public class Indexer {
         MongoDatabase db = crawlerDB.getDatabase();
         urlsCollection = crawlerDB.getUrlsCollection();
         invertedFile = crawlerDB.retrieveWordsDB();
+        DFsPerDocs = crawlerDB.retrieveDFsPerDocs();
         //MongoCollection<Document> wordsCollection = crawlerDB.getWordsCollection();
         startIndexing(crawlerDB);
         for (String key1 : invertedFile.keySet()) {
