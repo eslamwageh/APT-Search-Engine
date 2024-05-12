@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import dev.apt.searchengine.Indexer.DocData;
 import dev.apt.searchengine.Indexer.WordsProcessor;
@@ -17,6 +18,7 @@ import dev.apt.searchengine.Ranker.Ranker;
 
 @RestController
 @RequestMapping("/api/v1/query")
+@CrossOrigin(origins = "*")
 public class QueryProcessor {
     CrawlerDB database = new CrawlerDB();
     @PostMapping
