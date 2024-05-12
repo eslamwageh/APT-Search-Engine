@@ -12,7 +12,7 @@ public class WordsProcessor {
             "d", "did", "differ", "different", "differently", "do", "does", "done", "down", "downed", "downing", "downs", "during",
             "e", "each", "early", "either", "end", "ended", "ending", "ends", "enough", "even", "evenly", "ever", "every", "everybody", "everyone", "everything", "everywhere",
             "f", "face", "faces", "fact", "facts", "far", "felt", "few", "find", "finds", "first", "for", "four", "from", "full", "fully", "further", "furthered", "furthering", "furthers",
-            "g", "gave", "general", "generally", "get", "gets", "give", "given", "gives", "go", "going", "good", "goods", "got", "great", "greater", "greatest", "group", "grouped", "grouping", "groups",
+            "g", "gave", "general", "generally", "get", "gets", "give", "given", "gives", "going", "good", "goods", "got", "great", "greater", "greatest", "group", "grouped", "grouping", "groups",
             "h", "had", "has", "have", "having", "he", "her", "here", "hers", "herself", "high", "higher", "highest", "him", "himself", "his", "how", "however",
             "i", "if", "important", "in", "interest", "interested", "interesting", "interests", "into", "is", "it", "its", "itself",
             "j", "just",

@@ -44,7 +44,7 @@ public class SnippetGenerator {
             int score = calculateRelevanceScore(paragraphText, queryTerms);
 
             // Update best snippet if the current paragraph has a higher score
-            if (numberOfTerms > bestNumberOfTerms || numberOfTerms == bestNumberOfTerms && score > bestScore && paragraphText.length() <= SNIPPET_LENGTH) {
+            if (paragraphText.length() <= SNIPPET_LENGTH && (numberOfTerms > bestNumberOfTerms || numberOfTerms == bestNumberOfTerms && score > bestScore)) {
                 System.out.println(score);
                 bestSnippet = paragraphText;
                 bestScore = score;

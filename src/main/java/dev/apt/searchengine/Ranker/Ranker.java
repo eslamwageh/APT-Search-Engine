@@ -117,40 +117,61 @@ public class Ranker {
 
     public static void rank(HashMap<String, Double> popularityHashMap) {
         rankedDocs = new ArrayList<>();
+        Thread[] threads = new Thread[queryWords.size()];
 
+        int i = 0;
         for (String word : queryWords) {
-            Document findQuery = new Document("Word", word);
-            FindIterable<Document> documents = words.find(findQuery);
-            Document doc = documents.first();
+            threads[i] = new Thread(() -> {
+                Document findQuery = new Document("Word", word);
+                FindIterable<Document> documents = words.find(findQuery);
+                Document doc = documents.first();
 
-            if (doc != null) {
-                ArrayList<Document> documentList = (ArrayList<Document>) doc.get("Documents");
-                Double IDF = (Double) doc.get("IDF");
+                if (doc != null) {
+                    ArrayList<Document> documentList = (ArrayList<Document>) doc.get("Documents");
+                    Double IDF = (Double) doc.get("IDF");
 
-                /* Iterate over the embedded documents in the "Documents" array */
-                for (Document embeddedDoc : documentList) {
-                    Double score;
-                    // Access fields of each embedded document
-                    String url = embeddedDoc.getString("URL");
-                    System.out.println("doc url:" + url);
-                    int termFrequency = embeddedDoc.getInteger("TermFrequency");
-                    String title = embeddedDoc.getString("Title");
-                    int priority = embeddedDoc.getInteger("Priority");
+                    /* Iterate over the embedded documents in the "Documents" array */
+                    for (Document embeddedDoc : documentList) {
+                        Double score;
+                        // Access fields of each embedded document
+                        String url = embeddedDoc.getString("URL");
+                        System.out.println("doc url:" + url);
+                        int termFrequency = embeddedDoc.getInteger("TermFrequency");
+                        String title = embeddedDoc.getString("Title");
+                        int priority = embeddedDoc.getInteger("Priority");
 
-                    score = termFrequency * IDF * priority * (popularityHashMap.get(url) != null ? popularityHashMap.get(url) : 1 / popularityHashMap.size());
+                        score = termFrequency * IDF * priority * (popularityHashMap.get(url) != null ? popularityHashMap.get(url) : 1 / popularityHashMap.size());
 
-                    if (docHashMap.containsKey(url)) {
-                        docHashMap.get(url).setScore(docHashMap.get(url).getScore() + score);
-                    } else {
-                        String snippet = snippeter.generateSnippet(urlHtmlHashMap.get(url), Arrays.asList(originalQueryWords));
-                        RankedDoc info = new RankedDoc(url, score, title, snippet);
-                        rankedDocs.add(info);
-                        docHashMap.put(url, info);
+                        synchronized (docHashMap) {
+                            if (docHashMap.containsKey(url)) {
+                                docHashMap.get(url).setScore(docHashMap.get(url).getScore() + score);
+                            } else {
+                                String snippet = snippeter.generateSnippet(urlHtmlHashMap.get(url), Arrays.asList(originalQueryWords));
+                                RankedDoc info = new RankedDoc(url, score, title, snippet);
+                                rankedDocs.add(info);
+                                docHashMap.put(url, info);
+                            }
+                        }
                     }
-                }
 
+                }
+            });
+            threads[i++].start();
+        }
+
+
+
+
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
+
+
+
         System.out.println("finished getting ranked docs");
 
         Collections.sort(rankedDocs, Comparator.comparingDouble(RankedDoc::getScore).reversed());

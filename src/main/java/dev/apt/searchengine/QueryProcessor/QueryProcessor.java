@@ -31,6 +31,7 @@ public class QueryProcessor {
     @PostMapping
     public ArrayList<RankedDoc> processQuery(@RequestBody String query) {
         if (query.startsWith("\"") && query.endsWith("\"")) isPhrase = true;
+        else isPhrase = false;
         query = WordsProcessor.withoutStopWords(query).toString();
         String[] words = query.split(" ");
         for (int i = 0; i < words.length; i++) {
