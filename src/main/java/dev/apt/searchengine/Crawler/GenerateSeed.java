@@ -11,6 +11,7 @@ import java.util.Scanner;
 import org.jsoup.Jsoup;
 
 import com.google.gson.Gson;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class GenerateSeed {
@@ -113,18 +114,25 @@ public class GenerateSeed {
         }
 
         public void setHTMLContent(String URL) {
+            StringBuilder paragraphText = new StringBuilder();
             try {
                 org.jsoup.nodes.Document doc = Jsoup.connect(URL).get();
 
-                // Remove script elements within the body
-                Elements scripts = doc.select("body script");
-                scripts.remove();
+                // Select paragraph elements
+                Elements paragraphs = doc.select("p");
 
-                // Remove style elements within the body
-                Elements styles = doc.select("body style");
-                styles.remove();
+                // Iterate through each paragraph and extract text
+                for (Element paragraph : paragraphs) {
+                    // Append opening paragraph tag
+                    paragraphText.append("<p>");
 
-                HTMLContent = doc.body().outerHtml();
+                    // Append paragraph text
+                    paragraphText.append(paragraph.text());
+
+                    // Append closing paragraph tag with newline
+                    paragraphText.append("</p>\n");
+                }
+                HTMLContent = paragraphText.toString();
                 System.out.println(HTMLContent);
             } catch (IOException e) {
                 HTMLContent = "Couldn't Connect";
