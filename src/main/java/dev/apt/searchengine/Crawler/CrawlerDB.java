@@ -179,7 +179,6 @@ public class CrawlerDB {
 
                 documents.add(wordEntry);
             }
-            wordsCollection.deleteMany(new Document());
             wordsCollection.insertMany(documents);
         }
     }

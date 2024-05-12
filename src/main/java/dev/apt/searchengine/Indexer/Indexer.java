@@ -15,10 +15,7 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.FormatFlagsConversionMismatchException;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.Filter;
 
 public class Indexer {
@@ -48,7 +45,7 @@ public class Indexer {
         MongoCursor<Document> urlsIterator = urls.iterator();
         try {
             int counter = 0;
-            while (urlsIterator.hasNext() && counter++ < 500) {
+            while (urlsIterator.hasNext() && counter++ < 50) {
                 Document dbDocument = urlsIterator.next();
                 String url = dbDocument.getString("URL");
                 crawlerDB.updateIsIndexed(url, true);
@@ -76,12 +73,12 @@ public class Indexer {
         int totWordsInDoc = 0;
         for (Element e : allElements) {
             String tag = e.tagName();
-            String text = WordsProcessor.withoutStopWords(e.ownText());
+            List<String> text = WordsProcessor.withoutStopWords(e.ownText());
 
             if (tag.equals("title") || tag.equals("p") || tag.equals("h1") || tag.equals("h2") || tag.equals("h3")
                     || tag.equals("h4") || tag.equals("h5") || tag.equals("h6") || tag.equals("td") || tag.equals("li")
                     || tag.equals("span")) {
-                for (String word : text.split(" ")) {
+                for (String word : text) {
                     int priority = 1; //least priority means more important
 
                     if (tag == "title") {
@@ -94,18 +91,19 @@ public class Indexer {
                         priority = 2;
                     }
 
+                    if (word.isEmpty()) continue;
+
                     int index = docText.indexOf(word);
-                    int count = 0;
+                    System.out.println("the word searched for is :    " + word);
                     ArrayList<Integer> occurrences = new ArrayList<>();
                     while (index >= 0) {
-                        count++;
                         occurrences.add(index);
                         index = docText.indexOf(word, index + 1);
                     }
 
                     word = WordsProcessor.wordStemmer(word);
                     totWordsInDoc++;
-                    if (word.isEmpty()) continue;
+
                     // if word found before in all documents
                     if (invertedFile.containsKey(word)) {
 

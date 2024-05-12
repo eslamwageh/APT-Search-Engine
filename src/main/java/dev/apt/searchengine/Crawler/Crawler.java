@@ -96,12 +96,15 @@ public class Crawler implements Runnable {
             Elements links = doc.select("a[href]");
             System.out.println("second");
             // extract the urls into the grippedURLs array
+            int counter = 0;
             for (Element link : links) {
                 String href = link.attr("abs:href");
                 if (_isAllowedPath(href)) {
                     grippedURLs.add(href);
                     System.out.println("this is allowed link" + href);
+                    counter++;
                 }
+                if (counter >= maxChildren || counter >= maxWPNum - crawlerData.getCrawledPagesNum()) break;
             }
         } catch (IOException e) {
             return null;

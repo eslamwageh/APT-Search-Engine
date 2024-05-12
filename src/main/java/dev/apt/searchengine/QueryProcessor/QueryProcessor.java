@@ -29,7 +29,7 @@ public class QueryProcessor {
     HashMap<String, String> urlhtml = database.getUrlsAndHtmlContentMap();
     @PostMapping
     public ArrayList<RankedDoc> processQuery(@RequestBody String query) {
-        query = WordsProcessor.withoutStopWords(query);
+        query = WordsProcessor.withoutStopWords(query).toString();
         String[] words = query.split(" ");
         for (int i = 0; i < words.length; i++) {
             words[i] = words[i].replaceAll("[^a-zA-Z\\u0600-\\u06FF ]", "");
