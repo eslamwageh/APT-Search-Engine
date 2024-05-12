@@ -230,23 +230,31 @@ public class Crawler implements Runnable {
             String compactString = createCompactString(url);
             String HTMLContent = "";
             if (!database.detectDuplicatePages(compactString)) {
+                StringBuilder paragraphText = new StringBuilder();
                 try {
                     org.jsoup.nodes.Document doc = Jsoup.connect(url).get();
+                    // Select paragraph elements
+                    Elements paragraphs = doc.select("p");
+                    // Select span elements
+                    Elements spans = doc.select("span");
+                    for (Element paragraph : paragraphs) {
+                        paragraphText.append("<p>");
+                        paragraphText.append(paragraph.text());
+                        paragraphText.append("</p>\n");
+                    }
+                    for (Element span : spans) {
+                        paragraphText.append("<p>");
+                        paragraphText.append(span.text());
+                        paragraphText.append("</p>\n");
+                    }
 
-                    // Remove script elements within the body
-                    Elements scripts = doc.select("body script");
-                    scripts.remove();
-
-                    // Remove style elements within the body
-                    Elements styles = doc.select("body style");
-                    styles.remove();
+                    HTMLContent = paragraphText.toString();
 
                     LocalDateTime now = LocalDateTime.now();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
                     String formatDateTime = now.format(formatter);
 
                     System.out.println("Start getting HTML content of " + url + " at " + formatDateTime);
-                    HTMLContent = doc.body().outerHtml();
 
                     LocalDateTime now2 = LocalDateTime.now();
                     DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm:ss");
