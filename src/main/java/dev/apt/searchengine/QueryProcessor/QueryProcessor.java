@@ -41,7 +41,7 @@ public class QueryProcessor {
         }
         LinkedList<String> urls = new LinkedList<>();
         System.out.println("before ranks");
-        ArrayList<RankedDoc> rankedDocs = Ranker.mainRanker(stemmedQueryWords, words, database.fetchPopularity(), false, database, wordsCol, urlhtml);
+        ArrayList<RankedDoc> rankedDocs = Ranker.mainRanker(stemmedQueryWords, words, database.fetchPopularity(), true, database, wordsCol, urlhtml);
         System.out.println("after ranks");
         for (RankedDoc rd : rankedDocs) {
             urls.add(rd.getUrl());
