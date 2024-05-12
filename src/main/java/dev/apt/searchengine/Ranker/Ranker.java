@@ -137,7 +137,7 @@ public class Ranker {
                     String title = embeddedDoc.getString("Title");
                     int priority = embeddedDoc.getInteger("Priority");
 
-                    score = termFrequency * IDF * priority * (popularityHashMap.get(url) != null ? popularityHashMap.get(url) : 1);
+                    score = termFrequency * IDF * priority * (popularityHashMap.get(url) != null ? popularityHashMap.get(url) : 1 / popularityHashMap.size());
 
                     if (docHashMap.containsKey(url)) {
                         docHashMap.get(url).setScore(docHashMap.get(url).getScore() + score);
@@ -185,6 +185,22 @@ public class Ranker {
                 for (Document currentWordDoc : currentWordDocs) {
                     ArrayList<Integer> occ = (ArrayList<Integer>) currentWordDoc.get("Occurrences");
                     String url = currentWordDoc.getString("URL");
+
+                    Double score;
+                    System.out.println("doc url:" + url);
+                    int termFrequency = currentWordDoc.getInteger("TermFrequency");
+                    String title = currentWordDoc.getString("Title");
+                    int priority = currentWordDoc.getInteger("Priority");
+
+                    score = termFrequency * priority * (popularityHashMap.get(url) != null ? popularityHashMap.get(url) : 1 / popularityHashMap.size());
+
+                    if (docHashMap.containsKey(url)) {
+                        docHashMap.get(url).setScore(docHashMap.get(url).getScore() + score);
+                    } else {
+                        RankedDoc info = new RankedDoc(url, score, title, "");
+                        docHashMap.put(url, info);
+                    }
+
                     if (!docWordOccurrences.containsKey(url))
                         docWordOccurrences.put(url, new HashMap<>());
                     docWordOccurrences.get(url).put(word, occ);
@@ -208,14 +224,6 @@ public class Ranker {
         for (int i = 0; i < wordsIntersection.size(); i++) {
             Document doc = wordsIntersection.get(i);
             String url = doc.getString("URL");
-            String title = doc.getString("Title");
-            Double score;
-            // Access fields of each embedded document
-            int termFrequency = doc.getInteger("TermFrequency");
-            int priority = doc.getInteger("Priority");
-
-            score = termFrequency * priority * (popularityHashMap.get(url) != null ? popularityHashMap.get(url) : 1);
-
             int lastOcc = -1;
             boolean isPhrase = true;
             for (String word : queryWords) {
@@ -234,7 +242,8 @@ public class Ranker {
             }
             if (isPhrase) {
                 String snippet = snippeter.generateSnippet(urlHtmlHashMap.get(url), Arrays.asList(originalQueryWords));
-                RankedDoc info = new RankedDoc(url, score, title, snippet);
+                RankedDoc info = docHashMap.get(url);
+                info.setSnippet(snippet);
                 rankedDocs.add(info);
             }
 

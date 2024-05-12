@@ -46,7 +46,7 @@ public class Indexer {
         MongoCursor<Document> urlsIterator = urls.iterator();
         try {
             int counter = 0;
-            while (urlsIterator.hasNext() && counter++ < 50) {
+            while (urlsIterator.hasNext()) {
                 Document dbDocument = urlsIterator.next();
                 String url = dbDocument.getString("URL");
                 crawlerDB.updateIsIndexed(url, true);
@@ -116,7 +116,7 @@ public class Indexer {
                             info.setPriority(Math.max(info.getPriority(), priority));
                             invertedFile.get(word).put(url, info);
                         } else {
-                            DFsPerDocs.put(word, DFsPerDocs.get(word) + 1 / allDocsCount);
+                            DFsPerDocs.put(word, DFsPerDocs.get(word) != null? DFsPerDocs.get(word) + 1 / allDocsCount : (invertedFile.get(word).size() + 1) / allDocsCount);
                             DocData info = new DocData();
                             info.setTermFrequency(1);
                             info.setOccurrences(occurrences);
