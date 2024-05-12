@@ -117,21 +117,21 @@ public class GenerateSeed {
             StringBuilder paragraphText = new StringBuilder();
             try {
                 org.jsoup.nodes.Document doc = Jsoup.connect(URL).get();
-
                 // Select paragraph elements
                 Elements paragraphs = doc.select("p");
-
-                // Iterate through each paragraph and extract text
+                // Select span elements
+                Elements spans = doc.select("span");
                 for (Element paragraph : paragraphs) {
-                    // Append opening paragraph tag
                     paragraphText.append("<p>");
-
-                    // Append paragraph text
                     paragraphText.append(paragraph.text());
-
-                    // Append closing paragraph tag with newline
                     paragraphText.append("</p>\n");
                 }
+                for (Element span : spans) {
+                    paragraphText.append("<p>");
+                    paragraphText.append(span.text());
+                    paragraphText.append("</p>\n");
+                }
+
                 HTMLContent = paragraphText.toString();
                 System.out.println(HTMLContent);
             } catch (IOException e) {

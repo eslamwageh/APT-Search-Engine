@@ -8,6 +8,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SnippetGenerator {
     private static final int SNIPPET_LENGTH = 1000; // Maximum length of snippet
@@ -18,7 +20,7 @@ public class SnippetGenerator {
     public String generateSnippet(String document, List<String> queryTerms) {
         // Initialize variables to store the best snippet and its relevance score
         String bestSnippet = "";
-        double bestScore = Double.NEGATIVE_INFINITY;
+        double bestScore = -1.0;
 
         if (document == null || document.isEmpty()) {
             System.out.println("doc was null");
@@ -36,42 +38,51 @@ public class SnippetGenerator {
             String paragraphText = paragraph.text();
 
             // Calculate relevance score for the paragraph based on query terms frequency
-            double score = calculateRelevanceScore(paragraphText, queryTerms);
+            int score = calculateRelevanceScore(paragraphText, queryTerms);
 
             // Update best snippet if the current paragraph has a higher score
             if (score > bestScore && paragraphText.length() <= SNIPPET_LENGTH) {
                 System.out.println(score);
                 bestSnippet = paragraphText;
                 bestScore = score;
+                System.out.println(bestSnippet);
             }
         }
 
         // Highlight query terms in the best snippet
-        for (String term : queryTerms) {
-            bestSnippet = highlightQueryTerm(bestSnippet, term);
-        }
+//        for (String term : queryTerms) {
+//            bestSnippet = highlightQueryTerm(bestSnippet, term);
+//        }
         return bestSnippet;
     }
 
     // Method to calculate relevance score for a text based on query terms frequency
-    private double calculateRelevanceScore(String text, List<String> queryTerms) {
-        double score = 0.0;
+    private int calculateRelevanceScore(String text, List<String> queryTerms) {
+        int score = 0;
         for (String term : queryTerms) {
             // Calculate frequency of query term in the text
-            int frequency = countFrequency(text.toLowerCase(), term);
+            int frequency = countFrequency(text.toLowerCase(), term.toLowerCase());
             // Increment score based on query term frequency
             score += frequency;
         }
+
         return score;
     }
 
     // Method to count frequency of a term in a string
     private int countFrequency(String text, String term) {
+        // Escape special characters in the term to prevent them from being interpreted as regex metacharacters
+        String escapedTerm = Pattern.quote(term);
+
+        // Create a regex pattern to match the term
+        Pattern pattern = Pattern.compile(escapedTerm, Pattern.CASE_INSENSITIVE);
+
+        // Use Matcher to find all occurrences of the term
+        Matcher matcher = pattern.matcher(text);
+
         int frequency = 0;
-        int index = text.indexOf(term);
-        while (index != -1) {
+        while (matcher.find()) {
             frequency++;
-            index = text.indexOf(term, index + 1);
         }
         return frequency;
     }
