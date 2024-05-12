@@ -20,7 +20,7 @@ import java.util.logging.Filter;
 
 public class Indexer {
     private static MongoCollection<Document> urlsCollection;
-    private static HashMap<String, HashMap<String, DocData>> invertedFile = new HashMap<>();
+    private static HashMap<String, HashMap<String, DocData>> invertedFile;
     private static HashMap<String, Double> DFsPerDocs = new HashMap<>();
     private static Double allDocsCount = 0.0;
 
@@ -29,6 +29,7 @@ public class Indexer {
         CrawlerDB crawlerDB = new CrawlerDB();
         MongoDatabase db = crawlerDB.getDatabase();
         urlsCollection = crawlerDB.getUrlsCollection();
+        invertedFile = crawlerDB.retrieveWordsDB();
         //MongoCollection<Document> wordsCollection = crawlerDB.getWordsCollection();
         startIndexing(crawlerDB);
         for (String key1 : invertedFile.keySet()) {

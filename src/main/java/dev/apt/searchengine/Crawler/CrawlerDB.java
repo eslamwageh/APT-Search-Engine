@@ -15,6 +15,7 @@ import com.google.gson.JsonParser;
 import com.mongodb.client.*;
 import com.mongodb.client.model.UpdateOptions;
 import dev.apt.searchengine.Indexer.DocData;
+import dev.apt.searchengine.Indexer.Indexer;
 import lombok.Data;
 import lombok.Getter;
 import org.bson.Document;
@@ -100,7 +101,7 @@ public class CrawlerDB {
                 obj1.addProperty("html", wp.HtmlContent);
                 jsonArray.add(obj1);
 
-                System.out.println("to upload: "  + wp.URL);
+                System.out.println("to upload: " + wp.URL);
                 documents.add(document);
             }
             urlsCollection.insertMany(documents);
@@ -121,7 +122,7 @@ public class CrawlerDB {
         org.bson.Document result = urlsCollection.findOneAndUpdate(query, update);
         if (result != null) {
             String oldValue = result.getString("CompactString");
-            if(compactString == null)
+            if (compactString == null)
                 return;
             if (!compactString.equals(oldValue)) {
                 updateIsIndexed(URL, false);
@@ -179,8 +180,49 @@ public class CrawlerDB {
 
                 documents.add(wordEntry);
             }
+            wordsCollection.deleteMany(new Document());
             wordsCollection.insertMany(documents);
         }
+    }
+
+    public HashMap<String, HashMap<String, DocData>> retrieveWordsDB() {
+        HashMap<String, HashMap<String, DocData>> invertedFile = new HashMap<>();
+
+        // Retrieve all documents from the collection
+        FindIterable<Document> iterable = wordsCollection.find();
+
+        try (MongoCursor<Document> cursor = iterable.iterator()) {
+            while (cursor.hasNext()) {
+                Document wordEntry = cursor.next();
+
+                // Extract word and documents information
+                String word = wordEntry.getString("Word");
+                HashMap<String, DocData> docHash = new HashMap<>();
+                for (Document wordDocument : (Iterable<Document>) wordEntry.get("Documents")) {
+                    String docUrl = wordDocument.getString("URL");
+                    Integer termFrequency = wordDocument.getInteger("TermFrequency");
+                    String title = wordDocument.getString("Title");
+                    Integer priority = wordDocument.getInteger("Priority");
+                    ArrayList<Integer> occurrences = (ArrayList<Integer>) wordDocument.get("Occurrences");
+
+                    // Create DocData object
+                    DocData info = new DocData();
+                    info.setTitle(title);
+                    info.setOccurrences(occurrences);
+                    info.setPriority(priority);
+                    info.setTermFrequency(termFrequency);
+
+                    // Put DocData object into docHash
+                    docHash.put(docUrl, info);
+                }
+
+                // Put docHash into invertedFile
+                invertedFile.put(word, docHash);
+            }
+        }
+
+
+        return invertedFile;
     }
 
     // this is the best version
@@ -204,6 +246,7 @@ public class CrawlerDB {
         }
         return s;
     }
+
     public boolean detectDuplicatePages(String compactString) {
         org.bson.Document query = new org.bson.Document("CompactString", compactString);
         return urlsCollection.countDocuments(query) > 0;
@@ -238,27 +281,33 @@ public class CrawlerDB {
     }
 
     public void uploadPopularity(HashMap<String, Double> popularityHashMap) {
-        for (Map.Entry<String, Double> entry : popularityHashMap.entrySet()) {
-            String url = entry.getKey();
-            Double popularity = entry.getValue();
+        if (popularityHashMap != null && !popularityHashMap.isEmpty()) {
+            List<Document> documents = new ArrayList<>();
 
-            Document query = new Document("url", url);
-            Document update = new Document("$set", new Document("popularity", popularity));
+            for (Map.Entry<String, Double> entry : popularityHashMap.entrySet()) {
+                String url = entry.getKey();
+                Double pop = entry.getValue();
 
-            // Upsert the document: if the document doesn't exist, insert it; otherwise, update it.
-            popularityCollection.updateOne(query, update, new UpdateOptions().upsert(true));
+
+                Document popDocument = new Document("url", url)
+                        .append("popularity", pop);
+
+                documents.add(popDocument);
+            }
+            popularityCollection.deleteMany(new Document());
+            popularityCollection.insertMany(documents);
         }
     }
 
     public HashMap<String, Double> fetchPopularity() {
         HashMap<String, Double> popularityHashMap = new HashMap<>();
 
-            FindIterable<Document> documents = popularityCollection.find();
-            for (Document document : documents) {
-                String url = document.getString("url");
-                Double popularity = document.getDouble("popularity");
-                popularityHashMap.put(url, popularity);
-            }
+        FindIterable<Document> documents = popularityCollection.find();
+        for (Document document : documents) {
+            String url = document.getString("url");
+            Double popularity = document.getDouble("popularity");
+            popularityHashMap.put(url, popularity);
+        }
         return popularityHashMap;
     }
 

@@ -37,12 +37,12 @@ public class WordsProcessor {
             "?");
 
     public static List<String> withoutStopWords(String s) {
-        List<String> words = Arrays.asList(s.toLowerCase().split(" "));
+        List<String> words = Arrays.asList(s.split(" "));
         //words.removeIf(stopWords::contains);
         for (int i = 0; i < words.size(); i++) {
             String word = words.get(i).replaceAll("[^a-zA-Z\\u0600-\\u06FF ]", "");
             // Check if the stopWords list contains the current word
-            if (stopWords.contains(word)) {
+            if (stopWords.contains(word.toLowerCase())) {
                 // Remove the word if it's a stop word
                 words.set(i, "");
                 // Decrement the index to handle the shifted elements
@@ -54,7 +54,7 @@ public class WordsProcessor {
     }
 
     public static String wordStemmer(String w) {
-        String cleanedText = w.replaceAll("[^a-zA-Z\\u0600-\\u06FF ]", "");
+        String cleanedText = w.toLowerCase().replaceAll("[^a-zA-Z\\u0600-\\u06FF ]", "");
         englishStemmer stemmer = new englishStemmer();
         stemmer.setCurrent(cleanedText);
         stemmer.stem();

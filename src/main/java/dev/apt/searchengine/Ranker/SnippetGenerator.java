@@ -16,11 +16,14 @@ public class SnippetGenerator {
     private static final String HIGHLIGHT_START = "<b>"; // HTML tag to highlight query terms
     private static final String HIGHLIGHT_END = "</b>"; // Closing tag for highlighting
 
+    private int numberOfTerms;
+
     // Method to generate snippet for a document
     public String generateSnippet(String document, List<String> queryTerms) {
         // Initialize variables to store the best snippet and its relevance score
         String bestSnippet = "";
         double bestScore = -1.0;
+        double bestNumberOfTerms = -1.0;
 
         if (document == null || document.isEmpty()) {
             System.out.println("doc was null");
@@ -41,10 +44,11 @@ public class SnippetGenerator {
             int score = calculateRelevanceScore(paragraphText, queryTerms);
 
             // Update best snippet if the current paragraph has a higher score
-            if (score > bestScore && paragraphText.length() <= SNIPPET_LENGTH) {
+            if (numberOfTerms > bestNumberOfTerms || numberOfTerms == bestNumberOfTerms && score > bestScore && paragraphText.length() <= SNIPPET_LENGTH) {
                 System.out.println(score);
                 bestSnippet = paragraphText;
                 bestScore = score;
+                bestNumberOfTerms = numberOfTerms;
                 System.out.println(bestSnippet);
             }
         }
@@ -59,11 +63,14 @@ public class SnippetGenerator {
     // Method to calculate relevance score for a text based on query terms frequency
     private int calculateRelevanceScore(String text, List<String> queryTerms) {
         int score = 0;
+        numberOfTerms = 0;
         for (String term : queryTerms) {
             // Calculate frequency of query term in the text
+            if (term == null || term.isEmpty()) continue;
             int frequency = countFrequency(text.toLowerCase(), term.toLowerCase());
             // Increment score based on query term frequency
             score += frequency;
+            if (frequency != 0) numberOfTerms++;
         }
 
         return score;
