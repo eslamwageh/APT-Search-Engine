@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.bson.Document;
 import org.jsoup.Jsoup;
 
 import com.google.gson.Gson;
@@ -40,6 +41,11 @@ public class GenerateSeed {
         } else if (choice.equals("2")) {
             CrawlerDB db = new CrawlerDB();
             db.clearDB();
+        }
+        else {
+            CrawlerDB db = new CrawlerDB();
+            Document update = new Document("$set", new Document("IsIndexed", false));
+            db.getUrlsCollection().updateMany(new Document(), update);
         }
         scanner.close();
     }

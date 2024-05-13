@@ -12,7 +12,7 @@ public class WordsProcessor {
             "d", "did", "differ", "different", "differently", "do", "does", "done", "down", "downed", "downing", "downs", "during",
             "e", "each", "early", "either", "end", "ended", "ending", "ends", "enough", "even", "evenly", "ever", "every", "everybody", "everyone", "everything", "everywhere",
             "f", "face", "faces", "fact", "facts", "far", "felt", "few", "find", "finds", "first", "for", "four", "from", "full", "fully", "further", "furthered", "furthering", "furthers",
-            "g", "gave", "general", "generally", "get", "gets", "give", "given", "gives", "go", "going", "good", "goods", "got", "great", "greater", "greatest", "group", "grouped", "grouping", "groups",
+            "g", "gave", "general", "generally", "get", "gets", "give", "given", "gives", "going", "good", "goods", "got", "great", "greater", "greatest", "group", "grouped", "grouping", "groups",
             "h", "had", "has", "have", "having", "he", "her", "here", "hers", "herself", "high", "higher", "highest", "him", "himself", "his", "how", "however",
             "i", "if", "important", "in", "interest", "interested", "interesting", "interests", "into", "is", "it", "its", "itself",
             "j", "just",
@@ -36,25 +36,25 @@ public class WordsProcessor {
             "»",
             "?");
 
-    public static String withoutStopWords(String s) {
-        List<String> words = Arrays.asList(s.toLowerCase().split(" "));
+    public static List<String> withoutStopWords(String s) {
+        List<String> words = Arrays.asList(s.split(" "));
         //words.removeIf(stopWords::contains);
         for (int i = 0; i < words.size(); i++) {
-            String word = words.get(i);
-
+            String word = words.get(i).replaceAll("[^a-zA-Z\\u0600-\\u06FF ]", "");
             // Check if the stopWords list contains the current word
-            if (stopWords.contains(word)) {
+            if (stopWords.contains(word.toLowerCase())) {
                 // Remove the word if it's a stop word
                 words.set(i, "");
                 // Decrement the index to handle the shifted elements
             }
+            else words.set(i, word);
         }
         System.out.println(words.toString());
-        return words.toString();
+        return words;
     }
 
     public static String wordStemmer(String w) {
-        String cleanedText = w.replaceAll("[^a-zA-Z\\u0600-\\u06FF ]", "");
+        String cleanedText = w.toLowerCase().replaceAll("[^a-zA-Z\\u0600-\\u06FF ]", "");
         englishStemmer stemmer = new englishStemmer();
         stemmer.setCurrent(cleanedText);
         stemmer.stem();

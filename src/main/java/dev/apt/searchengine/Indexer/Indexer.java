@@ -15,15 +15,12 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.FormatFlagsConversionMismatchException;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.Filter;
 
 public class Indexer {
     private static MongoCollection<Document> urlsCollection;
-    private static HashMap<String, HashMap<String, DocData>> invertedFile = new HashMap<>();
+    private static HashMap<String, HashMap<String, DocData>> invertedFile;
     private static HashMap<String, Double> DFsPerDocs = new HashMap<>();
     private static Double allDocsCount = 0.0;
 
@@ -32,6 +29,8 @@ public class Indexer {
         CrawlerDB crawlerDB = new CrawlerDB();
         MongoDatabase db = crawlerDB.getDatabase();
         urlsCollection = crawlerDB.getUrlsCollection();
+        invertedFile = crawlerDB.retrieveWordsDB();
+        DFsPerDocs = crawlerDB.retrieveDFsPerDocs();
         //MongoCollection<Document> wordsCollection = crawlerDB.getWordsCollection();
         startIndexing(crawlerDB);
         for (String key1 : invertedFile.keySet()) {
@@ -45,29 +44,50 @@ public class Indexer {
         FindIterable<Document> urls = urlsCollection.find(Filters.eq("IsIndexed", false)).projection(Projections.include("URL"));
         Long l = urlsCollection.countDocuments();
         allDocsCount = l.doubleValue();
+
+        Thread[] threads = new Thread[50];
         MongoCursor<Document> urlsIterator = urls.iterator();
-        try {
-            int counter = 0;
-            while (urlsIterator.hasNext() && counter++ < 500) {
-                Document dbDocument = urlsIterator.next();
-                String url = dbDocument.getString("URL");
-                crawlerDB.updateIsIndexed(url, true);
-                org.jsoup.nodes.Document jsoupDoc = getDocFromUrl(url);
-                // Get all html elements
-                if (jsoupDoc == null) continue;
+        for (int i = 0; i < 50; i++) {
+            threads[i] = new Thread(() -> {
+                try {
+                    while (true) {
+                        Document dbDocument;
+                        synchronized (urlsIterator){
+                            if(urlsIterator.hasNext())
+                                dbDocument = urlsIterator.next();
+                            else
+                                break;
+                        }
+                        String url = dbDocument.getString("URL");
+                        crawlerDB.updateIsIndexed(url, true);
+                        org.jsoup.nodes.Document jsoupDoc = getDocFromUrl(url);
+                        // Get all html elements
+                        if (jsoupDoc == null) continue;
 
-                String title = jsoupDoc.title();
-                String docText = jsoupDoc.body().text();
+                        String title = jsoupDoc.title();
+                        String docText = jsoupDoc.body().text();
 
-                processElements(jsoupDoc.getAllElements(), title, url, docText);
+                        processElements(jsoupDoc.getAllElements(), title, url, docText);
 //                Elements allElements = jsoupDoc.getAllElements();
 
-                // Loop over all elements
+                        // Loop over all elements
 
-            }
-        } finally {
-            urlsIterator.close();
+                    }
+                } finally {
+                    urlsIterator.close();
+                }
+            });
+            threads[i].start();
+
         }
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
 
     }
 
@@ -76,12 +96,12 @@ public class Indexer {
         int totWordsInDoc = 0;
         for (Element e : allElements) {
             String tag = e.tagName();
-            String text = WordsProcessor.withoutStopWords(e.ownText());
+            List<String> text = WordsProcessor.withoutStopWords(e.ownText());
 
             if (tag.equals("title") || tag.equals("p") || tag.equals("h1") || tag.equals("h2") || tag.equals("h3")
                     || tag.equals("h4") || tag.equals("h5") || tag.equals("h6") || tag.equals("td") || tag.equals("li")
                     || tag.equals("span")) {
-                for (String word : text.split(" ")) {
+                for (String word : text) {
                     int priority = 1; //least priority means more important
 
                     if (tag == "title") {
@@ -94,18 +114,19 @@ public class Indexer {
                         priority = 2;
                     }
 
+                    if (word.isEmpty()) continue;
+
                     int index = docText.indexOf(word);
-                    int count = 0;
+                    System.out.println("the word searched for is :    " + word);
                     ArrayList<Integer> occurrences = new ArrayList<>();
                     while (index >= 0) {
-                        count++;
                         occurrences.add(index);
                         index = docText.indexOf(word, index + 1);
                     }
 
                     word = WordsProcessor.wordStemmer(word);
                     totWordsInDoc++;
-                    if (word.isEmpty()) continue;
+
                     // if word found before in all documents
                     if (invertedFile.containsKey(word)) {
 
@@ -117,7 +138,7 @@ public class Indexer {
                             info.setPriority(Math.max(info.getPriority(), priority));
                             invertedFile.get(word).put(url, info);
                         } else {
-                            DFsPerDocs.put(word, DFsPerDocs.get(word) + 1 / allDocsCount);
+                            DFsPerDocs.put(word, DFsPerDocs.get(word) != null? DFsPerDocs.get(word) + 1 / allDocsCount : (invertedFile.get(word).size() + 1) / allDocsCount);
                             DocData info = new DocData();
                             info.setTermFrequency(1);
                             info.setOccurrences(occurrences);
