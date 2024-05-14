@@ -37,8 +37,7 @@ public class WordsProcessor {
             "?");
 
     public static List<String> withoutStopWords(String s) {
-        List<String> words = Arrays.asList(s.split(" "));
-        //words.removeIf(stopWords::contains);
+        List<String> words = Arrays.asList(s.split("[\\s,.+=*$>*-]+"));        //words.removeIf(stopWords::contains);
         for (int i = 0; i < words.size(); i++) {
             String word = words.get(i).replaceAll("[^a-zA-Z\\u0600-\\u06FF ]", "");
             // Check if the stopWords list contains the current word

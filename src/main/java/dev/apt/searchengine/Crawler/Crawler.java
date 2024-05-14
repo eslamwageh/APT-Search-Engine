@@ -73,6 +73,9 @@ public class Crawler implements Runnable {
             // remove duplicates and create a list of new webpages to upload
             List<WebPage> newWP = detectDuplicate(newSeeds);
 
+            if (newWP != null && newSeeds != null);
+                crawlerData.increaseCrawledPagesNum(newWP.size() - newSeeds.size());
+
             // update the database
             database.updateUrlsDB(newWP);
             database.updateIsCrawled(seed, true);

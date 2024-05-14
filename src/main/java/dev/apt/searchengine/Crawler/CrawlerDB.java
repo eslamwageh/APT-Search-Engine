@@ -35,6 +35,7 @@ public class CrawlerDB {
     private MongoCollection<org.bson.Document> wordsCollection;
     private MongoCollection<org.bson.Document> urlsGraphCollection;
     private MongoCollection<org.bson.Document> popularityCollection;
+    private MongoCollection<org.bson.Document> urlHtmlCollection;
 
     public CrawlerDB() {
         env = new Properties();
@@ -63,32 +64,23 @@ public class CrawlerDB {
         System.out.println(password);
         System.out.println(username);
 
-        String uri = String.format(
-                "mongodb+srv://%s:%s@searchengine.c7upty2.mongodb.net/?retryWrites=true&w=majority&appName=SearchEngine",
-                username, password);
+        String uri = "mongodb://localhost:27017";
         mongoClient = MongoClients.create(uri);
         database = mongoClient.getDatabase("SearchEngine");
         urlsCollection = database.getCollection("WebPage");
         wordsCollection = database.getCollection("Search Index");
         urlsGraphCollection = database.getCollection("URLs Graph");
         popularityCollection = database.getCollection("Popularity");
+        urlHtmlCollection = database.getCollection(("urlHtml"));
     }
 
     // changed the name to urls as there will be another db update
     public synchronized void updateUrlsDB(List<WebPage> newWPs) {
         if (newWPs != null) {
-            JsonArray jsonArray = new JsonArray();
-            // Read JSON array from file
-            try (FileReader reader = new FileReader("urlHtml.json")) {
-                JsonParser parser = new JsonParser();
-                jsonArray = parser.parse(reader).getAsJsonArray();
-            } catch (IOException e) {
-                System.out.println("Error in reading url html json");
-            }
 
             List<org.bson.Document> documents = new ArrayList<>();
+            List<org.bson.Document> urlHtmldocuments = new ArrayList<>();
             for (WebPage wp : newWPs) {
-                JsonObject obj1 = new JsonObject();
 
                 org.bson.Document document = new org.bson.Document()
                         .append("URL", wp.URL)
@@ -97,22 +89,16 @@ public class CrawlerDB {
                         .append("IsCrawled", wp.isCrawled)
                         .append("IsIndexed", wp.isIndexed);
 
-                obj1.addProperty("url", wp.URL);
-                obj1.addProperty("html", wp.HtmlContent);
-                jsonArray.add(obj1);
+                org.bson.Document urlHtmldocument = new org.bson.Document()
+                        .append("url", wp.URL)
+                        .append("html", wp.HtmlContent);
 
                 System.out.println("to upload: " + wp.URL);
                 documents.add(document);
+                urlHtmldocuments.add(urlHtmldocument);
             }
             urlsCollection.insertMany(documents);
-
-            // Write JSON array to file
-            try (FileWriter writer = new FileWriter("urlHtml.json")) {
-                Gson gson = new Gson();
-                gson.toJson(jsonArray, writer);
-            } catch (IOException e) {
-                System.out.println("Error in writing url html json");
-            }
+            urlHtmlCollection.insertMany(urlHtmldocuments);
         }
     }
 
@@ -176,7 +162,7 @@ public class CrawlerDB {
                 }
 
                 Document wordEntry = new Document("Word", word)
-                        .append("Documents", wordDocuments).append("IDF", Math.log(1 / DFsPerDocs.get(word)));
+                        .append("Documents", wordDocuments).append("IDF", DFsPerDocs.get(word) != null? Math.log(1 / DFsPerDocs.get(word)): 5.0);
 
                 documents.add(wordEntry);
             }
@@ -336,29 +322,41 @@ public class CrawlerDB {
     public HashMap<String, String> getUrlsAndHtmlContentMap() {
         HashMap<String, String> urlHtmlMap = new HashMap<>();
 
-        try (FileReader reader = new FileReader("urlHtml.json")) {
-            // Parse the JSON file into a JSON array
-            JSONArray jsonArray = new JSONArray(new JSONTokener(reader));
+        for (Document doc : urlHtmlCollection.find()) {
+            // Extract URL and HTML content from the document
+            String url = doc.getString("url");
+            String htmlContent = doc.getString("html");
 
-            // Iterate through the JSON array
-            for (int i = 0; i < jsonArray.length(); i++) {
-                // Get the JSON object at the current index
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
+            // Put URL and HTML content into the map
+            urlHtmlMap.put(url, htmlContent);
 
-                // Extract URL and HTML content from the JSON object
-                String url = jsonObject.getString("url");
-                String htmlContent = jsonObject.getString("html");
-
-                // Put URL and HTML content into the map
-                urlHtmlMap.put(url, htmlContent);
-
-                // Print URL (optional)
-                System.out.println(url);
-            }
-        } catch (IOException e) {
-            // Handle IO exception
-            System.out.println("error in gettin hash map");
+            // Print URL (optional)
+            System.out.println(url);
         }
+
+//        try (FileReader reader = new FileReader("urlHtml.json")) {
+//            // Parse the JSON file into a JSON array
+//            JSONArray jsonArray = new JSONArray(new JSONTokener(reader));
+//
+//            // Iterate through the JSON array
+//            for (int i = 0; i < jsonArray.length(); i++) {
+//                // Get the JSON object at the current index
+//                JSONObject jsonObject = jsonArray.getJSONObject(i);
+//
+//                // Extract URL and HTML content from the JSON object
+//                String url = jsonObject.getString("url");
+//                String htmlContent = jsonObject.getString("html");
+//
+//                // Put URL and HTML content into the map
+//                urlHtmlMap.put(url, htmlContent);
+//
+//                // Print URL (optional)
+//                System.out.println(url);
+//            }
+//        } catch (IOException e) {
+//            // Handle IO exception
+//            System.out.println("error in gettin hash map");
+//        }
 
         return urlHtmlMap;
     }

@@ -20,7 +20,7 @@ public class Ranker {
     public static String[] originalQueryWords;
     public static ArrayList<RankedDoc> rankedDocs;
     public static HashMap<String, RankedDoc> docHashMap;
-    private static HashMap<String, HashMap<String, ArrayList<Integer>>> docWordOccurrences= new HashMap<>();
+    private static HashMap<String, HashMap<String, ArrayList<Integer>>> docWordOccurrences = new HashMap<>();
 
 
     public static ArrayList<RankedDoc> mainRanker(ArrayList<String> qw, String[] oqw, HashMap<String, Double> popularityHashMap, boolean isPhrase, CrawlerDB database, MongoCollection<Document> wordsCol, HashMap<String, String> urlhtml) {
@@ -119,6 +119,7 @@ public class Ranker {
         rankedDocs = new ArrayList<>();
         Thread[] threads = new Thread[queryWords.size()];
 
+
         int i = 0;
         for (String word : queryWords) {
             threads[i] = new Thread(() -> {
@@ -130,7 +131,11 @@ public class Ranker {
                     ArrayList<Document> documentList = (ArrayList<Document>) doc.get("Documents");
                     Double IDF = (Double) doc.get("IDF");
 
+
+                    Thread[] snippetThreads = new Thread[documentList.size()];
+
                     /* Iterate over the embedded documents in the "Documents" array */
+                    int j = 0;
                     for (Document embeddedDoc : documentList) {
                         Double score;
                         // Access fields of each embedded document
@@ -142,24 +147,34 @@ public class Ranker {
 
                         score = termFrequency * IDF * priority * (popularityHashMap.get(url) != null ? popularityHashMap.get(url) : 1 / popularityHashMap.size());
 
-                        synchronized (docHashMap) {
+                        snippetThreads[j] = new Thread(() -> {
+
                             if (docHashMap.containsKey(url)) {
-                                docHashMap.get(url).setScore(docHashMap.get(url).getScore() + score);
+                                synchronized (docHashMap) {
+                                    docHashMap.get(url).setScore(docHashMap.get(url).getScore() + score);
+                                }
                             } else {
                                 String snippet = snippeter.generateSnippet(urlHtmlHashMap.get(url), Arrays.asList(originalQueryWords));
                                 RankedDoc info = new RankedDoc(url, score, title, snippet);
-                                rankedDocs.add(info);
-                                docHashMap.put(url, info);
+                                synchronized (docHashMap) {
+                                    rankedDocs.add(info);
+                                    docHashMap.put(url, info);
+                                }
                             }
+                        });
+                        snippetThreads[j++].start();
+                    }
+                    for (Thread thread : snippetThreads) {
+                        try {
+                            thread.join();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
-
                 }
             });
             threads[i++].start();
         }
-
-
 
 
         for (Thread thread : threads) {
@@ -169,7 +184,6 @@ public class Ranker {
                 e.printStackTrace();
             }
         }
-
 
 
         System.out.println("finished getting ranked docs");
@@ -234,42 +248,57 @@ public class Ranker {
                     }
                 }
                 wordsIntersection = newIntersection;
-                System.out.println("Current Intersected Docs till word "+ word);
-                for(Document testDoc: wordsIntersection)
+                System.out.println("Current Intersected Docs till word " + word);
+                for (Document testDoc : wordsIntersection)
                     System.out.println(testDoc.getString("URL"));
             }
         }
         // wordsIntersection now contains the documents that contain all the words in the query
 
+        Thread[] snippetThreads = new Thread[wordsIntersection.size()];
 
         for (int i = 0; i < wordsIntersection.size(); i++) {
-            Document doc = wordsIntersection.get(i);
-            String url = doc.getString("URL");
-            int lastOcc = -1;
-            boolean isPhrase = true;
-            for (String word : queryWords) {
-                boolean goodDoc = false;
-                for (Integer j : docWordOccurrences.get(url).get(word)) {
-                    if (j > lastOcc) {
-                        lastOcc = j;
-                        goodDoc = true;
+            ArrayList<Document> finalWordsIntersection = wordsIntersection;
+            int finalI = i;
+            snippetThreads[i] = new Thread(() -> {
+                Document doc = finalWordsIntersection.get(finalI);
+                String url = doc.getString("URL");
+                int lastOcc = -1;
+                boolean isPhrase = true;
+                for (String word : queryWords) {
+                    boolean goodDoc = false;
+                    for (Integer j : docWordOccurrences.get(url).get(word)) {
+                        if (j > lastOcc) {
+                            lastOcc = j;
+                            goodDoc = true;
+                            break;
+                        }
+                    }
+                    if (!goodDoc) {
+                        isPhrase = false;
                         break;
                     }
                 }
-                if (!goodDoc) {
-                    isPhrase = false;
-                    break;
+                if (isPhrase) {
+                    String snippet = snippeter.generateSnippet(urlHtmlHashMap.get(url), Arrays.asList(originalQueryWords));
+                    RankedDoc info = docHashMap.get(url);
+                    info.setSnippet(snippet);
+                    synchronized (rankedDocs) {
+                        rankedDocs.add(info);
+                    }
                 }
-            }
-            if (isPhrase) {
-                String snippet = snippeter.generateSnippet(urlHtmlHashMap.get(url), Arrays.asList(originalQueryWords));
-                RankedDoc info = docHashMap.get(url);
-                info.setSnippet(snippet);
-                rankedDocs.add(info);
-            }
+            });
+            snippetThreads[i].start();
 
         }
 
+        for (Thread thread : snippetThreads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         Collections.sort(rankedDocs, Comparator.comparingDouble(RankedDoc::getScore).reversed());
 

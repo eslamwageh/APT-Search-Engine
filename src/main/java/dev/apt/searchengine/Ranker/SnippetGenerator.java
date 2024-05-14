@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 public class SnippetGenerator {
     private static final int SNIPPET_LENGTH = 1000; // Maximum length of snippet
+    private static final int Min_SNIPPET_LENGTH = 30; // Maximum length of snippet
     private static final String HIGHLIGHT_START = "<b>"; // HTML tag to highlight query terms
     private static final String HIGHLIGHT_END = "</b>"; // Closing tag for highlighting
 
@@ -44,7 +45,7 @@ public class SnippetGenerator {
             int score = calculateRelevanceScore(paragraphText, queryTerms);
 
             // Update best snippet if the current paragraph has a higher score
-            if (paragraphText.length() <= SNIPPET_LENGTH && (numberOfTerms > bestNumberOfTerms || numberOfTerms == bestNumberOfTerms && score > bestScore)) {
+            if (paragraphText.length() <= SNIPPET_LENGTH && paragraphText.length() >= Min_SNIPPET_LENGTH && (numberOfTerms > bestNumberOfTerms || numberOfTerms == bestNumberOfTerms && score > bestScore)) {
                 System.out.println(score);
                 bestSnippet = paragraphText;
                 bestScore = score;

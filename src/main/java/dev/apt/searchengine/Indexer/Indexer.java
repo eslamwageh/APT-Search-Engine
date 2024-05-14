@@ -45,9 +45,9 @@ public class Indexer {
         Long l = urlsCollection.countDocuments();
         allDocsCount = l.doubleValue();
 
-        Thread[] threads = new Thread[50];
+        Thread[] threads = new Thread[700];
         MongoCursor<Document> urlsIterator = urls.iterator();
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 700; i++) {
             threads[i] = new Thread(() -> {
                 try {
                     while (true) {
