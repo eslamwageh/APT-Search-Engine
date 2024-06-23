@@ -61,7 +61,7 @@ This repository contains the source code for a Crawler-based search engine devel
 
 1. **Clone the Repository:**
    ```bash
-   https://github.com/eslamwageh/APT-Search-Engine.git
+   git clone https://github.com/eslamwageh/APT-Search-Engine.git
    ```
 
 ## Team: 
