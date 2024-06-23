@@ -1,0 +1,43 @@
+.App {
+  text-align: center;
+}  
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font-size: calc(10px + 2vmin);
+  color: var(--text-color);
+}
+
+#Logo-and-Input-Home {
+  margin-top: -180px;
+}
+
+#wordmark {
+  font-family: "Dancing Script";
+  font-size: 6vw;
+  margin-top: 0px;
+}  
+
+#Input-Post-Text {
+  max-width: 96vw;
+  width: 500px;
+  font-size: 15px;
+  line-height: 26px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#Input-Post-Text .Link {
+  text-decoration: none;
+  color: burlywood;
+  font-weight: 600;
+}
+
+@media (min-width: 700px) {
+  #wordmark{
+    font-size: 42px;
+  }
+}

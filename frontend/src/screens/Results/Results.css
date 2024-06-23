@@ -1,0 +1,58 @@
+.Gap-Container {
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+#Gap-Container-Top {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+#Results-Count {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  padding-left: 12vw;
+  font-size: 1.1em;
+  color: rgb(133, 133, 133);
+}
+
+.Gap {
+  width: 4vw;
+}
+
+#Logo-and-Input {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 4vmin;
+  margin: 1vh 0 4vh 0;
+}
+
+#Results-Container {
+  padding-bottom: 80px;
+}
+
+@media (max-width: 810px) {
+  #Logo-and-Input {
+    /* Add your small screen styles here */
+    flex-direction: column;
+    align-items: start;
+    gap: 3vmin;
+    margin: 0.5vh 0 2vh 0;
+  }
+}
+
+#Horizontal-line-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#Horizontal-Line {
+  background-color: burlywood;
+  width: 99vw;
+  height: 2px;
+}

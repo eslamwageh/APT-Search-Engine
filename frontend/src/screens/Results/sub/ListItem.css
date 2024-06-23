@@ -1,0 +1,40 @@
+.ListItem {
+  max-width: 652px;
+  width: 95vw;
+  margin: 30px 10px 30px 0;
+}
+
+.ListItem h2 {
+  color: burlywood;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.ListItem h2:hover{
+  text-decoration: underline;
+  text-decoration-color: burlywood;
+  text-decoration-thickness: 2px;
+}
+
+.ListItem p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.ListItem strong {
+  color: rgb(253, 224, 188);
+  font-size: 1.2em;
+}
+
+.ListItem .url {
+  color: rgb(133, 133, 133);
+}
+
+.ListItem .paragraph {
+  color: var(--secondary-text-color);
+}
+
+.ListItem .Result-Link {
+  text-decoration: none;
+}

@@ -1,0 +1,19 @@
+#Theme-Switch {
+  position: fixed;
+  top: 4vh;
+  z-index: 9999;
+  right: 2vw;
+  width: 30px;
+  aspect-ratio: 1/1;
+}
+
+@media (max-width: 810px) {
+  #Theme-Switch {
+    right: 5vw;
+    top: 3.5vh;
+  }
+}
+
+#Theme-Switch img {
+  width: 100%;
+}
