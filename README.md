@@ -1,4 +1,7 @@
 # Cairo University Advanced Programming Search Engine
+<p align="center">
+   <img src = "/logo.jpg" alt = "searchlock holmes" width = 300px height = 200px/> 
+</p>
 
 ## Introduction
 
